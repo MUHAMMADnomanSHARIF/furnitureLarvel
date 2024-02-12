@@ -12,27 +12,25 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    { if(!Schema::hasTable("setting")){
-        Schema::create('settings', function (Blueprint $table) {
-            $table->id();
-            $table->string('title', 50);
-            $table->string('description',  100);
-            $table->string('color1',  100)->default('white');
-            $table->string('color2',  100)->default('white');
-            $table->string('color3',  100)->default('white');
-            $table->string('color4',  100)->default('white');
-            $table->text('link')->nullable;
-            $table->text('fblink')->nullable;
-            $table->text('twlink')->nullable;
-            $table->text('instalink')->nullable;
-            $table->text('email')->nullable;
-            $table->integer('fixheader')->default(1);
-
-            $table->softDeletes();
-            $table->timestamps();
-        });
+    {
+        if (!Schema::hasTable("setting")) {
+            Schema::create('settings', function (Blueprint $table) {
+                $table->id();
+                $table->string('application_name', 50)->default('Furnimart');
+                $table->string('short_description',  100)->nullable();
+                $table->string('color_one')->default('white');
+                $table->string('color_two')->default('white');
+                $table->string('color_three')->default('white');
+                $table->string('color_four')->default('white');
+                $table->string('facebook_link')->nullable();
+                $table->string('instagram_link')->nullable();
+                $table->string('gsc')->nullable();
+                $table->string('site_index')->default('off');
+                $table->string('email')->nullable();
+                $table->timestamps();
+            });
+        }
     }
-}
 
     /**
      * Reverse the migrations.

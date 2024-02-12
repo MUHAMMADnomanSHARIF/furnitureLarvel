@@ -1,36 +1,75 @@
 @extends('frontend.layout.app')
 
 @section('CoustomCSS')
+<style>
+   html,
+        body {
+            overflow-x: hidden;
+        }
+
+        @media only screen and (max-width: 676px) {
+
+            html,
+            body {
+                overflow-x: hidden;
+            }
+        }
+
+        .cat-image {
+            height: 130px;
+            width: 130px;
+        }
+
+        .banner {
+            position: relative;
+            height: 70vh;
+            /* Adjust the height as needed */
+            background: url('{{ asset('images/banner.png') }}') center/cover fixed no-repeat;
+        }
+
+        .banner-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            /* Adjust the text color */
+            text-align: center;
+            font-size: 24px;
+            /* Adjust the font size */
+        }
+</style>
 
 @endsection
 
 @section('content')
-   <!-- Slider Area Start -->
-   <div class="slider-area">
-    <div class="slider-wrapper owl-carousel carousel-style-dot">
-        <div class="single-slide" style="background-image: url('assets/img/slider/1.jpg');">
-            <div class="container">
-                <div class="slider-banner">
-                    <h1>Collection</h1>
-                    <h2>Lamps light Color</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In quos aspernatur voluptates?</p>
-                    <a href="shop.html" class="banner-btn">Shop now</a>
+    <!-- Slider Area Start -->
+    <div class="slider-area">
+        <div class="slider-wrapper owl-carousel carousel-style-dot">
+            <div class="single-slide" style="background-image: url('assets/slider/1.png');">
+                <div class="container">
+                    <div class="slider-banner">
+                        <h2>Timeless Versatile</h2>
+                        <h3>Sofas</h3>
+                        <p>Suitable for all Styles of interior</p>
+                        <a href="shop.html" class="banner-btn">Shop now</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="single-slide slide-two" style="background-image: url('assets/img/slider/2.jpg');">
-            <div class="container">
-                <div class="slider-banner">
-                    <h1>inimalist design</h1>
-                    <h2>Lounge Chairs</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae mollitia distinctio qui?</p>
-                    <a href="shop.html" class="banner-btn">Shop now</a>
+            <div class="single-slide slide-two" style="background-image: url('assets/slider/3.png');">
+                <div class="container">
+                    <div class="slider-banner">
+                        <h1>inimalist design</h1>
+                        <h2>Lounge Chairs</h2>
+                        <p>Lorem ipsum dolor sit amet,
+                        </p>
+                        <a href="shop.html" class="banner-btn">Shop now</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Slider Area End -->
+    <!-- Slider Area End -->
 <!-- Banner Area Start -->
 <!-- <div class="banner-area text-center pt-90">
     <div class="container ">
@@ -87,34 +126,37 @@
     </div>
 </div>
 <!-- Banner Area End -->
-<!-- Category  Area Start -->
-<div class="section-title ">
+ <!-- Category  Area Start -->
+ <div class="section-title ">
 
-        <h2 align="center" class="mt-5 fs-1 fw-700"><span>Categories</span></h2>
-
-    </div>
-<div class="about-skill-area1 pt-80 pb-50">
-            <div class=" category1 col-md-10 col-sm-12 ">
-
-                <div class="cards-list card-list1 ">
-
-                     @foreach($childcategory as $child)
-                      <div  class="card 1 cardss1"  onclick="location.href='/product-by-child-category/{{$child->id}}'">
-                           <div class="card_image"> <img src="{{$child->getFirstMediaUrl('childCategory.image')}}" /> </div>
-                          <div class="cards1_title ">
-                          <p><a class="text-dark" href="/product-by-child-category/{{$child->id}}">{{$child->name}}</a></p>
-                        </div>
-                      </div>
-                      @endforeach
-
-
-
-                    </div>
-            </div>
-
-
+<h2 align="center" class="mt-5 fs-1 fw-700"><span>Categories</span></h2>
 
 </div>
+<div class="container-fluid mb-3">
+<div class="row justify-content-center">
+    {{-- Adjusted classes to center one category if there's only one --}}
+    @foreach ($childcategory as $child)
+        <div class="col-md-{{ count($childcategory) === 1 ? '8' : '2' }} col-sm-6 col-6">
+            <div class="card border-0" onclick="location.href='/product-by-child-category/{{ $child->id }}'">
+                <div class="text-center">
+                    <img src="{{ $child->getFirstMediaUrl('childCategory.image') }}"
+                        class="rounded-circle cat-image" alt="cat-image">
+                </div>
+                <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="card-title">{{ $child->name }}</h5>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
+</div>
+
+
+
+
+
+
+
 <!-- Category  Area End -->
 
 
@@ -174,53 +216,136 @@
     </div>
 <!-- Feature Product Area End -->
 
+<div class="banner-area text-center pt-5 pt-md-5 pt-lg-90">
+        <div class="container">
+            <div class="section-title">
+                <h2><span>Design</span></h2>
+            </div>
 
-<!-- Information Area Start -->
-<div class="information-area">
-    <div class="container">
-        <div class="information-wrapper ptb-60">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="single-information">
-                        <div class="s-info-img"><img src="assets/img/icon/shipping.png" alt=""></div>
-                        <div class="s-info-text">
-                            <h4>free shipping</h4>
-                            <span>Free shipping on all US order</span>
+            <!-- Banner Area Start -->
+            <div class="banner-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 grid-item position-relative">
+                            <!-- Image with link -->
+                            <a class="banner-image" href="shop.html">
+                                <img src="assets/slider/4.png" alt="">
+                                <span class="banner-hover-text position-absolute w-100 text-center">Chair collection</span>
+                            </a>
+
+                            <!-- Centered text -->
+
+                            <div class="position-absolute w-100 text-start text-black bottom-50 ms-5">
+
+                                <h4>Heading</h4>
+                                <p>Paragraph</p>
+                            </div>
+
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="single-information">
-                        <div class="s-info-img"><img src="assets/img/icon/online.png" alt=""></div>
-                        <div class="s-info-text">
-                            <h4>Online Support 24/7</h4>
-                            <span>Support online 24 hours a day</span>
+
+
+                        <div class="col-md-4 grid-item position-relative">
+                            <!-- Image with link -->
+                            <a class="banner-image" href="shop.html">
+                                <img src="assets/slider/4.png" alt="">
+                                <span class="banner-hover-text position-absolute w-100 text-center">Chair collection</span>
+                            </a>
+
+                            <!-- Centered text -->
+
+                            <div class="position-absolute w-100 text-start text-black bottom-50 ms-5">
+
+                                <h4>Heading</h4>
+                                <p>Paragraph</p>
+                            </div>
+
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="single-information">
-                        <div class="s-info-img"><img src="assets/img/icon/money.png" alt=""></div>
-                        <div class="s-info-text">
-                            <h4>Money Return</h4>
-                            <span>Back guarantee under 7 days</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="single-information">
-                        <div class="s-info-img"><img src="assets/img/icon/member.png" alt=""></div>
-                        <div class="s-info-text">
-                            <h4>Member Discount</h4>
-                            <span>Onevery order over $120.00</span>
+                        <div class="col-md-4 grid-item position-relative">
+                            <!-- Image with link -->
+                            <a class="banner-image" href="shop.html">
+                                <img src="assets/slider/5.png" alt="">
+                                <span class="banner-hover-text position-absolute w-100 text-center"> collection</span>
+                            </a>
+
+                            <!-- Centered text -->
+
+                            <div class="position-absolute w-100 text-start text-black bottom-50 ms-5">
+
+                                <h4>Heading</h4>
+                                <p>Paragraph</p>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Banner Area End -->
         </div>
     </div>
-</div>
-<!-- Information Area End -->
+
+
+    <!-- ========== Start Section ========== -->
+    <section class="container mt-4">
+        <!-- 1 -->
+        <div class="row mx-auto icons-and-details">
+            <div class="col-lg-4">
+                <div class="d-flex gap-4 align-items-center">
+                    <div class="home-icon"><i class="fa-solid fa-truck fa-2xl"></i></div>
+                    <div class="home-text" style="font-size: 5px;">
+                        <h6>Heading</h6>
+                        <p class="lead h6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="d-flex gap-4 align-items-center">
+                    <div class="home-icon"><i class="fa-regular fa-handshake fa-2xl"></i></div>
+                    <div class="home-text" style="font-size: 5px;">
+                        <h6>Heading</h6>
+                        <p class="lead h6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="d-flex gap-4 align-items-center">
+                    <div class="home-icon"><i class="fa-solid fa-truck fa-2xl"></i></div>
+                    <div class="home-text" style="font-size: 5px;">
+                        <h6>Heading</h6>
+                        <p class="lead h6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- 2 -->
+
+
+
+    <!-- ========== End Section ========== -->
+
+    <!-- Information Area Start -->
+
+
+
+
+    <!-- Information Area End -->
+
+    <!-- Banner Area Start -->
+    <div class="container-fluid my-5 p-0 m-0 banner">
+        <!-- Banner Section -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="banner-text">
+                    <!-- Add your text here -->
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In ex magni blanditiis? Maxime, quidem ex?
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner Area End -->
 <!-- Testimonieal Section -->
 
     <div class="section-title ">
@@ -261,6 +386,33 @@
 </div>
 
 <!-- End Testimonieal Section -->
+
+
+
+    <!-- ========== Start Section blogs ========== -->
+    <div class="container">
+
+        <div class="row text-center mb-4">
+            <h2>Our Blogs</h2>
+        </div>
+        <div class="row">
+            <!-- Blog 1 - Large Screen -->
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4 mx-auto">
+                <!-- Your blog content goes here -->
+                <img src="blog1.jpg" alt="" class="img-fluid mb-2">
+                <h2>Blog Title 1</h2>
+                <p>Blog content goes here...</p>
+                <a href="#" class="btn btn-primary">Read</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ========== End Section blogs ========== -->
+
+
+
+
 
 @endsection
 

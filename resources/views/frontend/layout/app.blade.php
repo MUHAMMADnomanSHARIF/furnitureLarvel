@@ -38,40 +38,77 @@
          <!-- Header Area Start -->
          <header class="header-area bg-ash">
 
-            <!--Header Middle Area Start -->
-            <div class="header-middle-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="logo">
-                                <a href="{{url('/index')}}">ifurniture <!--<img src="assets/img/logo/logo.png" alt="ifurniture">--></a>
-                            </div>
-                        </div>
-                        <div class="col-md-2 invisible">
-                            <span class="email-image">
-                                <span><img src="assets/img/icon/email.png" alt=""></span>
-                                <span><span>Email: </span>admin@LOREM IPSUM.com</span>
-                            </span>
-                        </div>
-                        <div class="col-md-7">
-                            <form action="#" method="post" class="header-search col-5">
-                                <input type="text" placeholder="Search for item...">
-                                <button><i class="icon icon-Search"></i></button>
-                            </form>
-                            <div class="cart-box-wrapper" id="addcart">
-                            @include('frontend.layout.cart')
-                            </div>
-                            <div class="cart-box-wrapper  wish" id="addwish">
-                            @include('frontend.layout.wish')
-                            </div>
-                            <div class="col-2"></div>
-                        </div>
 
+            <!-- Mainmenu Area Start -->
+
+             <!-- Header Middle Area Start -->
+        <div class="header-middle-area">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+
+                    <!-- Logo and Search Bar for Desktop View -->
+                    <!-- Logo and Search Bar for Desktop View -->
+                    <div class="col-lg-8 col-md-8 col-12 text-center d-md-flex justify-content-around">
+                        <div class="logo">
+                            <a href="{{ Route('web.index') }}" class="logo"><img
+                                    src="{{ asset('images/logo.png') }}" alt="logo"></a>
+                        </div>
+                        <!-- Add your search bar HTML here -->
+                        <form action="#" method="post" class="header-search  d-flex">
+                            <input type="text" placeholder="Search for item..." class="w-100">
+                            <button><i class="icon icon-Search"></i></button>
+                        </form>
                     </div>
+
+
+                    <!-- Desktop Icons -->
+                    <div class="col-lg-4 col-md-4 mt-2 text-center d-none d-md-flex justify-content-center">
+                        <div class="cart-box-wrapper me-3">
+                            <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                            <span class="icon-text">Cart</span>
+                        </div>
+                        <div class="cart-box-wrapper mr-3">
+                            <span class="icon"><i class="fas fa-heart"></i></span>
+                            <span class="icon-text">Wishlist</span>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Icons and Toggle Button -->
+                    {{-- <div class="col-12 text-center d-md-none">
+                        <div class="mobile-icons mt-2">
+                            <div class="cart-box-wrapper me-3">
+                                <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                                <span class="icon-text">Cart</span>
+                            </div>
+                            <div class="cart-box-wrapper mr-3">
+                                <span class="icon"><i class="fas fa-heart"></i></span>
+                                <span class="icon-text">Wishlist</span>
+                            </div>
+                        </div>
+                    </div> --}}
+
+                    <!-- Search Bar for Mobile View -->
+                    {{-- <div class="col-md-6 col-12 text-center d-md-none d-flex justify-content-center"> --}}
+                    <!-- Add your search bar HTML here -->
+                    {{-- <form action="#" method="post" class="header-search">
+                            <input type="text" placeholder="Search for item...">
+                            <button><i class="icon icon-Search"></i></button>
+                        </form> --}}
+                    {{-- </div> --}}
+
                 </div>
             </div>
-            <!--Header Middle Area End -->
-            <!-- Mainmenu Area Start -->
+        </div>
+
+
+
+
+
+
+
+
+        <!--Header Middle Area End -->
+
             <div class="mainmenu-area header-sticky display-none">
                 <div class="container">
                     <div class="menu-wrapper">
@@ -136,23 +173,20 @@
         @yield('content')
 
 
-	   <!-- Footer Area Start -->
-       <footer class="footer-area">
-        <div class="footer-top pt-80 pb-80">
+
+    <!-- Footer Area Start -->
+    <footer class="footer-area bg-ash overflow-x-hidden">
+        <div class="footer-top pt-3 pb-4">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-5">
                         <div class="single-footer-widget">
-                            <div class="footer-logo">
-                                <a href="index.html"><img src="assets/img/logo/logo-2.png" alt="">Home</a>
+
+                            <div class="logo">
+                                <a href="{{ Route('web.index') }}" class="logo"><img
+                                        src="{{ asset('images/logo.png') }}" alt="logo"></a>
                             </div>
-                            <div class=" text-light single-footer-text ">
-                                <span>Addresss: Lorem, ipsum dolor.</span>
-                                <span>Phone 01: +(800) 123 456 78</span>
-                                <span>Phone 02: +(100) 123 456 789</span>
-                                <span>Fax : (800) 123 456 789</span>
-                                <span>Email:Contact@ifurniture.com</span>
-                            </div>
+
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3">
@@ -162,9 +196,9 @@
                                 <li><a href="#">Site Map</a></li>
                                 <li><a href="#">Specials</a></li>
                                 <li><a href="#">Delivery Information</a></li>
-                                <li><a href="{{route('web.privacy')}}">Privacy Policy</a></li>
-                                <li><a href="{{route('web.terms')}}">Terms & Condition</a></li>
-                                <li><a href="{{route('web.faq')}}">FAQ Section</a></li>
+                                <li><a href="{{ route('web.privacy') }}">Privacy Policy</a></li>
+                                <li><a href="{{ route('web.terms') }}">Terms & Condition</a></li>
+                                <li><a href="{{ route('web.faq') }}">FAQ Section</a></li>
                             </ul>
                         </div>
                     </div>
@@ -183,8 +217,8 @@
                         <div class="single-footer-widget">
                             <h4>my account</h4>
                             <ul class="footer-widget-list">
-                                <li><a href="{{url("/Check-Out")}}">Checkout</a></li>
-                                <li><a href="{{url("/Login")}}">Login</a></li>
+                                <li><a href="{{ url('/Check-Out') }}">Checkout</a></li>
+                                <li><a href="{{ url('/Login') }}">Login</a></li>
                                 <li><a href="#">Order status</a></li>
                                 <li><a href="#">Site Map</a></li>
                             </ul>
@@ -192,15 +226,23 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="single-footer-widget">
-                            <h4 >sign up newsletter</h4>
-                            <p class="text-light">Be the first to hear about new trending and offers and see how youve helped</p>
+                            <h4>sign up newsletter</h4>
+                            <p class="text-light">Be the first to hear about new trending and offers and see how youve
+                                helped</p>
                             <div class="newsletter-form mc_embed_signup">
-                                <form action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                                <form
+                                    action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
+                                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+                                    class="validate" target="_blank" novalidate>
                                     <div id="mc_embed_signup_scroll" class="mc-form">
-                                        <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email address" required>
+                                        <input type="email" value="" name="EMAIL" class="email"
+                                            id="mce-EMAIL" placeholder="Enter your email address" required>
                                         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                                        <div class="mc-news" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
-                                        <button id="mc-embedded-subscribe" type="submit" name="subscribe">Subscribe</button>
+                                        <div class="mc-news" aria-hidden="true"><input type="text"
+                                                name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1"
+                                                value=""></div>
+                                        <button id="mc-embedded-subscribe" type="submit"
+                                            name="subscribe">Subscribe</button>
                                     </div>
                                 </form>
                             </div>
@@ -212,34 +254,32 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 text-light">
-                        <span class="text-light">Copyright &copy; 2023<a href="{{url("/index")}}" class="text-light">I furniture</a>. All rights reserved.</span>
-                         <br>
+                    <div class="col-lg-6 col-md-6 text-light">
+                        <span class="text-light">Copyright &copy; 2023<a href="{{ url('/index') }}"
+                                class="text-light">I furniture</a>. All rights reserved.</span>
+                        <br>
                         <ul class="list-underline col-12 row" style="padding: 0px;">
-                            <li class="col-4"><a href="{{url("/Privacy-Policy")}}" class="text-light col-12 p-0 m-0">Privacy policy</a></li>
-                            <li class="col-5"><a href="{{url("/Terms")}}" class="text-light col-12 p-0 m-0">Terms & condition</a></li>
+                            <li class="col-4"><a href="{{ url('/Privacy-Policy') }}"
+                                    class="text-light col-12 p-0 m-0">Privacy policy</a></li>
+                            <li class="col-5"><a href="{{ url('/Terms') }}" class="text-light col-12 p-0 m-0">Terms
+                                    & condition</a></li>
 
                         </ul>
                     </div>
-                    <div class="col-lg-4 col-md-2">
+                    <div class="col-lg-6 col-md-6">
                         <div class="social-link text-light">
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="https://twitter.com/example"><i class="fab fa-twitter"></i></a>
+                            <a href="https://plus.google.com/example"><i class="fab fa-google-plus"></i></a>
+                            <a href="https://facebook.com/example"><i class="fab fa-facebook"></i></a>
+                            <a href="https://instagram.com/example"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="payment-image">
-                            <img src=" {{asset('assets/frontend/img/payment.png')}}" alt="">
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
     </footer>
     <!-- Footer Area End -->
-
 		<!-- all js here -->
         <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
         <script src=" {{asset('assets/frontend/js/vendor/modernizr-3.6.0.min.js')}}"></script>

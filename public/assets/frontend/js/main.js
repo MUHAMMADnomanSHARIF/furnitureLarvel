@@ -16,7 +16,7 @@
     07. Slick Slider
     08. Newletter Modal On Load
     09. Scroll Down
- 
+
 ======================================
 [ End table content ]
 ======================================*/
@@ -26,18 +26,18 @@
 
 /*------------------------------------
     01. Sticky Menu
--------------------------------------- */  
+-------------------------------------- */
     var windows = $(window);
     var stick = $(".header-sticky");
-	windows.on('scroll',function() {    
+	windows.on('scroll',function() {
 		var scroll = windows.scrollTop();
 		if (scroll < 245) {
 			stick.removeClass("sticky");
 		}else{
 			stick.addClass("sticky");
 		}
-	}); 
-    
+	});
+
 /*------------------------------------
     02. jQuery MeanMenu
 -------------------------------------- */
@@ -45,7 +45,7 @@
         meanScreenWidth: "991",
         meanMenuContainer: ".mobile-menu-area .mobile-menu",
     });
-    
+
 /*----------------------------------------
     03. Owl Carousel
 ---------------------------------------- */
@@ -210,30 +210,30 @@
     });
 /*------------------------------------------
     04. ScrollUp
-------------------------------------------- */	
+------------------------------------------- */
 	$.scrollUp({
         scrollText: '<i class="fa fa-chevron-up"></i>',
         easingType: 'linear',
         scrollSpeed: 900,
         animation: 'fade'
-    });  
-    
+    });
+
 /*------------------------------------------
     05. Wow js
--------------------------------------------- */    
+-------------------------------------------- */
     new WOW().init();
-    
+
 /*------------------------------------------
     06. Isotope
--------------------------------------------- */  
+-------------------------------------------- */
     $('.grid').isotope({
         itemSelector: '.grid-item',
         percentPosition: true,
         masonry: {
             columnWidth: '.grid-item'
         }
-    });    
-        
+    });
+
 /*----------------------------------------
 	07. Slick Slider
 ------------------------------------------*/
@@ -255,24 +255,24 @@
         slidesToShow: 1,
         asNavFor: '.product-thumbnail-slider',
     });
-    
+
 /*-----------------------------------------
     08. Newletter Modal On Load
------------------------------------------ */ 
+----------------------------------------- */
     var win = $(window);
     win.on('load', function() {
         $('#newslettermodal').modal('show');
-    });	
-    
+    });
+
 /*------------------------------------
     09. Scroll Down
--------------------------------------- */  
+-------------------------------------- */
     $('.scroll-down').on('click', function() {
         $('html, body').animate({scrollTop: $('.scroll-area').offset().top - 100 }, 'slow');
         return false;
     });
 
-    
+
     // testimonial Section
     $('.owl-carousel').owlCarousel({
         items:3,
@@ -285,7 +285,7 @@
             },
             374:{
                 items:1
-                
+
             },
 
             678:{
@@ -296,8 +296,8 @@
             }
         }
     });
-    
-})(jQuery);	
+
+})(jQuery);
 
 jQuery(document).ready(function($){
 	//update these values if you change these breakpoints in the style.css file (or _layout.scss if you use SASS)
@@ -310,8 +310,8 @@ jQuery(document).ready(function($){
 		faqsCategoriesContainer = $('.cd-faq-categories'),
 		faqsCategories = faqsCategoriesContainer.find('a'),
 		closeFaqsContainer = $('.cd-close-panel');
-	
-	//select a faq section 
+
+	//select a faq section
 	faqsCategories.on('click', function(event){
 		event.preventDefault();
 		var selectedHref = $(this).attr('href'),
@@ -321,13 +321,13 @@ jQuery(document).ready(function($){
 			closeFaqsContainer.addClass('move-left');
 			$('body').addClass('cd-overlay');
 		} else {
-	        $('body,html').animate({ 'scrollTop': target.offset().top - 19}, 200); 
+	        $('body,html').animate({ 'scrollTop': target.offset().top - 19}, 200);
 		}
 	});
 
 	//close faq lateral panel - mobile only
 	$('body').bind('click touchstart', function(event){
-		if( $(event.target).is('body.cd-overlay') || $(event.target).is('.cd-close-panel')) { 
+		if( $(event.target).is('body.cd-overlay') || $(event.target).is('.cd-close-panel')) {
 			closePanel(event);
 		}
 	});
@@ -344,7 +344,7 @@ jQuery(document).ready(function($){
 	//update category sidebar while scrolling
 	$(window).on('scroll', function(){
 		if ( $(window).width() > MqL ) {
-			(!window.requestAnimationFrame) ? updateCategory() : window.requestAnimationFrame(updateCategory); 
+			(!window.requestAnimationFrame) ? updateCategory() : window.requestAnimationFrame(updateCategory);
 		}
 	});
 
@@ -357,7 +357,7 @@ jQuery(document).ready(function($){
 				'-o-transform': 'translateY(0)',
 				'transform': 'translateY(0)',
 			});
-		}	
+		}
 		if( faqsCategoriesContainer.hasClass('is-fixed') ) {
 			faqsCategoriesContainer.css({
 				'left': faqsContainer.offset().left,
@@ -378,7 +378,7 @@ jQuery(document).ready(function($){
 	}
 
 	function updateCategoryPosition() {
-		var top = $('.cd-faq').offset().top,
+		var top = $('.cd-faq').offset().top(),
 			height = jQuery('.cd-faq').height() - jQuery('.cd-faq-categories').height(),
 			margin = 20;
 		if( top - margin <= $(window).scrollTop() && top - margin + height > $(window).scrollTop() ) {
@@ -402,7 +402,7 @@ jQuery(document).ready(function($){
 				'-o-transform': 'translateZ(0) translateY('+delta+'px)',
 				'transform': 'translateZ(0) translateY('+delta+'px)',
 			});
-		} else { 
+		} else {
 			faqsCategoriesContainer.removeClass('is-fixed').css({
 				'left': 0,
 				'top': 0,
@@ -416,7 +416,7 @@ jQuery(document).ready(function($){
 				margin = parseInt($('.cd-faq-title').eq(1).css('marginTop').replace('px', '')),
 				activeCategory = $('.cd-faq-categories a[href="#'+actual.attr('id')+'"]'),
 				topSection = (activeCategory.parent('li').is(':first-child')) ? 0 : Math.round(actual.offset().top);
-			
+
 			if ( ( topSection - 20 <= $(window).scrollTop() ) && ( Math.round(actual.offset().top) + actual.height() + margin - 20 > $(window).scrollTop() ) ) {
 				activeCategory.addClass('selected');
 			}else {

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ChildCategoryController;
 use App\Http\Controllers\Admin\productSizeController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\StripePaymentController;
 use App\Http\Controllers\frontend\DefaultController;
 use App\Http\Controllers\PostController;
 use App\Http\Middleware\Permissions;
@@ -29,31 +30,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// for components testing purpose
-// Route::view('/', 'welcome');
 
 
-// Route::view('/index', 'frontend.layout.index');
-// Route::view('/About', 'frontend.layout.about')->name('about');
-// Route::view('/Login', 'frontend.layout.login');
-// Route::view('/Register', 'frontend.layout.register');
-// Route::view('/Terms', 'frontend.layout.terms');
-// Route::view('/Privacy-Policy', 'frontend.layout.privacypolicy');
-// Route::view('/Product-Detail', 'frontend.layout.productdetail');
-// Route::view('/FAQ', 'frontend.layout.faq');
-// Route::view('/Contact-Us', 'frontend.layout.contact');
-// Route::view('/Add-To-Cart', 'frontend.layout.addtocart');
-// Route::view('/Add-To-Wishlist', 'frontend.layout.addtowishlist');
-//  Route::view('/All-Product', 'frontend.layout.allproduct');
-// Route::view('/Blog', 'frontend.layout.blog');
-// Route::view('/blog-Detail', 'frontend.layout.blogdetail');
-// Route::view('/Category', 'frontend.layout.category');
-// Route::view('/Check-Out', 'frontend.layout.checkout');
-// Route::view('/Child-Category', 'frontend.layout.childcategory');
-Route::view('/Terms', 'frontend.layout.terms')->name('web.terms');
-Route::view('/Privacy-Policy', 'frontend.layout.privacypolicy')->name('web.privacy');
-Route::view('/FAQ', 'frontend.layout.faq')->name('web.faq');
-Route::view('/Contact-Us', 'frontend.layout.contact');
 
 Route::withoutMiddleware([Permissions::class])->group(function () {
 Route::controller(AuthController::class)
@@ -65,7 +43,14 @@ Route::controller(AuthController::class)
         Route::get('register',  'registerView')->name('register');
         Route::post('check-register', 'checkRegister')->name('check.register');
         Route::get('logout', 'logout')->name('logout');
+
     });
+
+
+Route::view('/Terms', 'frontend.layout.terms')->name('web.terms');
+Route::view('/Privacy-Policy', 'frontend.layout.privacypolicy')->name('web.privacy');
+Route::view('/FAQ', 'frontend.layout.faq')->name('web.faq');
+Route::view('/Contact-Us', 'frontend.layout.contact');
 
 
     Route::controller(DefaultController::class)
@@ -128,7 +113,7 @@ Route::middleware('auth')->group(function () {
             Route::post('update/{user}', 'update')->name('update');
             Route::get('delete/{user}', 'destroy')->name('delete');
         });
-
+     Route::view('admin/dashboard','admin.Dashboard.index')->name('admin.dashboard');
     Route::get('filemanager', [FileManagerController::class, 'index'])->name('file.index');
     Route::post('filemanager/upload', [FileManagerController::class, 'upload'])->name('file.upload');
     Route::post('file/store', [FileManagerController::class, 'store'])->name('file.store');
@@ -224,11 +209,34 @@ Route::middleware('auth')->group(function () {
             ->name('setting.')
             ->group(function () {
                 Route::get('', 'index')->name('index');
-                Route::get('create', 'create')->name('create');
-                Route::put('store/{setting}', 'store')->name('store');
-                Route::get('edit/{setting}', 'edit')->name('edit');
-                Route::post('update/{setting}', 'update')->name('update');
-                Route::get('delete/{setting}', 'destroy')->name('delete');
+                Route::post('store', 'storeUpdateSetting')->name('storeUpdate');
+            });
+
+
+            Route::controller(StripePaymentController::class)->group(function(){
+                Route::get('stripe/{id}', 'stripe');
+
+                Route::post('/stripe/{id}', 'StripePost')->name('stripe.post');
+
+            });
+            Route::controller(DefaultController::class)
+            ->prefix('order')
+            ->name('order.')
+            ->group(function () {
+                Route::get('detail', 'detail')->name('detail');
+                Route::get('details{order}', 'details')->name('details');
+                Route::post('update/{order}', 'update')->name('update');
+
+
+            });
+            Route::controller(DefaultController::class)
+            ->prefix('order')
+            ->name('order.')
+            ->group(function () {
+                Route::get('trans', 'detail')->name('trans');
+                Route::post('update/{order}', 'update')->name('update');
+
+
             });
 
 

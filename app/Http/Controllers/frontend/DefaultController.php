@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\frontend;
 
+use App\DataTables\OrderDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\ChildCategory;
 use App\Models\Color;
@@ -12,6 +13,7 @@ use App\Models\productSize;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use SebastianBergmann\Type\NullType;
 use Illuminate\Support\Facades\Session;
@@ -344,10 +346,10 @@ return view('frontend.layout.productdetail')->with([
                 $total += $details['price'] * $details['quantity'];
                 $order_details=$order_details.'<br>'.
                 ('Product Name:'.$details["name"].', Quantity: '.$details["quantity"].
-                '<br> Price:'.$details["price"]);
+                '<br> Price:'.$details["price"].',Size:'.$details["size"].',Color:'.$details["color"]);
             }
     }
-    $Amount = $details["price"];
+    $Amount =$total;
     $O_Details=$order_details;
     $Email_Id=Auth::user()->email;
     $userid = Auth::user()->id;
@@ -357,18 +359,15 @@ return view('frontend.layout.productdetail')->with([
      $Order = new order();
      $Order->userid=$userid;
      $Order->address=$Delivery_Address;
-     $Order->product_id=$details["id"];
+     $Order->product_detail=$order_details;
      $Order->totalprice=$Amount;
-     $Order->color = $details["color"];
-     $Order->size = $details["size"];
-     $Order->size = $details["size"];
      $Order->payment_method=$Pmethod;
      $Order->save();
      $id=$Order->id;
 
-     if($Pmethod=='stripe')
+     if($Pmethod=='Stripe')
      {
-        return redirect("proceed_to_Payment/$id");
+        return redirect("stripe/$id");
      }
      else
      {
@@ -382,7 +381,7 @@ return view('frontend.layout.productdetail')->with([
            '.$Delivery_Address.'</p>
             <p> <strong>Total Amount:</strong>
             '.$Amount.'</p>
-             <p><strong>Payment Method:</strong>'.$p_method.'</p>';
+             <p><strong>Payment Method:</strong>'.$Pmethod.'</p>';
             $emailcontent=array(
                 'WelcomeMessage'=>$welcomemessage,
                 'emailBody'=>$emailbody
@@ -407,7 +406,17 @@ return view('frontend.layout.productdetail')->with([
      }
 
 
+
 }
+
+
+public function detail(OrderDataTable $colorDatable)
+{
+    return $colorDatable->render('admin.order.index',[$colorDatable]);
+}
+
+
+
 
 }
 

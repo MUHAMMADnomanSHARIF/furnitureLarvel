@@ -105,7 +105,7 @@
                                             <span>Cash on Delivery </span>
                                         </div>
                                          <div class="ship-address">
-                                            <input type="radio" name="payment_method" value="Stipe">
+                                            <input type="radio" name="payment_method" value="Stripe">
                                             <span>Stripe </span>
                                         </div>
                                     </div>

@@ -16,18 +16,15 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_no');
-            $table->string('product_id');
+            $table->string('product_detail');
             $table->string('totalprice');
-            $table->string('quantity');
-            $table->string('size');
-            $table->string('color');
             $table->string('userid');
             $table->string('Address');
             $table->string('delivery_status')->default('pending');
             $table->string('payment_method')->default('COD');            $table->string('payment_status')->default('pending');
             $table->string('update_payment_status');
 
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

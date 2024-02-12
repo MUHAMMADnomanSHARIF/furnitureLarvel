@@ -13,18 +13,16 @@ class setting extends Model implements HasMedia
     use HasFactory, InteractsWithMedia, SoftDeletes;
 
     protected $fillable = [
-        'title',
-        'description',
-        'color1',
-        'color2',
-        'color3',
-        'color4',
-        'link',
-        'fblink',
-        'twlink',
-        'instalink',
+        'application_name',
         'email',
-        'fixedheader'
-
+        'short_description',
+        'color_one' ,
+        'color_two' ,
+        'color_three' ,
+        'color_four' ,
+        'facebook_link',
+        'instagram_link',
+        'gsc',
+        'site_index',
     ];
 }
