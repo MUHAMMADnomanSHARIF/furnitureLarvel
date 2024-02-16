@@ -1,47 +1,95 @@
 <!doctype html>
 <html lang="en">
-    <head>
+
+<head>
 
 
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 
-        <title>name</title>
+    <title>Furnimart</title>
 
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href=" ">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href=" ">
 
-		<!-- all css here -->
-        <link rel="stylesheet" href=" {{asset('assets/frontend/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href=" {{asset('assets/frontend/css/owl.carousel.min.css')}}">
-        <link rel="stylesheet" href=" {{asset('assets/frontend/css/font-awesome.min.css')}}">
-        <link rel="stylesheet" href=" {{asset('assets/frontend/css/ie7.css')}}">
-        <link rel="stylesheet" href=" {{asset('assets/frontend/css/meanmenu.css')}}">
-        <link rel="stylesheet" href=" {{asset('assets/frontend/css/animate.css')}}">
-        <link rel="stylesheet" href=" {{asset('assets/frontend/css/bundle.css')}}">
-        <link rel="stylesheet" href=" {{asset('assets/frontend/css/slick.css')}}">
-        <link rel="stylesheet" href=" {{asset('assets/frontend/css/style.css')}}">
-        <link rel="stylesheet" href=" {{asset('assets/frontend/css/responsive.css')}}">
-        <link href=" {{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css"/>
+    <!-- all css here -->
+    <link rel="stylesheet" href=" {{ asset('assets/frontend/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href=" {{ asset('assets/frontend/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href=" {{ asset('assets/frontend/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href=" {{ asset('assets/frontend/css/ie7.css') }}">
+    <link rel="stylesheet" href=" {{ asset('assets/frontend/css/meanmenu.css') }}">
+    <link rel="stylesheet" href=" {{ asset('assets/frontend/css/animate.css') }}">
+    <link rel="stylesheet" href=" {{ asset('assets/frontend/css/bundle.css') }}">
+    <link rel="stylesheet" href=" {{ asset('assets/frontend/css/slick.css') }}">
+    <link rel="stylesheet" href=" {{ asset('assets/frontend/css/style.css') }}">
+    <link rel="stylesheet" href=" {{ asset('assets/frontend/css/responsive.css') }}">
+    <link href=" {{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 
 
-        @yield('CoustomCSS')
-    </head>
-    <body>
-        <!--[if lte IE 9]>
+
+
+    @yield('CoustomCSS')
+
+    <style>
+        /* Styling for the Cart container */
+        .cart-container {
+            position: relative;
+            display: inline-block;
+            /* margin: 20px; */
+        }
+
+        /* Styling for the Cart icon */
+        .cart-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Styling for the dropdown */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #dfbb0a;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            min-width: auto;
+            z-index: 1;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+
+        }
+
+        /* Styling for the dropdown items */
+        .dropdown-item {
+            padding: 8px;
+            text-decoration: none;
+            display: block;
+            color: #333;
+        }
+
+        /* Show the dropdown on hover */
+        .cart-container:hover .dropdown-menu {
+            display: block;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
 
-         <!-- Header Area Start -->
-         <header class="header-area bg-ash">
+    <!-- Header Area Start -->
+    <header class="header-area bg-ash">
 
 
-            <!-- Mainmenu Area Start -->
+        <!-- Mainmenu Area Start -->
 
-             <!-- Header Middle Area Start -->
+        <!-- Header Middle Area Start -->
         <div class="header-middle-area">
             <div class="container-fluid">
                 <div class="row align-items-center">
@@ -58,43 +106,56 @@
                             <input type="text" placeholder="Search for item..." class="w-100">
                             <button><i class="icon icon-Search"></i></button>
                         </form>
+
+                        <span class="icon fs-5 d-sm-flex d-md-none"><i class="fas fa-shopping-cart"></i></span>
+
+
                     </div>
+
+
+                    <!-- ========== Start Section ========== -->
+
+                    <!-- ========== End Section ========== -->
 
 
                     <!-- Desktop Icons -->
                     <div class="col-lg-4 col-md-4 mt-2 text-center d-none d-md-flex justify-content-center">
-                        <div class="cart-box-wrapper me-3">
+                        <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
                             <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                            <span class="icon-text">Cart</span>
+                            <span class="icon-text">cart</span>
+
+                            <!-- Dropdown content -->
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item">Item 1</a>
+                                <a href="#" class="dropdown-item">Item 2</a>
+                                <a href="#" class="dropdown-item">Item 3</a>
+                            </div>
                         </div>
-                        <div class="cart-box-wrapper mr-3">
+                        <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
                             <span class="icon"><i class="fas fa-heart"></i></span>
                             <span class="icon-text">Wishlist</span>
+                            <!-- Dropdown content -->
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item">Item 1</a>
+                                <a href="#" class="dropdown-item">Item 2</a>
+                                <a href="#" class="dropdown-item">Item 3</a>
+                            </div>
+                        </div>
+                        <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
+                            <span class="icon"><i class="fa-solid fa-user"></i></span>
+                            <span class="icon-text">Login</span>
+
+                            <!-- Dropdown content -->
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item">Item 1</a>
+                                <a href="#" class="dropdown-item">Item 2</a>
+                                <a href="#" class="dropdown-item">Item 3</a>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Mobile Icons and Toggle Button -->
-                    {{-- <div class="col-12 text-center d-md-none">
-                        <div class="mobile-icons mt-2">
-                            <div class="cart-box-wrapper me-3">
-                                <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                                <span class="icon-text">Cart</span>
-                            </div>
-                            <div class="cart-box-wrapper mr-3">
-                                <span class="icon"><i class="fas fa-heart"></i></span>
-                                <span class="icon-text">Wishlist</span>
-                            </div>
-                        </div>
-                    </div> --}}
 
-                    <!-- Search Bar for Mobile View -->
-                    {{-- <div class="col-md-6 col-12 text-center d-md-none d-flex justify-content-center"> --}}
-                    <!-- Add your search bar HTML here -->
-                    {{-- <form action="#" method="post" class="header-search">
-                            <input type="text" placeholder="Search for item...">
-                            <button><i class="icon icon-Search"></i></button>
-                        </form> --}}
-                    {{-- </div> --}}
+
 
                 </div>
             </div>
@@ -109,68 +170,70 @@
 
         <!--Header Middle Area End -->
 
-            <div class="mainmenu-area header-sticky display-none">
-                <div class="container">
-                    <div class="menu-wrapper">
-                        <div class="main-menu">
-                            <nav>
-                                <ul>
+        <div class="mainmenu-area header-sticky display-none">
+            <div class="container">
+                <div class="menu-wrapper">
+                    <div class="main-menu">
+                        <nav>
+                            <ul>
 
-                                    <li class="{{Request::route()->getName()=='index'?'active':''}}"><a href="{{url('')}}">Home</a></li>
+                                <li class="{{ Request::route()->getName() == 'index' ? 'active' : '' }}"><a
+                                        href="{{ url('') }}">Home</a></li>
 
-                                    <li class="megamenu {{Request::route()->getName()=='web.allcategories'?'active':''}}"><a href="{{url('/allcategories')}}">Categories</a>
-                                        <ul>
-                                        @foreach(\App\Models\ParentCategory::take(7)->get() as $parent)
+                                <li
+                                    class="megamenu {{ Request::route()->getName() == 'web.allcategories' ? 'active' : '' }}">
+                                    <a href="{{ url('/allcategories') }}">Categories</a>
+                                    <ul>
+                                        @foreach (\App\Models\ParentCategory::take(7)->get() as $parent)
                                             <li>
                                                 <ul>
-                                                    <li>{{$parent->name}}</li>
+                                                    <li>{{ $parent->name }}</li>
 
 
-                                                     @foreach( \App\Models\ChildCategory::where(['parent_category_id' => $parent->id])->take(10)->get() as $child)
-
-                                                    <li><a href="#">{{$child->name}}</a></li>
-
-
+                                                    @foreach (\App\Models\ChildCategory::where(['parent_category_id' => $parent->id])->take(10)->get() as $child)
+                                                        <li><a href="#">{{ $child->name }}</a></li>
                                                     @endforeach
-                                                    <li ><a class="text-lowercase" href="#">more</a></li>
+                                                    <li><a class="text-lowercase" href="#">more</a></li>
                                                 </ul>
                                             </li>
-
                                         @endforeach
 
-                                        </ul>
-                                    </li>
-                                    <li class="{{Request::route()->getName()=='web.allproduct'?'active':''}}" ><a href="{{url('/all-product')}}">Shop</a></li>
-                                    <li class="{{Request::route()->getName()=='web.about'?'active':''}}"><a class="{{Request::route()->getName()=='about'?'active':''}}" href="{{url('/about')}}">About Us</a></li>
-                                    <li><a href="{{url("/Blog")}}">Blog</a></li>
-                                    <li><a href="{{url("/Contact-Us")}}">Contact</a></li>
+                                    </ul>
+                                </li>
+                                <li class="{{ Request::route()->getName() == 'web.allproduct' ? 'active' : '' }}"><a
+                                        href="{{ url('/all-product') }}">Shop</a></li>
+                                <li class="{{ Request::route()->getName() == 'web.about' ? 'active' : '' }}"><a
+                                        class="{{ Request::route()->getName() == 'about' ? 'active' : '' }}"
+                                        href="{{ url('/about') }}">About Us</a></li>
+                                <li><a href="{{ url('/Blog') }}">Blog</a></li>
+                                <li><a href="{{ url('/Contact-Us') }}">Contact</a></li>
 
-                                </ul>
-                            </nav>
-                        </div>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
-            <!-- Mainmenu Area End -->
-            <!-- Mobile Menu Area Start -->
-            <div class="mobile-menu-area container">
-                <div class="mobile-menu">
-                    <nav id="mobile-menu-active">
-                        <ul class="menu-overflow">
-                            <li><a href="{{url('')}}">HOME</a></li>
-                            <li><a href="{{url("/All-Product")}}">Shop</a></li>
-                            <li><a href="{{url("/About")}}">About Us</a></li>
-                            <li><a href="{{url("/Blog")}}">Blog</a></li>
-                            <li><a href="{{url("/Contact-Us")}}">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
+        </div>
+        <!-- Mainmenu Area End -->
+        <!-- Mobile Menu Area Start -->
+        <div class="mobile-menu-area container">
+            <div class="mobile-menu">
+                <nav id="mobile-menu-active">
+                    <ul class="menu-overflow">
+                        <li><a href="{{ url('') }}">HOME</a></li>
+                        <li><a href="{{ url('/All-Product') }}">Shop</a></li>
+                        <li><a href="{{ url('/About') }}">About Us</a></li>
+                        <li><a href="{{ url('/Blog') }}">Blog</a></li>
+                        <li><a href="{{ url('/Contact-Us') }}">Contact</a></li>
+                    </ul>
+                </nav>
             </div>
-            <!-- Mobile Menu Area End -->
-        </header>
-        <!-- Header Area End -->
+        </div>
+        <!-- Mobile Menu Area End -->
+    </header>
+    <!-- Header Area End -->
 
-        @yield('content')
+    @yield('content')
 
 
 
@@ -280,57 +343,58 @@
         </div>
     </footer>
     <!-- Footer Area End -->
-		<!-- all js here -->
-        <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
-        <script src=" {{asset('assets/frontend/js/vendor/modernizr-3.6.0.min.js')}}"></script>
-        <script src="{{asset('assets/frontend/js/vendor/jquery-3.6.0.min.js')}}"></script>
-        <script src="{{asset('assets/frontend/js/vendor/jquery-migrate-3.3.2.min.js')}}"></script>
-        <script src="{{asset('assets/frontend/js/vendor/bootstrap.bundle.min.js')}} "></script>
-        <script src="{{asset('assets/frontend/js/owl.carousel.min.js')}}"></script>
-        <script src="{{asset('assets/frontend/js/jquery.meanmenu.js')}}"></script>
-        <script src="{{asset('assets/frontend/js/ajax-mail.js')}}"></script>
-        <script src="{{asset('assets/frontend/js/plugins.js')}}"></script>
-        <script src="{{asset('assets/frontend/js/main.js')}}"></script>
-        <script type="text/javascript">
+    <!-- all js here -->
+    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script src=" {{ asset('assets/frontend/js/vendor/modernizr-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/vendor/bootstrap.bundle.min.js') }} "></script>
+    <script src="{{ asset('assets/frontend/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/jquery.meanmenu.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/ajax-mail.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/plugins.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
+    <script>
+        $(document).ready(function() {
 
-$(document).ready(function () {
+            $('.increment-btn').click(function(e) {
+                e.preventDefault();
+                var incre_value = $(this).parents('.quantity').find('.qty-input').val();
+                var value = parseInt(incre_value, 10);
+                value = isNaN(value) ? 0 : value;
+                if (value < 10) {
+                    value++;
+                    $(this).parents('.quantity').find('.qty-input').val(value);
+                }
+            });
+            $('.decrement-btn').click(function(e) {
+                e.preventDefault();
+                var
+                    decre_value = $(this).parents('.quantity').find('.qty-input').val();
+                var value = parseInt(decre_value, 10);
+                value = isNaN(value) ? 0 : value;
+                if (value > 1) {
+                    value--;
+                    $(this).parents('.quantity').find('.qty-input').val(value);
+                }
+            });
 
-$('.increment-btn').click(function (e) {
-    e.preventDefault();
-    var incre_value = $(this).parents('.quantity').find('.qty-input').val();
-    var value = parseInt(incre_value, 10);
-    value = isNaN(value) ? 0 : value;
-    if(value<10){
-        value++;
-        $(this).parents('.quantity').find('.qty-input').val(value);
-    }
-
-});
-
-$('.decrement-btn').click(function (e) {
-    e.preventDefault();
-    var decre_value = $(this).parents('.quantity').find('.qty-input').val();
-    var value = parseInt(decre_value, 10);
-    value = isNaN(value) ? 0 : value;
-    if(value>1){
-        value--;
-        $(this).parents('.quantity').find('.qty-input').val(value);
-    }
-});
-
-});
+        });
 
 
-        $(document).on('click', '.remove-from-cart', function (e) {
+        $(document).on('click', '.remove-from-cart', function(e) {
 
-    e.preventDefault();
+            e.preventDefault();
             var ele = $(this);
-            if(confirm("Are you sure")) {
+            if (confirm("Are you sure")) {
                 $.ajax({
                     url: '{{ url('delete-cart') }}',
                     method: "DELETE",
-                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
-                    success: function (response) {
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: ele.attr("data-id")
+                    },
+                    success: function(response) {
                         updatecart(response.cartSection);
                         updateaddCart(response.updatecar);
 
@@ -340,126 +404,133 @@ $('.decrement-btn').click(function (e) {
 
                 });
             }
+
             function updatecart(cartHtml) {
-    // Update the cart section with the new HTML content
-    $('#addcart').html(cartHtml);
+                // Update the cart section with the new HTML content
+                $('#addcart').html(cartHtml);
             }
+
             function updateaddCart(carthtml) {
-    // Update the cart section with the new HTML content
-    $('#addcart1').html(carthtml);
-}
-});
-$(document).on('click', '.remove-from-wish', function (e) {
-    e.preventDefault();
+                // Update the cart section with the new HTML content
+                $('#addcart1').html(carthtml);
+            }
+        });
+        $(document).on('click', '.remove-from-wish', function(e) {
+            e.preventDefault();
             var ele = $(this);
-            if(confirm("Are you sure")) {
+            if (confirm("Are you sure")) {
                 $.ajax({
                     url: '{{ url('delete-wish') }}',
                     method: "DELETE",
-                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
-                    success: function (response) {
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: ele.attr("data-id")
+                    },
+                    success: function(response) {
                         updatewish(response.wishSection);
                     }
                 });
             }
+
             function updatewish(wishHtml) {
-    // Update the cart section with the new HTML content
-    $('#addwish').html(wishHtml);
-}
+                // Update the cart section with the new HTML content
+                $('#addwish').html(wishHtml);
+            }
 
 
 
 
-});
-$(document).ready(function(){
-    $('#product').submit(function(e){
-        e.preventDefault();
+        });
+        $(document).ready(function() {
+            $('#product').submit(function(e) {
+                e.preventDefault();
 
-        // Serialize the form data
-        var formData = $('#product').serialize();
+                // Serialize the form data
+                var formData = $('#product').serialize();
 
-        // Log the serialized data to the consol
-        $.ajaxSetup({
-            type: 'POST',
-            url: "/add-to-cart",
-            data: formData,
-            async: true,
-            dataType: 'json',
-            beforeSend: function () {
-                // You can add any code here to be executed before the request is sent
-            },
-            complete: function(){
-                // You can add any code here to be executed after the request is completed
+                // Log the serialized data to the consol
+                $.ajaxSetup({
+                    type: 'POST',
+                    url: "/add-to-cart",
+                    data: formData,
+                    async: true,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        // You can add any code here to be executed before the request is sent
+                    },
+                    complete: function() {
+                        // You can add any code here to be executed after the request is completed
+                    }
+                });
+
+                $.post()
+                    .done(function(response) {
+                        if (response.redirect) {
+                            // Handle redirect
+                            window.location.href = response.redirect;
+                        } else {
+                            // Update the cart section with the new HTML content
+                            updateCart(response.cartSection);
+                            // Other actions...
+                        }
+                    })
+                    .fail(function() {
+                        console.log('failed');
+                    });
+            });
+
+            function updateCart(cartHtml) {
+                // Update the cart section with the new HTML content
+                $('#addcart').html(cartHtml);
             }
         });
 
-        $.post()
-        .done(function(response) {
-            if (response.redirect) {
-                    // Handle redirect
-                    window.location.href = response.redirect;
-                } else {
-                    // Update the cart section with the new HTML content
-                    updateCart(response.cartSection);
-                    // Other actions...
-                }
-        })
-        .fail(function() {
-            console.log('failed');
-        });
-    });
-    function updateCart(cartHtml) {
-    // Update the cart section with the new HTML content
-    $('#addcart').html(cartHtml);
-}
-});
-
-$(document).ready(function () {
-    $('.add-to-wish').on('click', function () {
-        var productId = $(this).data('product-id');
-        console.log('Product ID:', productId); // Add this line
+        $(document).ready(function() {
+            $('.add-to-wish').on('click', function() {
+                var productId = $(this).data('product-id');
+                console.log('Product ID:', productId); // Add this line
 
 
-        $.ajax({
-            type: 'POST', // Use POST method
-            url: '{{ route("web.addtowish", ["productId" => ":productId"]) }}'.replace(':productId', productId),
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            success: function (response) {
-                // Check the console for the response
-                if (response.redirect) {
-                    // Handle redirect
-                    window.location.href = response.redirect;
-                } else {
-                    // Update the cart section with the new HTML content
-                    updateCart(response.wishSection);
-                    // Other actions...
-                }
+                $.ajax({
+                    type: 'POST', // Use POST method
+                    url: '{{ route('web.addtowish', ['productId' => ':productId']) }}'.replace(
+                        ':productId', productId),
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        // Check the console for the response
+                        if (response.redirect) {
+                            // Handle redirect
+                            window.location.href = response.redirect;
+                        } else {
+                            // Update the cart section with the new HTML content
+                            updateCart(response.wishSection);
+                            // Other actions...
+                        }
 
 
-                // Show the cart message
+                        // Show the cart message
 
-            },
-            error: function (error) {
-                // Check the console for errors
-                console.error('Error adding to cart:', error);
+                    },
+                    error: function(error) {
+                        // Check the console for errors
+                        console.error('Error adding to cart:', error);
+                    }
+                });
+            });
+
+            function updateCart(wishHtml) {
+                // Update the cart section with the new HTML content
+                $('#addwish').html(wishHtml);
             }
+
+
         });
-    });
-    function updateCart(wishHtml) {
-    // Update the cart section with the new HTML content
-    $('#addwish').html(wishHtml);
-}
-
-
-});
-
-
     </script>
-        @yield('coustomJS')
+    @yield('coustomJS')
 
 
-    </body>
+</body>
 
 </html>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FileManagerController;
 use App\Http\Controllers\Admin\ParentCategoryController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -34,70 +35,70 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::withoutMiddleware([Permissions::class])->group(function () {
-Route::controller(AuthController::class)
-    ->prefix('auth')
-    ->name('auth.')
-    ->group(function () {
-        Route::get('login',  'loginView')->name('login');
-        Route::post('login-user', 'userLogin')->name('login.user');
-        Route::get('register',  'registerView')->name('register');
-        Route::post('check-register', 'checkRegister')->name('check.register');
-        Route::get('logout', 'logout')->name('logout');
+    Route::controller(AuthController::class)
+        ->prefix('auth')
+        ->name('auth.')
+        ->group(function () {
+            Route::get('login', 'loginView')->name('login');
+            Route::post('login-user', 'userLogin')->name('login.user');
+            Route::get('register', 'registerView')->name('register');
+            Route::post('check-register', 'checkRegister')->name('check.register');
+            Route::get('logout', 'logout')->name('logout');
 
-    });
+        });
 
 
-Route::view('/Terms', 'frontend.layout.terms')->name('web.terms');
-Route::view('/Privacy-Policy', 'frontend.layout.privacypolicy')->name('web.privacy');
-Route::view('/FAQ', 'frontend.layout.faq')->name('web.faq');
-Route::view('/Contact-Us', 'frontend.layout.contact');
+    Route::view('/Terms', 'frontend.layout.terms')->name('web.terms');
+    Route::view('/Privacy-Policy', 'frontend.layout.privacypolicy')->name('web.privacy');
+    Route::view('/FAQ', 'frontend.layout.faq')->name('web.faq');
+    Route::view('/Contact-Us', 'frontend.layout.contact');
 
 
     Route::controller(DefaultController::class)
-    ->prefix('')
-    ->name('web.')
-    ->group(function () {
-        Route::get('', 'home')->name('index');
-        Route::get('/prod-by-cat/{parentCategory}', 'prodByCat')->name('prodByCat');
-        Route::get('/allcategories', 'allparentcategory')->name('allcategories');
-        Route::view('/about', 'frontend.layout.about')->name('about');
-        Route::get('/product-by-category/{id}', 'productbycategory')->name('product-by-category');
-        Route::get('/all-product', 'all')->name('allproduct');
-        Route::get('/product-by-child-category/{id}', 'porductbychildcategory')->name('productbychildcategory');
-        Route::view('/Terms', 'frontend.layout.terms')->name('terms');
-        Route::view('/Privacy-Policy', 'frontend.layout.privacypolicy')->name('privacy');
-        Route::view('/FAQ', 'frontend.layout.faq')->name('faq');
+        ->prefix('')
+        ->name('web.')
+        ->group(function () {
+            Route::get('', 'home')->name('index');
+            Route::get('/prod-by-cat/{parentCategory}', 'prodByCat')->name('prodByCat');
+            Route::get('/allcategories', 'allparentcategory')->name('allcategories');
+            Route::view('/about', 'frontend.layout.about')->name('about');
+            Route::get('/product-by-category/{id}', 'productbycategory')->name('product-by-category');
+            Route::get('/all-product', 'all')->name('allproduct');
+            Route::get('/product-by-child-category/{id}', 'porductbychildcategory')->name('productbychildcategory');
+            Route::view('/Terms', 'frontend.layout.terms')->name('terms');
+            Route::view('/Privacy-Policy', 'frontend.layout.privacypolicy')->name('privacy');
+            Route::view('/FAQ', 'frontend.layout.faq')->name('faq');
 
-        Route::post('add-to-cart',  'addtocart')->name('addtocart');
-        Route::post('/update-cart', 'updateCart')->name('updatecart');
-        Route::post('add-to-wish/{productId}', 'addtowishlist')->name('addtowish');
-        Route::get('/check-out', 'checkout')->name('checkout');
-        Route::post('/payment', 'payment')->name('payment');
-        Route::get('/cart', 'cart')->name('cart');
-        Route::get('/wish', 'wish')->name('wish');
-        Route::delete('delete-wish', 'deletewish')->name('deletewish');
-        Route::get('product-detail/{name}', 'productDetail')->name('product.detail');
+            Route::post('add-to-cart', 'addtocart')->name('addtocart');
+            Route::post('/update-cart', 'updateCart')->name('updatecart');
+            Route::post('add-to-wish/{productId}', 'addtowishlist')->name('addtowish');
+            Route::get('/check-out', 'checkout')->name('checkout');
+            Route::post('/payment', 'payment')->name('payment');
+            Route::get('/cart', 'cart')->name('cart');
+            Route::get('/wish', 'wish')->name('wish');
+            Route::delete('delete-wish', 'deletewish')->name('deletewish');
+            Route::get('product-detail/{name}', 'productDetail')->name('product.detail');
 
-        Route::delete('delete-cart', 'deletecart')->name('deletecart');
-        Route::get('product/detail/{product}', 'productDetails')->name('prod.detail');
-        Route::get('getsize/{id}', function ($id) {
+            Route::delete('delete-cart', 'deletecart')->name('deletecart');
+            Route::get('product/detail/{product}', 'productDetails')->name('prod.detail');
+            Route::get('getsize/{id}', function ($id) {
 
-            $size = App\Models\productSize::where('parent_category_id',$id)->get();
-            return response()->json($size);
-        });
-        Route::get('getproduct/{id}', function ($id) {
+                $size = App\Models\productSize::where('parent_category_id', $id)->get();
+                return response()->json($size);
+            });
+            Route::get('getproduct/{id}', function ($id) {
 
-            $products = App\Models\Product::where('parent_category_id', $id)->get();
+                $products = App\Models\Product::where('parent_category_id', $id)->get();
 
-            $productsWithMedia = $products->map(function ($product) {
-                $product->image_url = $product->getFirstMediaUrl('product.image');
-                return $product;
+                $productsWithMedia = $products->map(function ($product) {
+                    $product->image_url = $product->getFirstMediaUrl('product.image');
+                    return $product;
+                });
+
+                return response()->json($productsWithMedia);
             });
 
-            return response()->json($productsWithMedia);
         });
-
-    });
 
 });
 
@@ -113,7 +114,8 @@ Route::middleware('auth')->group(function () {
             Route::post('update/{user}', 'update')->name('update');
             Route::get('delete/{user}', 'destroy')->name('delete');
         });
-     Route::view('admin/dashboard','admin.Dashboard.index')->name('admin.dashboard');
+
+    Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('filemanager', [FileManagerController::class, 'index'])->name('file.index');
     Route::post('filemanager/upload', [FileManagerController::class, 'upload'])->name('file.upload');
     Route::post('file/store', [FileManagerController::class, 'store'])->name('file.store');
@@ -146,98 +148,98 @@ Route::middleware('auth')->group(function () {
             Route::get('synchronize', 'synchronize')->name('synchronize');
         });
 
-        Route::controller(ParentCategoryController::class)
-            ->prefix('parent/category')
-            ->name('parent.category.')
-            ->group(function () {
-                Route::get('', 'index')->name('index');
-                Route::get('create', 'create')->name('create');
-                Route::post('store', 'store')->name('store');
-                Route::get('edit/{parentCategory}', 'edit')->name('edit');
-                Route::post('update/{parentCategory}', 'update')->name('update');
-                Route::get('delete/{parentCategory}', 'destroy')->name('delete');
-            });
+    Route::controller(ParentCategoryController::class)
+        ->prefix('parent/category')
+        ->name('parent.category.')
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{parentCategory}', 'edit')->name('edit');
+            Route::post('update/{parentCategory}', 'update')->name('update');
+            Route::get('delete/{parentCategory}', 'destroy')->name('delete');
+        });
 
-          ;
-            Route::controller(ChildCategoryController::class)
-            ->prefix('child/category')
-            ->name('child.category.')
-            ->group(function () {
-                Route::get('', 'index')->name('index');
-                Route::get('create', 'create')->name('create');
-                Route::post('store', 'store')->name('store');
-                Route::get('edit/{childCategory}', 'edit')->name('edit');
-                Route::post('update/{childCategory}', 'update')->name('update');
-                Route::get('delete/{childCategory}', 'destroy')->name('delete');
-            });
-            Route::controller(ProductController::class)
-            ->prefix('product')
-            ->name('product.')
-            ->group(function () {
-                Route::get('', 'index')->name('index');
-                Route::get('create', 'create')->name('create');
+    ;
+    Route::controller(ChildCategoryController::class)
+        ->prefix('child/category')
+        ->name('child.category.')
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{childCategory}', 'edit')->name('edit');
+            Route::post('update/{childCategory}', 'update')->name('update');
+            Route::get('delete/{childCategory}', 'destroy')->name('delete');
+        });
+    Route::controller(ProductController::class)
+        ->prefix('product')
+        ->name('product.')
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
 
-                Route::post('store', 'store')->name('store');
-                Route::get('edit/{product}', 'edit')->name('edit');
-                Route::post('update/{product}', 'update')->name('update');
-                Route::get('delete/{product}', 'destroy')->name('delete');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{product}', 'edit')->name('edit');
+            Route::post('update/{product}', 'update')->name('update');
+            Route::get('delete/{product}', 'destroy')->name('delete');
 
-            });
-            Route::controller(ColorController::class)
-            ->prefix('color')
-            ->name('color.')
-            ->group(function () {
-                Route::get('', 'index')->name('index');
-                Route::get('create', 'create')->name('create');
-                Route::post('store', 'store')->name('store');
-                Route::get('delete/{color}', 'destroy')->name('delete');
-            });
-             // Product Size Route
-            Route::controller(productSizeController::class)
-            ->prefix('size')
-            ->name('size.')
-            ->group(function () {
-                Route::get('', 'index')->name('index');
-                Route::get('create', 'create')->name('create');
-                Route::post('store', 'store')->name('store');
-                Route::get('delete/{size}', 'destroy')->name('delete');
-            });
+        });
+    Route::controller(ColorController::class)
+        ->prefix('color')
+        ->name('color.')
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('delete/{color}', 'destroy')->name('delete');
+        });
+    // Product Size Route
+    Route::controller(productSizeController::class)
+        ->prefix('size')
+        ->name('size.')
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('delete/{size}', 'destroy')->name('delete');
+        });
 
-            // Setting Routes
-            Route::controller(SettingController::class)
-            ->prefix('setting')
-            ->name('setting.')
-            ->group(function () {
-                Route::get('', 'index')->name('index');
-                Route::post('store', 'storeUpdateSetting')->name('storeUpdate');
-            });
-
-
-            Route::controller(StripePaymentController::class)->group(function(){
-                Route::get('stripe/{id}', 'stripe');
-
-                Route::post('/stripe/{id}', 'StripePost')->name('stripe.post');
-
-            });
-            Route::controller(DefaultController::class)
-            ->prefix('order')
-            ->name('order.')
-            ->group(function () {
-                Route::get('detail', 'detail')->name('detail');
-                Route::get('details{order}', 'details')->name('details');
-                Route::post('update/{order}', 'update')->name('update');
+    // Setting Routes
+    Route::controller(SettingController::class)
+        ->prefix('setting')
+        ->name('setting.')
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::post('store', 'storeUpdateSetting')->name('storeUpdate');
+        });
 
 
-            });
-            Route::controller(DefaultController::class)
-            ->prefix('order')
-            ->name('order.')
-            ->group(function () {
-                Route::get('trans', 'detail')->name('trans');
-                Route::post('update/{order}', 'update')->name('update');
+    Route::controller(StripePaymentController::class)->group(function () {
+        Route::get('stripe/{id}', 'stripe');
+
+        Route::post('/stripe/{id}', 'StripePost')->name('stripe.post');
+
+    });
+    Route::controller(DefaultController::class)
+        ->prefix('order')
+        ->name('order.')
+        ->group(function () {
+            Route::get('detail', 'detail')->name('detail');
+            Route::get('details{order}', 'details')->name('details');
+            Route::post('update/{order}', 'update')->name('update');
 
 
-            });
+        });
+    Route::controller(DefaultController::class)
+        ->prefix('order')
+        ->name('order.')
+        ->group(function () {
+            Route::get('trans', 'detail')->name('trans');
+            Route::post('update/{order}', 'update')->name('update');
+
+
+        });
 
 
 });
