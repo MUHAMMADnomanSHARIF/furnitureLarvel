@@ -205,7 +205,12 @@
                                 <i class="fa fa-star"></i>
                             </div>
                             <h4><a href="shop.html">{{$product->name}}</a></h4>
+                            @if($product->discounted_price)
                             <div class="product-price"><span>${{$product->discounted_price}}</span><span class="prev-price">${{$product->price}}</span></div>
+                            @else
+                            <div class="product-price"><span>${{$product->price}}</span></div>
+                            @endif
+
 
                         </div>
                     </div>

@@ -66,7 +66,7 @@ class ProductController extends Controller
              // Convert color array to JSON before storing
              $validatedData['color'] = $request->input('color', []);
              $validatedData['size'] = $request->input('size', []);
-             
+
 
             $product = Product::create($validatedData);
 
@@ -109,12 +109,14 @@ class ProductController extends Controller
         $parentCategories = ParentCategory::all();
         $childCategories = ChildCategory::all();
         $color = Color::all();
+        $size =productSize::all();
         return view('admin.product.edit')->with(
             [
                  'product' => $product,
                  'childCategories' =>$childCategories,
                  'parentCategories' => $parentCategories,
-                 'color' => $color
+                 'color' => $color,
+                 'size' => $size,
             ]
             );
     }

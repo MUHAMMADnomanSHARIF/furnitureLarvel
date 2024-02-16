@@ -10,6 +10,7 @@ use App\Models\order;
 use App\Models\ParentCategory;
 use App\Models\Product;
 use App\Models\productSize;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -415,8 +416,28 @@ public function detail(OrderDataTable $colorDatable)
     return $colorDatable->render('admin.order.index',[$colorDatable]);
 }
 
+public function edit(order $order):View
+{
+    $user = User::where('id', $order->userid)->first();
+    $email = $user->email;
+
+
+
+    return view('admin.order.updateorder')->with(
+        [
+             'order' => $order,
+             'mail' => $email,
+        ]);
+}
+public function orderupdate()
+{
+
+}
+
+
 
 
 
 }
+
 

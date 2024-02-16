@@ -30,7 +30,7 @@ return new class extends Migration
                 $table->integer('product_weight')->nullable();
                 $table->integer('product_height')->nullable();
                 $table->integer('product_width')->nullable();
-                $table->integer('availability')->default(1);
+                $table->string('availability')->default('off');
                 $table->softDeletes();
                 $table->timestamps();
             });

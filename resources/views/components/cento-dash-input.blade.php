@@ -32,13 +32,13 @@
             <!--begin::Image input-->
             <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
                 <!--begin::Preview existing avatar-->
-                <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/300-1.jpg)"></div>
+                <div class="image-input-wrapper w-125px h-125px" @if (isset($globalSetting) && $globalSetting->media()) style="background-image: url('{{ $globalSetting->getFirstMediaUrl('$collection_name')}}')" @endif></div>
                 <!--end::Preview existing avatar-->
                 <!--begin::Label-->
                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                     <i class="bi bi-pencil-fill fs-7"></i>
                     <!--begin::Inputs-->
-                    <input type="file" name="avatar" />
+                    <input type="file" name="{{$name ?? 'image'}}" />
                     <!--end::Inputs-->
                 </label>
                 <!--end::Label-->

@@ -62,9 +62,9 @@
                                         <label class="col-lg-8 col-form-label required fw-bold fs-6">Parent
                                             Category</label>
                                         <select name='parent_category_id' class="form-select form-select-solid"
-                                            data-control="select2">
+                                            data-control="select2" id="parent">
                                             @foreach ($parentCategories as $parentCategory)
-                                            <option value="{{ $parentCategory->id }}">{{ $parentCategory->name }}</option>
+                                            <option value="{{ $parentCategory['id'] }}">{{ $parentCategory->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -101,7 +101,7 @@
                                             placeholder="product_width" value="{{$product['product_width']}}"
                                             :message="$errors->first('product_width')" />
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-3">
 
 
                                             <select id="color" name="color[]" multiple >
@@ -111,16 +111,15 @@
                                             </select>
 
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-3">
 
 
-                                            <select id="color" name="color[]" multiple >
-                                                @foreach($size as $size)
-                                                <option value="{{$size->id}}">{{$size->dimension}}</option>
-                                                @endforeach
-                                            </select>
+                                        <select id="size" class="form-control form-control-sm"  name="size[]" multiple >
 
-                                    </div>
+
+                                        </select>
+
+                                        </div>
                                     <div class="col-sm-3 my-4">
                                         <label class="form-check form-switch form-check-custom form-check-solid">
                                             <input class="form-check-input" type="checkbox"
@@ -144,6 +143,60 @@
             </form>
         </div>
         <!--end:::Main-->
+
+        @section('js')
+        <script>
+           $(document).ready(function() {
+    $('#parent').on('change', function() {
+        var parentid = $(this).val();
+        if (parentid) {
+            $.ajax({
+                url: '/getsize/' + parentid,
+                type: "GET",
+                data: {"_token": "{{ csrf_token() }}"},
+                dataType: "json",
+                success: function(data) {
+                    if (data) {
+                        console.log(size);
+                        $('#size').empty();
+                        $('#size').append('<option hidden>Choose Size</option>');
+                        $.each(data, function(key, size) {
+                            $('select[name="size[]"]').append('<option value="' + size.id + '">' + size.dimension + '</option>');
+                            $('#size').multiselect('rebuild');
+
+                        });
+                    } else {
+                        $('#size').empty();
+                    }
+                }
+            });
+        } else {
+            $('#size').empty();
+        }
+    });
+});
+
+        </script>
+
+        <script>
+    $(function () {
+                // Summernote
+                $('textarea').summernote({
+                    height: '200px',
+                    tabsize: 2
+
+                });
+                $('#color').multiselect({
+		nonSelectedText: 'Select Colors'
+	});
+    $('#size').multiselect({
+		nonSelectedText: 'Select Size'
+	});
+            });
+            </script>
+
+
+        @endsection
     </x-slot>
     <x-slot name="footer">
         <x-layout.footer />

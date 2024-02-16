@@ -61,7 +61,7 @@
                         };
                         this.options.addedfile.call(this, file);
                         this.emit("thumbnail", file, fileUrl);
-                        $('form').append('<input type="hidden" name="image" value="' + fileUrl + '">');
+                        $('form').append('<input type="hidden" name="{{$dropzone_name??'image'}}" value="' + fileUrl + '">');
 
                         uploadedDocumentMap[file.name] = file;
                     @endif

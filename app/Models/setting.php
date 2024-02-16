@@ -10,7 +10,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class setting extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, SoftDeletes;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'application_name',

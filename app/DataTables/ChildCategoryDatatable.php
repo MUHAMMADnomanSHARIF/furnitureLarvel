@@ -26,6 +26,9 @@ class ChildCategoryDatatable extends DataTable
             ->addColumn('parent_category_id', function (ChildCategory $childCategory) {
                 return $childCategory->parentCategory->name;
             })
+            ->addColumn('description', function (ChildCategory $childCategory) {
+                return strip_tags($childCategory->description);
+            })
             ->addColumn('image', function (ChildCategory $childCategory) {
                 return '<img src="' . asset($childCategory->getFirstMediaUrl('childCategory.image')) . '" class="image-input-wrapper rounded-circle w-50px h-50px" alt="alt text">';
             })

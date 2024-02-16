@@ -44,12 +44,12 @@
                                     </div>
                                     <div class="col-6">
                                         <x-cento-dash-input type="number" name="price" label="price" placeholder="price"
-                                            :message="$errors->first('price')" />
+                                            :message="$errors->first('price')" required/>
                                     </div>
                                     <div class="col-6">
                                         <x-cento-dash-input type="number" name="discounted_price"
                                             label="Discounted Price" placeholder="Discounted Price"
-                                            :message="$errors->first('discounted_price')" />
+                                            :message="$errors->first('discounted_price')"  />
                                     </div>
 
                                     <label class="col-lg-12 col-form-label required fw-bold fs-6">Description</label>

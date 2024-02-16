@@ -32,17 +32,17 @@
                             <div class="modal-body">
                                 <!--begin::Label-->
                                 <!--end::Label-->
-                                <div class="row"> 
+                                <div class="row">
                                 <label class="col-lg-8 col-form-label required fw-bold fs-6 ml-2">Image</label>
                                     <div class="col-12">
-                                        
+
                                         @include('admin.media.dropdown')
                                     </div>
                                     <div class="col-6">
                                         <x-cento-dash-input type="text" name="name" label="Name" placeholder="Name"
                                             :message="$errors->first('name')" />
                                     </div>
-                                    
+
 
                                     <div class="col-6">
                                         <x-cento-dash-input type="select" name="parent_category_id"
@@ -75,6 +75,23 @@
             </form>
         </div>
         <!--end:::Main-->
+        @section('js')
+
+
+        <script>
+    $(function () {
+                // Summernote
+                $('textarea').summernote({
+                    height: '200px',
+                    tabsize: 2
+
+                });
+            });
+
+            </script>
+
+
+        @endsection
     </x-slot>
     <x-slot name="footer">
         <x-layout.footer />
