@@ -716,10 +716,11 @@ input[type="number"] {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    height: 706px;
+    height: auto;
 }
 .slider-banner {
     padding-left: 25px;
+
 }
 .single-slide h1 {
     color: #252531;
@@ -3716,71 +3717,7 @@ h3.login-title {
 /*----------------------------------------*/
 /*  21. Contact Page
 /*----------------------------------------*/
-.contact-area h4 {
-    color: #252531;
-    line-height: 14px;
-    margin-bottom: 30px;
-    font-size: 20px;
-    font-family: "Roboto", sans-serif;
-    letter-spacing: 0.3px;
-}
-.contact-area #contact-form input,
-.contact-area #contact-form textarea {
-    border: 1px solid #e4e4e4;
-    color: #888888;
-    font-size: 12px;
-    font-weight: 300;
-    height: 38px;
-    margin-bottom: 25px;
-    padding: 0 20px;
-}
-.contact-area #contact-form textarea {
-    height: 159px;
-    padding: 10px 20px;
-    margin-bottom: 35px;
-}
-.contact-area #contact-form input::-moz-placeholder,
-.contact-area #contact-form textarea::-moz-placeholder {
-    color: #888;
-}
-.contact-area #contact-form input::-webkit-input-placeholder,
-.contact-area #contact-form textarea::-webkit-input-placeholder {
-    color: #888;
-}
-.adrs-text > span {
-    color: #666666;
-    display: inline-block;
-    line-height: 24px;
-}
-.c-address-icon {
-    background: #333333 none repeat scroll 0 0;
-    border-radius: 50%;
-    color: #ffffff;
-    display: inline-block;
-    font-size: 24px;
-    height: 47px;
-    line-height: 47px;
-    text-align: center;
-    -webkit-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
-    width: 47px;
-}
-.single-contact-adrs {
-    float: left;
-    width: 33.3333%;
-}
-.contact-address-info {
-    margin-top: 65px;
-    overflow: hidden;
-    padding: 40px 132px 36px;
-}
-.adrs-text {
-    overflow: hidden;
-    padding-top: 15px;
-}
-.single-contact-adrs:hover .c-address-icon {
-    background: #c7880b none repeat scroll 0 0;
-}
+
 /*----------------------------------------*/
 /*  22. Blog Details Page
 /*----------------------------------------*/
@@ -4661,6 +4598,15 @@ h3.login-title {
 
     color: #fff;
 }
+@media only screen and (max-width: 991px) {
+    .get_say_info_sec  {
+
+        display: flex;
+        flex-direction: column;
+
+    }
+}
+
 .get_say_form {
     display: inline-block;
     padding: 45px 0 25px 30px;
@@ -4713,7 +4659,7 @@ h3.login-title {
 }
 @media only screen and (max-width: 778px) {
     .get_say_info_sec > li a {
-        display: none;
+        display: grid;
         width: 50%;
     }
     .get_say_info_sec i {
