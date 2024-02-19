@@ -188,19 +188,19 @@
 
 
 
-                @foreach($product as $product)
+                @foreach($product as $products)
                 <div class="custom-col">
                     <div class="product-item">
                         <span class="hot-sale">sale</span>
                         <div class="product-image-hover">
-                             <a href="{{ url('product-detail/'.$product->name) }}">
-                                            <img class="primary-image" src="{{$product->getFirstMediaUrl('product.image')}}" alt="">
+                             <a href="{{ url('product-detail/'.$products->name) }}">
+                                            <img class="primary-image" src="{{$products->getFirstMediaUrl('product.image')}}" alt="">
                                         </a>
                                         <div class="product-hover">
-                                        <button class="add-to-cart" data-product-id="{{ $product->id }}"   role="button"><i class="icon icon-FullShoppingCart"></i></button>
-                                            <button class="add-to-wish" data-product-id="{{ $product->id }}"><i class="icon icon-Heart"></i></button>
+                                        <button class="add-to-cart" data-product-id="{{ $products->id }}"   role="button"><i class="icon icon-FullShoppingCart"></i></button>
+                                            <button class="add-to-wish" data-product-id="{{ $products->id }}"><i class="icon icon-Heart"></i></button>
 
-                                            <a href="{{ url('product-detail/'.$product->name) }}"><i class="icon icon-Files"></i></a>
+                                            <a href="{{ url('product-detail/'.$products->name) }}"><i class="icon icon-Files"></i></a>
                                         </div>
                         </div>
                         <div class="product-text">
@@ -212,11 +212,11 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <h4><a href="shop.html">{{$product->name}}</a></h4>
-                            @if($product->discounted_price)
-                            <div class="product-price"><span>${{$product->discounted_price}}</span><span class="prev-price">${{$product->price}}</span></div>
+                            <h4><a href="shop.html">{{$products->name}}</a></h4>
+                            @if($products->discounted_price)
+                            <div class="product-price"><span>${{$products->discounted_price}}</span><span class="prev-price">${{$products->price}}</span></div>
                             @else
-                            <div class="product-price"><span>${{$product->price}}</span></div>
+                            <div class="product-price"><span>${{$products->price}}</span></div>
                             @endif
 
 
@@ -447,22 +447,22 @@
 
 
 
-                    @foreach ($product as $product)
+                    @foreach ($product as $products)
                         <div class="custom-col">
                             <div class="product-item">
                                 <span class="hot-sale">sale</span>
                                 <div class="product-image-hover">
-                                    <a href="{{ url('product-detail/' . $product->name) }}">
-                                        <img class="primary-image" src="{{ $product->getFirstMediaUrl('product.image') }}"
+                                    <a href="{{ url('/product-detail' . $products->name) }}">
+                                        <img class="primary-image" src="{{ $products->getFirstMediaUrl('product.image') }}"
                                             alt="">
                                     </a>
                                     <div class="product-hover">
-                                        <button class="add-to-cart" data-product-id="{{ $product->id }}" role="button"><i
+                                        <button class="add-to-cart" data-product-id="{{ $products->id }}" role="button"><i
                                                 class="icon icon-FullShoppingCart"></i></button>
-                                        <button class="add-to-wish" data-product-id="{{ $product->id }}"><i
+                                        <button class="add-to-wish" data-product-id="{{ $products->id }}"><i
                                                 class="icon icon-Heart"></i></button>
 
-                                        <a href="{{ url('product-detail/' . $product->name) }}"><i
+                                        <a href="{{ url('product-detail/' . $products->name) }}"><i
                                                 class="icon icon-Files"></i></a>
                                     </div>
                                 </div>
@@ -475,9 +475,9 @@
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <h4><a href="shop.html">{{ $product->name }}</a></h4>
-                                    <div class="product-price"><span>${{ $product->discounted_price }}</span><span
-                                            class="prev-price">${{ $product->price }}</span></div>
+                                    <h4><a href="shop.html">{{ $products->name }}</a></h4>
+                                    <div class="product-price"><span>${{ $products->discounted_price }}</span><span
+                                            class="prev-price">${{ $products->price }}</span></div>
 
                                 </div>
                             </div>
