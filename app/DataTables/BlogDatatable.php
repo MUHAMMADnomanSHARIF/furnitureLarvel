@@ -2,17 +2,16 @@
 
 namespace App\DataTables;
 
-use App\Models\order;
+use App\Models\Blog;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
 
-class OrderDataTable extends DataTable
+class BlogDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -23,20 +22,23 @@ class OrderDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'admin.order.datatables_actions')
-            ->rawColumns(['edit','details','action'])
+            ->addColumn('action', 'admin.blog.datatables_actions')
+            ->addColumn('image', function (Blog $blog) {
+                return '<img src="' . asset($blog->getFirstMediaUrl('blog.image')) . '" class="image-input-wrapper rounded-circle w-50px h-50px" alt="alt text">';
+            })
+            ->rawColumns(['image', 'edit', 'delete', 'action'])
             ->setRowId('id');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\ParentCategory $model
+     * @param \App\Models\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(order $model): QueryBuilder
+    public function query(Blog $model): QueryBuilder
     {
-        return $model->newQuery()->select('id','order_no', 'product_detail', 'totalprice','userid','delivery_status','payment_method','payment_status');
+        return $model->newQuery()->select('id', 'title');
     }
 
     /**
@@ -47,7 +49,7 @@ class OrderDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('order-table')
+            ->setTableId('blog-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
@@ -67,20 +69,13 @@ class OrderDataTable extends DataTable
     {
         $columns = [
             Column::make('id'),
-            Column::make('order_no'),
-            Column::make('product_detail')->naem('Details'),
-            Column::make('totalprice'),
-            Column::make('userid'),
-            Column::make('delivery_status'),
-            Column::make('payment_method')->name('method'),
-            Column::make('payment_status')->name('status'),
+            Column::make('image'),
+            Column::make('title'),
         ];
 
-        if(Auth::user()->can('order.details') || Auth::user()->can('order.edit'))
-        {
-            $columns = array_merge($columns,[Column::make('action')]);
+        if (Auth::user()->can('blog.edit') || Auth::user()->can('blog.delete')) {
+            $columns = array_merge($columns, [Column::make('action')]);
         }
-
 
         return $columns;
     }
@@ -92,6 +87,6 @@ class OrderDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Order_' . date('YmdHis');
+        return 'Blog_' . date('YmdHis');
     }
 }

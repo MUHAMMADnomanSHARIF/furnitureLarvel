@@ -203,7 +203,7 @@ input[type="number"] {
     margin: 42px 0 50px 0px;
     position: relative;
 }
-.cart-info span span {
+.cartspan {
     background: #85979d none repeat scroll 0 0;
     border-radius: 50%;
     color: #ffffff;
@@ -1623,7 +1623,7 @@ ul.header-menu-list {
 .header-four-area .header-search > input::-moz-placeholder {
     color: #d4c8b2;
 }
-.header-three-area .cart-info span span {
+.header-three-area .cartspan {
     position: relative;
     right: -4px;
 }

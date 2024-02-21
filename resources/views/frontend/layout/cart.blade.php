@@ -1,5 +1,5 @@
+ <a class="cart-info" href="{{url('/cart')}}">
 
-                                <a class="cart-info" href="{{url('/cart')}}">
                                     <span>
                                         <img src=" {{asset('assets/frontend/img/icon/cart.png')}}" alt="" width="25px" height="25px">
                                         <span style="width: 19px; height: 19px; font-size: 13px;">{{ count((array) session('cart')) }}</span>

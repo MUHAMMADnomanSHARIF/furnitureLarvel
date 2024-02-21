@@ -12,8 +12,10 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Blog Details</li>
+                <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
+                @foreach($blogs as $blog)
+                @endforeach
+                <li class="breadcrumb-item active" aria-current="page">{{$blog->title}}</li>
             </ul>
         </nav>
     </div>
@@ -23,66 +25,64 @@
 <div class="blog-details-area ptb-80">
     <div class="container">
         <div class="row">
+            @foreach($detail as $details)
             <div class="col-xl-9 col-lg-8">
                 <div class="blog-image">
-                    <a href="blog.html"><img src="assets/img/blog/l-1.jpg" alt=""></a>
+                    <a ><img src="{{$details->getFirstMediaUrl('blog.image')}}" alt=""></a>
                 </div>
-                <h5>It is a long established fact that a reader will </h5>
+                <h5>{{$details->title}} </h5>
                 <div class="post-information">
                     <span>BY : ADMIN</span>
-                    <span>3 COMMENTS</span>
+
                 </div>
                 <div class="blog-details-text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.lkf Excepteur sint occaecat cupidatat non proident, sunt in culpa qui. </p>
-                    <p class="quote">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr exercitation ullamco laboris nisi ut aliquip ex. </p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comm consequat. Duis aute irure dolor in reprehenderit in.</p>
+                    <p>{{$details->description}}</p>
+                    <h5>{{$details->second_title}} </h5>
+                    <p  >{{$details->second_description}} </p>
+                    <h5>{{$details->third_title}} </h5>
+                    <p>{{$details->third_description}}</p>
+                    <h5>{{$details->fourth_title}} </h5>
+                    <p>{{$details->fourth_description}}</p>
+                    <h5>{{$details->fifth_title}} </h5>
+                    <p>{{$details->fifth_description}}</p>
 
                 </div>
 
 
             </div>
+            @endforeach
+
             <div class="col-xl-3 col-lg-4">
-                <div class="single-widget">
-                    <form action="#" method="post">
-                        <div class="search-box">
-                            <input type="text" placeholder="Search......">
-                            <button type="button"><i class="fa fa-search"></i></button>
-                        </div>
-                    </form>
-                </div>
+
 
                 <div class="single-widget">
                     <h4 class="details-title">LATEST POST</h4>
+                    @foreach($blogs as $blog)
                     <div class="recent-item">
-                        <a href="blog.html"><img src="assets/img/comment/4.jpg" alt=""></a>
+                        <a href="/blog-detail/{{$blog->id}}"><img src="{{$blog->getFirstMediaUrl('blog.image')}}" alt=""></a>
+
+                        <?php
+                            $date = $blog->created_at; // Your date in YYYY-MM-DD format
+
+                            // Format the date as "14 SEP 2017"
+                            $formattedDate = date("d M Y", strtotime($date));
+                            ?>
+                            <?php
+                                    $time = $blog->created_at; // Your time in HH:MM:SS format (24-hour format)
+
+                                    // Format the time as "5 : 00 PM"
+                                    $formattedTime = date("g : i A", strtotime($time));
+                                    ?>
                         <div class="recent-text">
-                            <h5><a href="blog-details.html">Lorem ipsum dolor sit amet, consectetu.</a></h5>
+                            <h5><a href="/blog-detail/{{$blog->id}}">{{$blog->title}}</a></h5>
                             <div class="recent-info">
-                                <a href="blog.html">14 SEP 2017</a>
-                                <span>5 : 00 PM</span>
+                            <span><?php echo $formattedDate; ?></span>
+                                <span><?php echo $formattedTime; ?></span>
                             </div>
                         </div>
                     </div>
-                    <div class="recent-item">
-                        <a href="blog.html"><img src="assets/img/comment/3.jpg" alt=""></a>
-                        <div class="recent-text">
-                            <h5><a href="blog-details.html">Lorem ipsum dolor sit amet, consectetu.</a></h5>
-                            <div class="recent-info">
-                                <a href="blog.html">20 DEC 2017</a>
-                                <span>8 : 00 AM</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="recent-item">
-                        <a href="blog.html"><img src="assets/img/comment/2.jpg" alt=""></a>
-                        <div class="recent-text">
-                            <h5><a href="blog-details.html">Lorem ipsum dolor sit amet, consectetu.</a></h5>
-                            <div class="recent-info">
-                                <a href="blog.html">26 JAN 2017</a>
-                                <span>7 : 00 PM</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
 
             </div>

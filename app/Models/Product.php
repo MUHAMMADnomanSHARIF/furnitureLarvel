@@ -37,9 +37,9 @@ class Product extends Model implements HasMedia
         {
             $this->attributes['size'] = json_encode($value);
         }
-        
+
         // Accessor to convert JSON string to an array when getting the attribute
-        
+
 
         // Accessor to convert JSON string to an array when getting the attribute
         public function getColorAttribute($value)
@@ -62,6 +62,13 @@ class Product extends Model implements HasMedia
         public function colors()
 {
     return $this->belongsToMany(Color::class);
+}
+public function allProducts()
+{
+    // Fetch all products with pagination
+    $products = Product::paginate(10); // Adjust the number as per your requirement
+
+    return view('frontend.layout.allproduct', compact('products'));
 }
 }
 

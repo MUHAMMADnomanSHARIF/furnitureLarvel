@@ -120,22 +120,58 @@
 
                     <!-- Desktop Icons -->
                     <div class="col-lg-4 col-md-4 mt-2 text-center d-none d-md-flex justify-content-center">
-                        <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
+                        <div class="cart-box-wrapper me-3 cart-container cart-box-wrapper " data-toggle="dropdown">
                             <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                            <span class="icon-text">cart</span>
+                            <span class="icon-text"> <a class="cart-info" style="display: inline;" href="{{url('/cart')}}">cart</a></span>
 
                             <!-- Dropdown content -->
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Item 1</a>
-                                <a href="#" class="dropdown-item">Item 2</a>
-                                <a href="#" class="dropdown-item">Item 3</a>
-                            </div>
+                            <div class="dropdown-menu" id="addcart" >
+                                 <div>   <button class="close"><i class="fa fa-close"></i></button>
+                                    <div class="cart-item-a-wrapper">
+                                        <div class="cart-item-amount ">
+                                            <span class=""><span>{{ count((array) session('cart')) }}</span> items</span>
+                                             <?php $total = 0    ?>
+                                             @foreach((array) session('cart') as $id => $details)
+                                             <?php $total += $details['price'] * $details['quantity'] ?>
+                                             @endforeach
+                                            <div class="cart-amount">
+                                                <h5>total:</h5>
+                                                <h4>$ {{ $total }}</h4>
+                                            </div>
+                                        </div>
+                                        <a href="{{ url('/check-out') }}" class="grey-button" style="height: 50px; width:80%;">Checkout</a>
+                                    </div>
+                                    @if(session('cart'))
+
+                                     @foreach(session('cart') as $id => $details)
+
+
+
+                                        <div class="cart-p-text"><label for="">Name:</label>
+                                            <a  class="cart-p-name">{{ $details['name'] }}</a>
+                                            <span>Size:</span>
+                                            <span>{{ $details['size'] }}</span>
+                                            <div class="cart-p-qty">
+                                                <label>Qty</label>
+                                                <input type="text" placeholder=""readonly value="{{ $details['quantity'] }}">
+                                                <button  class="remove-from-cart" data-id="{{ $id }}"  ><i class="icon icon-Delete"></i></button>
+                                            </div>
+
+                                    </div>
+                                    @endforeach
+                                    @endif
+
+                                    <div class="cart-btn-wrapper ">
+                                        <a href="{{url('/cart')}}" class="grey-button" style="height: 50px; width:80%;">View  cart</a>
+                                    </div></div>
+                                </div>
+
                         </div>
                         <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
                             <span class="icon"><i class="fas fa-heart"></i></span>
                             <span class="icon-text">Wishlist</span>
                             <!-- Dropdown content -->
-                            <div class="dropdown-menu">
+                            <div class="dropdown-menu" id="addwish">
                                 <a href="#" class="dropdown-item">Item 1</a>
                                 <a href="#" class="dropdown-item">Item 2</a>
                                 <a href="#" class="dropdown-item">Item 3</a>
@@ -205,7 +241,7 @@
                                 <li class="{{ Request::route()->getName() == 'web.about' ? 'active' : '' }}"><a
                                         class="{{ Request::route()->getName() == 'about' ? 'active' : '' }}"
                                         href="{{ url('/about') }}">About Us</a></li>
-                                <li><a href="{{ url('/Blog') }}">Blog</a></li>
+                                <li><a href="{{ url('/blog') }}">Blog</a></li>
                                 <li><a href="{{ url('/Contact-Us') }}">Contact</a></li>
 
                             </ul>
@@ -396,7 +432,7 @@
                     },
                     success: function(response) {
                         updatecart(response.cartSection);
-                        updateaddCart(response.updatecar);
+
 
 
                     }
@@ -410,10 +446,6 @@
                 $('#addcart').html(cartHtml);
             }
 
-            function updateaddCart(carthtml) {
-                // Update the cart section with the new HTML content
-                $('#addcart1').html(carthtml);
-            }
         });
         $(document).on('click', '.remove-from-wish', function(e) {
             e.preventDefault();

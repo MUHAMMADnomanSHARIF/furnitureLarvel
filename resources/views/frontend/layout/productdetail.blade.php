@@ -78,7 +78,7 @@ input[type='radio']:checked::after {
             <div class="col-lg-7 col-md-7 col-sm-12">
                 <div class="p-d-wrapper">
                     <h1>{{$product->name}}</h1>
-                    <div class="p-rating-review">
+                    <!-- <div class="p-rating-review">
                         <div class="product-rating">
                             <i class="fa fa-star color"></i>
                             <i class="fa fa-star color"></i>
@@ -88,7 +88,7 @@ input[type='radio']:checked::after {
                         </div>
                         <span>1 review</span>
                         <a href="#" class="scroll-down">Add your review</a>
-                    </div>
+                    </div> -->
                     <span class="p-d-price">{{$product->discounted_price}}</span>
                     <span class="model-stock">In stock <span><span>SKU</span>{{$product->sku}}</span></span>
                      <form id="product">
@@ -156,7 +156,7 @@ input[type='radio']:checked::after {
             <div class="p-tab-btn">
                 <div class="nav" role="tablist">
                     <a class="active" href="#tab1" data-bs-toggle="tab" role="tab" aria-selected="true" aria-controls="tab1">Details</a>
-                    <a href="#tab2" data-bs-toggle="tab" role="tab" aria-selected="false" aria-controls="tab2">Reviews 1</a>
+                    <!-- <a href="#tab2" data-bs-toggle="tab" role="tab" aria-selected="false" aria-controls="tab2">Reviews 1</a> -->
                 </div>
             </div>
             <div class="p-d-tab tab-content">
@@ -164,15 +164,11 @@ input[type='radio']:checked::after {
                     <div class="tab-items">
                         <div class="p-details-list">
                             <p>{!! $product->description !!}</p>
-                            <span>Zippered main compartment.</span>
-                            <span>Front zippered pocket.</span>
-                            <span>Side mesh pocket.</span>
-                            <span>Cell phone pocket on strap.</span>
-                            <span>Adjustable shoulder strap and top carry handle.</span>
+
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade scroll-area" id="tab2" role="tabpanel">
+                <!-- <div class="tab-pane fade scroll-area" id="tab2" role="tabpanel">
                     <div class="tab-items">
                         <div class="p-review-wrapper">
                             <div class="section-title title-style-2 text-center"><h2><span>Customer Reviews</span></h2></div>
@@ -235,7 +231,7 @@ input[type='radio']:checked::after {
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -251,17 +247,19 @@ input[type='radio']:checked::after {
     <div class="container">
         <div class="custom-row">
             <div class="related-product-carousel owl-carousel carousel-style-one">
+
+                @foreach($relate as $related)
+
                 <div class="custom-col">
                     <div class="product-item">
                         <div class="product-image-hover">
-                            <a href="product-details.html">
-                                <img class="primary-image" src="assets/img/product/1.jpg" alt="">
-                                <img class="hover-image" src="assets/img/product/2.jpg" alt="">
-                            </a>
+                            <a href="{{ url('product-detail/'.$related->name) }}">
+                                <img class="primary-image" src="{{$related->getFirstMediaUrl('product.image')}}" alt="">
+                             </a>
                             <div class="product-hover">
-                                <button><i class="icon icon-FullShoppingCart"></i></button>
-                                <a href="wishlist.html"><i class="icon icon-Heart"></i></a>
-                                <a href="wishlist.html"><i class="icon icon-Files"></i></a>
+                            <button class="add-to-cart" data-product-id="{{ $related->id }}"   role="button"><i class="icon icon-FullShoppingCart"></i></button>
+                                <button class="add-to-wish" data-product-id="{{ $related->id }}"><i class="icon icon-Heart"></i></button>
+                                <a href="{{ url('product-detail/'.$related->name) }}"><i class="icon icon-Files"></i></a>
                             </div>
                         </div>
                         <div class="product-text">
@@ -272,89 +270,12 @@ input[type='radio']:checked::after {
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <h4><a href="product-details.html">Joust Duffle Bag</a></h4>
-                            <div class="product-price"><span>$34.00</span></div>
+                            <h4><a href="{{ url('product-detail/'.$related->name) }}">{{$related->name}}</a></h4>
+                            <div class="product-price"><span>${{$related->price}}</span></div>
                         </div>
                     </div>
                 </div>
-                <div class="custom-col">
-                    <div class="product-item">
-                        <div class="product-image-hover">
-                            <a href="product-details.html">
-                                <img class="primary-image" src="assets/img/product/3.jpg" alt="">
-                                <img class="hover-image" src="assets/img/product/4.jpg" alt="">
-                            </a>
-                            <div class="product-hover">
-                                <button><i class="icon icon-FullShoppingCart"></i></button>
-                                <a href="wishlist.html"><i class="icon icon-Heart"></i></a>
-                                <a href="wishlist.html"><i class="icon icon-Files"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-text">
-                            <div class="product-rating">
-                                <i class="fa fa-star color"></i>
-                                <i class="fa fa-star color"></i>
-                                <i class="fa fa-star color"></i>
-                                <i class="fa fa-star color"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <h4><a href="product-details.html">Strive Shoulder Pack</a></h4>
-                            <div class="product-price"><span>$32.00</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="custom-col">
-                    <div class="product-item">
-                        <div class="product-image-hover">
-                            <a href="product-details.html">
-                                <img class="primary-image" src="assets/img/product/5.jpg" alt="">
-                                <img class="hover-image" src="assets/img/product/6.jpg" alt="">
-                            </a>
-                            <div class="product-hover">
-                                <button><i class="icon icon-FullShoppingCart"></i></button>
-                                <a href="wishlist.html"><i class="icon icon-Heart"></i></a>
-                                <a href="wishlist.html"><i class="icon icon-Files"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-text">
-                            <div class="product-rating">
-                                <i class="fa fa-star color"></i>
-                                <i class="fa fa-star color"></i>
-                                <i class="fa fa-star color"></i>
-                                <i class="fa fa-star color"></i>
-                                <i class="fa fa-star color"></i>
-                            </div>
-                            <h4><a href="product-details.html">Crown Summit Backpack</a></h4>
-                            <div class="product-price"><span>$38.00</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="custom-col">
-                    <div class="product-item">
-                        <div class="product-image-hover">
-                            <a href="product-details.html">
-                                <img class="primary-image" src="assets/img/product/7.jpg" alt="">
-                                <img class="hover-image" src="assets/img/product/8.jpg" alt="">
-                            </a>
-                            <div class="product-hover">
-                                <button><i class="icon icon-FullShoppingCart"></i></button>
-                                <a href="wishlist.html"><i class="icon icon-Heart"></i></a>
-                                <a href="wishlist.html"><i class="icon icon-Files"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-text">
-                            <div class="product-rating">
-                                <i class="fa fa-star color"></i>
-                                <i class="fa fa-star color"></i>
-                                <i class="fa fa-star color"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <h4><a href="product-details.html">Wayfarer Messenger Bag</a></h4>
-                            <div class="product-price"><span>$40.00</span></div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

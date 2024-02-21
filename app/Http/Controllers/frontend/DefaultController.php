@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\DataTables\OrderDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\ChildCategory;
 use App\Models\Color;
 use App\Models\order;
@@ -11,6 +12,7 @@ use App\Models\ParentCategory;
 use App\Models\Product;
 use App\Models\productSize;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -86,11 +88,13 @@ if($pid->isEmpty())
         $productCounts = Product::select('parent_category_id', DB::raw('count(*) as product_count'))
             ->groupBy('parent_category_id')
             ->get();
+        $blogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
 
         return view('frontend.layout.allproduct')->with([
             'product' => $product,
             'categories' => $categories,
             'productCounts' => $productCounts,
+            'blogs' => $blogs,
         ]);
 
     }
@@ -269,7 +273,6 @@ if($pid->isEmpty())
     {
 
         $name = $request->name;
-
         $products= Product::where("name",$name)->first();
 
         $colors = Color::whereIn('id', $products->color)->get();
@@ -281,7 +284,8 @@ if($pid->isEmpty())
             abort(404); // or redirect to a 404 page, or display an error message
         };
 
-        $relatedProducts = Product::where([['category_id','=',$products->category_id]]);
+        $relatedProducts = Product::where('parent_category_id',$products->parent_category_id)->where('name', '!=', $name)->get();
+
         $productImage = $products->getFirstMediaUrl('product.image');
 
         $color = Color::all();
@@ -293,7 +297,8 @@ return view('frontend.layout.productdetail')->with([
     'product' => $products,
     'image' => $productImage,
     'colors' => $colors,
-    'size' => $size
+    'size' => $size,
+    'relate' =>$relatedProducts
 ]);
 
 
@@ -416,28 +421,68 @@ public function detail(OrderDataTable $colorDatable)
     return $colorDatable->render('admin.order.index',[$colorDatable]);
 }
 
-public function edit(order $order):View
+
+public function orderedit(order $id):View
 {
-    $user = User::where('id', $order->userid)->first();
-    $email = $user->email;
+
+
+     $userid = $id->userid;
+     $mail = User::where('id', $userid)->first();
+    //  dd($mail);
+   $email= $mail->email;
 
 
 
-    return view('admin.order.updateorder')->with(
-        [
-             'order' => $order,
-             'mail' => $email,
+
+    return view('admin.order.updateorder',)->with([
+        'orders' => $id,
+        'mail' => $email
+    ]);
+
+
+}
+ public function orderupdate(Request $request):RedirectResponse
+ {
+
+
+    $id =$request->id;
+    $order= order::where('id',$id)->first();
+
+    $order->delivery_status = $request->delivery_status;
+    $order->save();
+    return redirect()->back()->with('success', 'Delivery status updated successfully');
+    }
+
+    public function blog(){
+
+        $blogs = Blog::orderBy('created_at', 'desc')->get();
+        return view('frontend.layout.blog')->with([
+            'blogs' => $blogs
         ]);
-}
-public function orderupdate()
-{
-
-}
 
 
 
+    }
+    public function blogDetail(Request $request)
+    {
+        $id = $request->id;
+        $detail = Blog::where('id', $id)->get();
+        $blogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
+        return view('frontend.layout.blogdetail')->with([
+            'detail' => $detail,
+            'blogs' => $blogs
+        ]);
 
 
-}
+    }
+
+
+ }
+
+
+
+
+
+
 
 

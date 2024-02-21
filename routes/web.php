@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FileManagerController;
@@ -68,6 +69,9 @@ Route::withoutMiddleware([Permissions::class])->group(function () {
             Route::view('/Terms', 'frontend.layout.terms')->name('terms');
             Route::view('/Privacy-Policy', 'frontend.layout.privacypolicy')->name('privacy');
             Route::view('/FAQ', 'frontend.layout.faq')->name('faq');
+            Route::get('/blog', 'blog')->name('faq');
+            Route::get('/blog-detail/{id}', 'blogDetail')->name('blogDetail');
+
 
             Route::post('add-to-cart', 'addtocart')->name('addtocart');
             Route::post('/update-cart', 'updateCart')->name('updatecart');
@@ -86,9 +90,25 @@ Route::withoutMiddleware([Permissions::class])->group(function () {
                 $size = App\Models\productSize::where('parent_category_id', $id)->get();
                 return response()->json($size);
             });
-            Route::get('getproduct/{id}', function ($id) {
+            Route::get('getproduct/{id?}', function ($id = null) {
+                $productsQuery = App\Models\Product::query();
 
-                $products = App\Models\Product::where('parent_category_id', $id)->get();
+                if ($id !== null) {
+                    $productsQuery->where('parent_category_id', $id);
+                }
+
+                $products = $productsQuery->get();
+
+                $productsWithMedia = $products->map(function ($product) {
+                    $product->image_url = $product->getFirstMediaUrl('product.image');
+                    return $product;
+                });
+
+                return response()->json($productsWithMedia);
+            });
+
+            Route::get('getallproducts', function () {
+                $products = App\Models\Product::all();
 
                 $productsWithMedia = $products->map(function ($product) {
                     $product->image_url = $product->getFirstMediaUrl('product.image');
@@ -226,8 +246,9 @@ Route::middleware('auth')->group(function () {
         ->name('order.')
         ->group(function () {
             Route::get('detail', 'detail')->name('detail');
-            Route::get('details{order}', 'details')->name('details');
-            Route::post('update/{order}', 'update')->name('update');
+            Route::get('details{id}', 'details')->name('details');
+            Route::get('edit/{id}', 'orderedit')->name('edit');
+            Route::post('update/{id}', 'orderupdate')->name('update');
 
 
         });
@@ -236,10 +257,20 @@ Route::middleware('auth')->group(function () {
         ->name('order.')
         ->group(function () {
             Route::get('trans', 'detail')->name('trans');
-            Route::post('update/{order}', 'update')->name('update');
 
 
         });
 
+        Route::controller(BlogController::class)
+        ->prefix('admin/blog')
+        ->name('blog.')
+        ->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{blog}', 'edit')->name('edit');
+            Route::post('update{blog}', 'update')->name('update');
+            Route::get('delete/{blog}', 'destroy')->name('delete');
+        });
 
 });
