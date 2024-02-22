@@ -103,6 +103,7 @@ if($pid->isEmpty())
         $id = $request->id;
 
         $childproduct = Product::where('child_category_id',  $id)->get();
+        $blogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
 
 
        $category =  ChildCategory::where('id',  $id)->take(1)->get();
@@ -110,7 +111,8 @@ if($pid->isEmpty())
         return view('frontend.layout.allproduct')->with([
 
             'product' => $childproduct,
-            'category' =>$category,
+            'categories' =>$category,
+            'blogs' => $blogs,
         ]);
     }
     public function addtocart(Request $request)
