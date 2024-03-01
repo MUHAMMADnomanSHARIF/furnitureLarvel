@@ -2,7 +2,7 @@
 
 @section('CoustomCSS')
     <style>
-        input[type="text"],
+        .contact-page input[type="text"],
         input[type="email"],
         input[type="tel"],
         textarea {
@@ -16,12 +16,7 @@
         }
 
         .aside {
-            background-image: linear-gradient(to left bottom,
-                    #051937,
-                    #002350,
-                    #002d69,
-                    #003684,
-                    #01409f);
+
             animation: animateClr 5s infinite cubic-bezier(0.62, 0.28, 0.23, 0.99);
             background-size: 400%;
         }
@@ -40,7 +35,7 @@
             }
         }
 
-        ion-icon:not([name="logo-codepen"]) {
+        .random i:not([name="logo-codepen"]) {
             border: 1px solid currentColor;
             border-radius: 20%;
             padding: 1rem;
@@ -72,8 +67,8 @@
     </div>
     <!-- Breadcrumb Area End -->
     <!-- Contact Area Start -->
-    <div class="container mt-5 border-1">
-        <div class="bg-light">
+    <div class="container mt-5 border-1 contact-page">
+        <div class="bg-dark">
             <div class="row">
 
                 <div class="col-lg-8 col-md-12 p-5 bg-white rounded-3">
@@ -95,36 +90,36 @@
                             <textarea required name="" placeholder="write your message" id="" cols="30" rows="1"></textarea>
                         </div>
                         <div class="text-end mt-4">
-                            <input class="btn btn-outline-dark" type="submit" value="Send Message" />
+                            <button id="" class="banner-btn" type="submit" name="subscribe">Contact Us </button>
                         </div>
                     </form>
                 </div>
                 <div class="col-lg-4 col-md-12 text-white aside px-4 py-5">
                     <div class="mb-5">
-                        <h1 class="h3">Contact Information</h1>
-                        <p class="opacity-50">
+                        <h2 class="text-white">Contact Information</h2>
+                        <p class="">
                             <small>
                                 Fill out the from and we will get back to you whitin 24 hours
                             </small>
                         </p>
                     </div>
-                    <div class="d-flex flex-column px-0">
+                    <div class="d-flex flex-column px-0 random">
                         <ul class="m-0 p-0">
                             <li class="d-flex justify-content-start align-items-center mb-4">
                                 <span class="opacity-50 d-flex align-items-center me-3 fs-2">
-                                    <ion-icon name="call"></ion-icon>
+                                    <i class="fa-solid fa-phone"></i>
                                 </span>
                                 <span>+447916312844</span>
                             </li>
                             <li class="d-flex align-items-center r mb-4">
                                 <span class="opacity-50 d-flex align-items-center me-3 fs-2">
-                                    <ion-icon name="mail"></ion-icon>
+                                    <i class="fa-regular fa-envelope"></i>
                                 </span>
                                 <span>Help@contact.com</span>
                             </li>
                             <li class="d-flex justify-content-start align-items-center mb-4">
                                 <span class="opacity-50 d-flex align-items-center me-3 fs-2">
-                                    <ion-icon name="pin"></ion-icon>
+                                    <i class="fa-solid fa-location-crosshairs"></i>
                                 </span>
                                 <span>10-16 tiller road, canary wharf, E14 8PX
                                 </span>
