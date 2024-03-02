@@ -47,7 +47,7 @@
         .introduction-section,
         .location-section,
         .questions-section {
-            max-width: 50em;
+            max-width: 70em;
             margin-left: auto;
             margin-right: auto;
             margin-top: 2em;
@@ -65,13 +65,12 @@
 
 
         @media only screen and (max-width: 571px) {
-            .masthead {
-                padding: 5em 0;
-            }
+
 
 
             .masthead-heading {
-                font-size: 3em;
+                padding: 5em 0px,
+                    font-size: 3em;
             }
 
             .container {

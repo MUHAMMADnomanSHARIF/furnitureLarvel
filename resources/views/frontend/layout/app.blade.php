@@ -57,6 +57,7 @@
 
         /* Styling for the dropdown */
         .dropdown-menu {
+            width: auto;
             display: none;
             position: absolute;
             top: 100%;
@@ -82,6 +83,11 @@
         .cart-container:hover .dropdown-menu {
             display: block;
 
+        }
+
+        .custom-input-width {
+            width: 30px;
+            /* Adjust the width according to your design */
         }
     </style>
 </head>
@@ -130,49 +136,54 @@
                     <div class="col-lg-4 col-md-4 mt-2 text-center d-none d-md-flex justify-content-center">
                         <div class="cart-box-wrapper me-3 cart-container cart-box-wrapper " data-toggle="dropdown">
                             <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                            <span class="icon-text"> <a class="cart-info" style="display: inline;" href="{{url('/cart')}}">cart</a></span>
+                            <span class="icon-text"> <a class="cart-info" style="display: inline;"
+                                    href="{{ url('/cart') }}">cart</a></span>
 
                             <!-- Dropdown content -->
-                            <div class="dropdown-menu" id="addcart" >
-                                 <div>   <button class="close"><i class="fa fa-close"></i></button>
-                                    <div class="cart-item-a-wrapper">
-                                        <div class="cart-item-amount ">
-                                            <span class=""><span>{{ count((array) session('cart')) }}</span> items</span>
-                                             <?php $total = 0    ?>
-                                             @foreach((array) session('cart') as $id => $details)
-                                             <?php $total += $details['price'] * $details['quantity'] ?>
-                                             @endforeach
-                                            <div class="cart-amount">
-                                                <h5>total:</h5>
-                                                <h4>$ {{ $total }}</h4>
-                                            </div>
+                            <div class="dropdown-menu" id="addcart">
+                                <button class="close"><i class="fa fa-close"></i></button>
+
+                                <div class="cart-summary">
+                                    <div class="cart-item-amount d-flex">
+                                        <span class="item-count">{{ count((array) session('cart')) }}</span> items
+                                        <?php $total = 0; ?>
+                                        @foreach ((array) session('cart') as $id => $details)
+                                            <?php $total += $details['price'] * $details['quantity']; ?>
+                                        @endforeach
+                                        <div class="cart-total">
+                                            <h5>Total:</h5>
+                                            <h4>$ {{ $total }}</h4>
                                         </div>
-                                        <a href="{{ url('/check-out') }}" class="grey-button" style="height: 50px; width:80%;">Checkout</a>
                                     </div>
-                                    @if(session('cart'))
 
-                                     @foreach(session('cart') as $id => $details)
-
-
-
-                                        <div class="cart-p-text"><label for="">Name:</label>
-                                            <a  class="cart-p-name">{{ $details['name'] }}</a>
-                                            <span>Size:</span>
-                                            <span>{{ $details['size'] }}</span>
-                                            <div class="cart-p-qty">
-                                                <label>Qty</label>
-                                                <input type="text" placeholder=""readonly value="{{ $details['quantity'] }}">
-                                                <button  class="remove-from-cart" data-id="{{ $id }}"  ><i class="icon icon-Delete"></i></button>
+                                    @if (session('cart'))
+                                        @foreach (session('cart') as $id => $details)
+                                            <div class="cart-item d-flex">
+                                                <div class="cart-item-details">
+                                                    <label>Name:</label>
+                                                    <a href="#" class="cart-item-name">{{ $details['name'] }}</a>
+                                                    <span>Size:</span>
+                                                    <span>{{ $details['size'] }}</span>
+                                                </div>
+                                                <div class="cart-item-quantity d-flex">
+                                                    <label class="me-3">Qty</label>
+                                                    <input type="text" placeholder="" readonly
+                                                        value="{{ $details['quantity'] }}" class="custom-input-width">
+                                                    <button class="remove-from-cart ms-3 "
+                                                        data-id="{{ $id }}">
+                                                        <i class="icon icon-Delete"></i></button>
+                                                </div>
                                             </div>
-
-                                    </div>
-                                    @endforeach
+                                        @endforeach
                                     @endif
 
-                                    <div class="cart-btn-wrapper ">
-                                        <a href="{{url('/cart')}}" class="grey-button" style="height: 50px; width:80%;">View  cart</a>
-                                    </div></div>
+                                    <div class="cart-buttons mt-3">
+                                        <a href="{{ url('/check-out') }}" class="grey-button">Checkout</a>
+                                        <a href="{{ url('/cart') }}" class="grey-button">View Cart</a>
+                                    </div>
                                 </div>
+                            </div>
+
 
                         </div>
                         <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
@@ -364,14 +375,7 @@
                     <div class="col-lg-6 col-md-6 text-light">
                         <span class="text-light">Copyright &copy; 2023<a href="{{ url('/index') }}"
                                 class="text-light">I furniture</a>. All rights reserved.</span>
-                        <br>
-                        <ul class="list-underline col-12 row" style="padding: 0px;">
-                            <li class="col-4"><a href="{{ url('/Privacy-Policy') }}"
-                                    class="text-light col-12 p-0 m-0">Privacy policy</a></li>
-                            <li class="col-5"><a href="{{ url('/Terms') }}" class="text-light col-12 p-0 m-0">Terms
-                                    & condition</a></li>
 
-                        </ul>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="social-link text-light">

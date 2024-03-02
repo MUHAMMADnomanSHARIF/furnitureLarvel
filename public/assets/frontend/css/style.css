@@ -2669,7 +2669,7 @@ h1.page-title {
 .cart-main-area .cart-table table {
     background: #ffffff none repeat scroll 0 0;
     border: 1px solid #f1f1f1;
-    line-height: 25px;
+    line-height: 15px;
     margin: 0;
     width: 100%;
 }
@@ -2689,6 +2689,7 @@ h1.page-title {
     border: 1px solid #ececec;
     display: block;
     text-align: center;
+
 }
 .cart-main-area .cart-table table td {
     border-right: 1px solid #f1f1f1;
