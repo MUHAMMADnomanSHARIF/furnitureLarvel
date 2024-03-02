@@ -23,7 +23,7 @@
                             </td>
                             <td class="p-name"><a href="{{url('product-detail/'.$details['name']) }}">{{ $details['name'] }}</a></td>
                             <td class="p-amount">${{ $details['price'] }}</td>
-                            <td class="p-quantity quantity "> <button type="button" class="btn btn-small btn-danger fw-bold decrement-btn" >-</button><input maxlength="12" readonly type="number" placeholder="" value="{{ $details['quantity'] }}" name="quantity" class="qty-input"> <button type="button" class="btn btn-small btn-success fw-bold increment-btn" onclick="console.log('Button clicked!');">+</button></td>
+                            <td class="p-quantity quantity "> <button  class="btn btn-small btn-danger fw-bold decrement-btn" >-</button><input maxlength="12" readonly type="number" placeholder="" value="{{ $details['quantity'] }}" name="quantity" class="qty-input"> <button  class="btn btn-small btn-success fw-bold increment-btn" onclick="console.log('Button clicked!');">+</button></td>
                             <td class="p-total"><span>${{ $details['price'] * $details['quantity'] }}</span></td>
 
                             <td class="edit"><button  class="remove-from-cart" data-id="{{ $id }}"><img src=" {{asset('assets/frontend/img/icon/delte.png')}}" alt=""></button></td>

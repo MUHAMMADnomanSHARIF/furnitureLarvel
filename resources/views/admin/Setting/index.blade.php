@@ -35,44 +35,29 @@
 
                             <div class="card-body pt-0">
 
+                            <div class="row">
+                            <div class="col-6">
+                                                <label class="col-lg-8 col-form-label required fw-bold fs-6">Logo</label>
+                                                @include('admin.media.dropdown', ['file' => $setting, 'collection_name' => 'setting.logo'])
+                                                @if (!empty($setting['logo']))
+                                                    <img src="{{ asset('path/to/your/logo/' . $setting['logo']) }}" alt="Logo">
+                                                @else
+                                                    <p>No logo found</p>
+                                                @endif
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="col-lg-8 col-form-label required fw-bold fs-6">Favicon</label>
+                                                @include('admin.media.dropdown', ['file' => $setting, 'collection_name' => 'setting.favicon'])
+                                                @if (!empty($setting['favicon']))
+                                                    <img src="{{ asset('path/to/your/favicon/' . $setting['favicon']) }}" alt="Favicon">
+                                                @else
+                                                    <p>No favicon found</p>
+                                                @endif
+                                            </div>
 
-                                <div class="row">
-                                    <div class="col-6">
-                                        <!--begin::Image input-->
-                                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
-                                            <!--begin::Preview existing avatar-->
-                                            <div class="image-input-wrapper w-125px h-125px" @if (isset($setting) && is_object($setting) && method_exists($setting, 'getFirstMediaUrl') && $setting->getFirstMediaUrl('settings.logo'))
-    style="background-image: url('{{ $setting->getFirstMediaUrl('settings.logo') }}')"
-@endif
 
-                                                ></div>
-                                            <!--end::Preview existing avatar-->
-                                            <!--begin::Label-->
-                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-                                                <i class="bi bi-pencil-fill fs-7"></i>
-                                                <!--begin::Inputs-->
-                                                <input type="file" name="settings_logo" />
-                                                <!--end::Inputs-->
-                                            </label>
-                                            <!--end::Label-->
-                                            <!--begin::Cancel-->
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                                                <i class="bi bi-x fs-2"></i>
-                                            </span>
-                                            <!--end::Cancel-->
-                                            <!--begin::Remove-->
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                                                <i class="bi bi-x fs-2"></i>
-                                            </span>
-                                            <!--end::Remove-->
-                                        </div>
-                                        <!--end::Image input-->
-                                        <!--begin::Hint-->
-                                        <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
-                                        <!--end::Hint-->
-                                    </div>
-                                    <div class="col-6">
-                                        <x-cento-dash-input type="file" name="setting_favicon" collection_name='settings.favicon' />
+
+
                                         <div class="col-lg-6 fv-row fv-plugins-icon-container">
                                             <label class="col-lg-6 col-form-label fw-bold fs-6">Application
                                                 Name</label>

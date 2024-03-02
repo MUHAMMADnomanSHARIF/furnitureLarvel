@@ -123,7 +123,7 @@
                                     <div class="col-sm-3 my-4">
                                         <label class="form-check form-switch form-check-custom form-check-solid">
                                             <input class="form-check-input" type="checkbox"
-                                                {{$product['availability']=='on' ?'checked':''}} name="availability" />
+                                                {{$product['availability']=='on' ?'checked':''}} name="availability" value="" />
                                             <span class="form-check-label fw-semibold text-muted">Availability</span>
                                         </label>
                                     </div>

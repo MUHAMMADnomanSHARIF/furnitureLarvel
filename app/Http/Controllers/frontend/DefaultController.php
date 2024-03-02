@@ -25,15 +25,17 @@ class DefaultController extends Controller
 {
     public function home(): View
     {
-        $products = Product::latest()->take(20)->get();
+
         $allcategories = ChildCategory::all();
         $product = Product::latest()->take(20)->get();
+        $blogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
 
         return view('frontend.layout.index')
             ->with([
 
                 'product' => $product,
                 'childcategory' => $allcategories,
+                'blogs' => $blogs
             ]);
     }
 
@@ -59,27 +61,32 @@ if($pid->isEmpty())
                 $products =  Product::where(function ($query) use($allid){
                     $query->whereNull('child_category_id')
                         ->where('parent_category_id', $allid);
-                })->get();
+                })->paginate(12);
                 // dd($products->all());
+                $blogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
                 $parentcategory = ParentCategory::where('id',  $allid)->get();
-                return view('frontend.layout.allproduct')->with([
+                return view('frontend.layout.productbycategory')->with([
                   'product' => $products,
-                  'category' =>$parentcategory,
+                  'categories' =>$parentcategory,
+                  'blogs' => $blogs,
               ]);
             } else{
                 $childcategory = ChildCategory::where('parent_category_id',  $allid)->get();
                 $parentcategory = ParentCategory::where('id', $allid)->get();
+                $blogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
                 $product = Product::latest()->take(20)->get();
                 return view('frontend.layout.childcatgory')->with([
                     'childcategory' => $childcategory,
                     'parentcategory' =>$parentcategory,
                     'product' => $product,
+                    'blogs' => $blogs,
                 ]);
 
             }
 
 
     }
+
 
     public function all(){
 
@@ -91,7 +98,7 @@ if($pid->isEmpty())
         $blogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
 
         return view('frontend.layout.allproduct')->with([
-            'product' => $product,
+            'category' => $product,
             'categories' => $categories,
             'productCounts' => $productCounts,
             'blogs' => $blogs,
@@ -102,13 +109,13 @@ if($pid->isEmpty())
 
         $id = $request->id;
 
-        $childproduct = Product::where('child_category_id',  $id)->get();
+        $childproduct = Product::where('child_category_id',  $id)->paginate(12);
         $blogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
 
 
        $category =  ChildCategory::where('id',  $id)->take(1)->get();
     //   dd($category);
-        return view('frontend.layout.allproduct')->with([
+        return view('frontend.layout.productbycategory')->with([
 
             'product' => $childproduct,
             'categories' =>$category,
@@ -137,11 +144,12 @@ if($pid->isEmpty())
 
         // Product doesn't exist, add it to the cart
         $productImage =  $product->getFirstMediaUrl('product.image');
+        $price = $product->discounted_price ?? $product->price;
         $wish[$id] = [
             "id" =>$product->id,
             "name" => $product->name,
             "quantity" => $quantity ,
-            "price" => $product->discounted_price,
+            "price" => $price,
             "photo" => $productImage,
             "size" => $size,
             "color" => $color
@@ -205,10 +213,11 @@ if($pid->isEmpty())
             } else {
                 // Product doesn't exist, add it to the cart
                 $productImage =  $product->getFirstMediaUrl('product.image');
+                $price = $product->discounted_price ?? $product->price;
                 $wish[$productId] = [
                     "name" => $product->name,
                     "quantity" => 1,
-                    "price" => $product->discounted_price,
+                    "price" => $price,
                     "photo" => $productImage
 
 
@@ -343,7 +352,8 @@ return view('frontend.layout.productdetail')->with([
         $Pmethod=$request->input('payment_method');
 
           $fullname =$Fname.''.$Lname;
-        $Delivery_Address=$address.',<br>'.$city.','.$state.',<br>'.$zipcode.','.$phno;
+          $state_city = $city.','.$state;
+
 
         if(session('cart'))
         {
@@ -365,8 +375,13 @@ return view('frontend.layout.productdetail')->with([
     $name=Auth::user()->name;
 /*Order Details Ends Here*/
      $Order = new order();
+
      $Order->userid=$userid;
-     $Order->address=$Delivery_Address;
+     $Order->userName=$fullname;
+     $Order->StreetAddress=$address;
+     $Order->state=$state_city;
+     $Order->zipcode=$zipcode;
+     $Order->phoneNo=$phno;
      $Order->product_detail=$order_details;
      $Order->totalprice=$Amount;
      $Order->payment_method=$Pmethod;
@@ -447,17 +462,24 @@ public function orderedit(order $id):View
  {
 
 
+
     $id =$request->id;
     $order= order::where('id',$id)->first();
 
     $order->delivery_status = $request->delivery_status;
+    $order->zipcode = $request->zipcode;
+    $order->StreetAddress = $request->StreetAddress;
+    $order->state = $request->state;
+    $order->phoneNo = $request->phoneNo;
+
     $order->save();
     return redirect()->back()->with('success', 'Delivery status updated successfully');
     }
 
     public function blog(){
+        $blogs = Blog::orderBy('created_at', 'desc')->paginate(8);
 
-        $blogs = Blog::orderBy('created_at', 'desc')->get();
+
         return view('frontend.layout.blog')->with([
             'blogs' => $blogs
         ]);

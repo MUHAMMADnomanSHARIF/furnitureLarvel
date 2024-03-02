@@ -21,6 +21,7 @@ class UpdateProductRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
+
     public function rules()
     {
         return [
@@ -37,7 +38,14 @@ class UpdateProductRequest extends FormRequest
             'product_weight' => 'nullable',
             'product_height' => 'nullable',
             'product_width' => 'nullable',
-            'availability' => 'nullable'
+            'availability' => 'nullable|in:on,off'
         ];
+    }
+    protected function prepareForValidation()
+    {
+        // If 'availability' is not in the request, set its value to 'off'
+        if (! $this->has('availability')) {
+            $this->merge(['availability' => 'off']);
+        }
     }
 }

@@ -22,4 +22,5 @@ class Blog extends Model implements HasMedia
         'fifth_title',
         'fifth_description'
     ];
+
 }

@@ -65,6 +65,48 @@ margin-top: 8px;
                 <div class="ht-product-shop tab-content">
                     <div class="tab-pane active show fade text-center" id="grid" role="tabpanel">
                         <div class="row" id="product-container">
+                        @foreach($product as $category)
+                                     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                  <div class="product-item">
+                                  @if($category->availability == 'on')
+                                        <span class="in-stock">In Stock</span>
+                                    @else
+                                        <span class="in-stock">Out of Stock</span>
+                                    @endif
+                                    <div class="product-image-hover">
+                                   <a href="{{ url('product-detail/'.$category->name) }}">
+                                     <img class="primary-image" src="{{$category->getFirstMediaUrl('product.image')}}" alt="" />
+                                     </a>
+                                    <div class="product-hover">
+                                        <button class="add-to-cart" data-product-id="{{$category->id}}" role="button"><i class="icon icon-FullShoppingCart"></i></button>
+                                        <button class="add-to-wish" data-product-id="{{$category->id}}"><i class="icon icon-Heart"></i></button>
+                                        <a href="{{ url('product-detail/'.$category->name) }}"><i class="icon icon-Files"></i></a>
+                                    </div>
+                                              </div>
+                                                        <div class="product-text">
+                                                <div class="product-rating">
+                                                    <i class="fa fa-star color"></i>
+                                                    <i class="fa fa-star color"></i>
+                                                    <i class="fa fa-star color"></i>
+                                                    <i class="fa fa-star color"></i>
+                                                    <i class="fa fa-star"></i>
+                                                        </div>
+                                    <h4><a href="{{ url('product-detail/'.$category->name) }}">{{$category->name}}</a></h4>
+                                    @if('$category->discounted_price ?')
+
+                                     <div class="product-price">
+                                            <span>{{$category->discounted_price}}</span>
+                                            <span class="prev-price">{{$category->price}}</span>
+                                        </div>
+                                        @else
+                                        <div class="product-price">
+                                            <span>{{$category->price}}</span>
+                                        </div>
+                                    @endif
+                        </div>
+                    </div>
+                </div>
+                 @endforeach
 
 
 
@@ -105,10 +147,10 @@ margin-top: 8px;
                                         <input type="radio" style="border-radius:none;"class="category-checkbox"  name="cate" value="" checked>
                                         <label for="tables" selected>ALL Products</label>
                                     </div>
-                            @foreach($categories as $category)
+                            @foreach($categories as $categor)
                                     <div class="single-widget-opt">
-                                        <input type="radio" name="cate" class="category-checkbox" value="{{ $category->id }}" id="tables">
-                                        <label for="tables">{{ $category->name }}<span>({{ $category->products->count() }})</span></label>
+                                        <input type="radio" name="cate" class="category-checkbox" value="{{ $categor->id }}" id="tables">
+                                        <label for="tables">{{ $categor->name }}<span>({{ $categor->products->count() }})</span></label>
                                     </div>
                                 @endforeach
 
@@ -205,7 +247,7 @@ margin-top: 8px;
 @endsection
 
 @section('coustomJS')
-
+<!--
    <script>
   $(document).ready(function() {
     // Function to fetch all products
@@ -260,6 +302,7 @@ margin-top: 8px;
             $('#product-container').append(`
                 <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="product-item">
+                    <span class="hot-sale">sale</span>
                         <div class="product-image-hover">
                             <a href="{{ url('product-detail/') }}/${product.name}">
                                 <img class="primary-image" src="${product.image_url}" alt="">
@@ -281,11 +324,11 @@ margin-top: 8px;
                             <h4><a href="{{ url('product-detail/') }}/${product.name}">${product.name}</a></h4>
                             ${product.discounted_price ?
                                 `<div class="product-price">
-                                    <span>${product.discounted_price}</span>
-                                    <span class="prev-price">${product.price}</span>
+                                    <span>$${product.discounted_price}</span>
+                                    <span class="prev-price text-danger" >$${product.price}</span>
                                 </div>` :
                                 `<div class="product-price">
-                                    <span>${product.price}</span>
+                                    <span>$${product.price}</span>
                                 </div>`
                             }
                         </div>
@@ -295,7 +338,7 @@ margin-top: 8px;
         });
     }
 });
-</script>
+</script> -->
 
 
 

@@ -46,6 +46,37 @@
                 </div>
             </div>
             @endforeach
+           <div class="pagination-wrapper">
+    <nav aria-label="navigation">
+        <ul class="pagination align-items-center">
+            @if ($blogs->currentPage() == 1)
+                <li class="page-item disabled">
+                    <span class="page-link">&laquo;</span>
+                </li>
+            @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $blogs->previousPageUrl() }}" rel="prev">&laquo;</a>
+                </li>
+            @endif
+
+            @for ($i = 1; $i <= $blogs->lastPage(); $i++)
+                <li class="page-item {{ $blogs->currentPage() == $i ? 'active' : '' }}">
+                    <a class="page-link" href="{{ $blogs->url($i) }}">{{ $i }}</a>
+                </li>
+            @endfor
+
+            @if ($blogs->currentPage() == $blogs->lastPage())
+                <li class="page-item disabled">
+                    <span class="page-link">&raquo;</span>
+                </li>
+            @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $blogs->nextPageUrl() }}" rel="next">&raquo;</a>
+                </li>
+            @endif
+        </ul>
+    </nav>
+</div>
 
         </div>
     </div>
