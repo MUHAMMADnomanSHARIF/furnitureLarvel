@@ -28,6 +28,7 @@
     <link rel="stylesheet" href=" {{ asset('assets/frontend/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href=" {{ asset('assets/frontend/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href=" {{ asset('assets/frontend/css/ie7.css') }}">
+    <link rel="stylesheet" href=" {{ asset('assets/frontend/css/ion.rangeSlider.min.css') }}">
     <link rel="stylesheet" href=" {{ asset('assets/frontend/css/meanmenu.css') }}">
     <link rel="stylesheet" href=" {{ asset('assets/frontend/css/animate.css') }}">
     <link rel="stylesheet" href=" {{ asset('assets/frontend/css/bundle.css') }}">
@@ -256,7 +257,7 @@
                                     </ul>
                                 </li>
                                 <li class="{{ Request::route()->getName() == 'web.allproduct' ? 'active' : '' }}"><a
-                                        href="{{ url('/all-product') }}">Shop</a></li>
+                                        href="{{ url('/shop') }}">Shop</a></li>
                                 <li class="{{ Request::route()->getName() == 'web.about' ? 'active' : '' }}"><a
                                         class="{{ Request::route()->getName() == 'about' ? 'active' : '' }}"
                                         href="{{ url('/about') }}">About Us</a></li>
@@ -402,6 +403,7 @@
     <script src="{{ asset('assets/frontend/js/ajax-mail.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/ion.rangeSlider.min.js') }}"></script>
     <script>
         $(document).ready(function() {
 
