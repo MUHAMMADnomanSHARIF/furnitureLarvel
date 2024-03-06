@@ -89,22 +89,55 @@ input[type='radio']:checked::after {
                         <span>1 review</span>
                         <a href="#" class="scroll-down">Add your review</a>
                     </div> -->
-                    <span class="p-d-price">{{$product->discounted_price}}</span>
-                    <span class="model-stock">In stock <span><span>SKU</span>{{$product->sku}}</span></span>
+                    @if($product->discounted_price)
+                    <span class="p-d-price text-danger text-decoration-line-through">${{$product->price}} </span>
+                    &emsp; <span class="p-d-price text-decoration-none">${{$product->discounted_price}}</span>&nbsp;
+                     <span class="fs-5 fw-bold">  {{$percentageDiscount =  number_format((($product->price - $product->discounted_price) / $product->price) * 100)
+                }}%</span>
+
+
+
+                    @else
+                    <span class="p-d-price fw-bold">${{$product->price}}</span>
+                    @endif
+                    <span class="model-stock">  @if($product->availability == 'on')
+                    In stock
+            @else
+            Out of Stock
+            @endif <span><span>SKU</span>{{$product->sku}}</span></span>
                      <form id="product">
 
                      {{ csrf_field() }}
-                    <div class="qty-cart-add quantity">
 
-                        <label for="qty">qty</label>
+                    <div class="qty-cart-add quantity">
+                    @if($product->availability == 'on')
+                    <label for="qty">qty</label>
                          <div class="input-group-prepend decrement-btn" style="cursor: pointer">
                          <span class="input-group-text">-</span>
                       </div>
-                        <input  type="number" name="quantity"  class="qty-input" style="border:none; border-radius:3px; margin:0px 4px 0px 4px; background-color:lightgray; font-weight:bold;" placeholder="0" id="qty" min="1" value="1">
+                        <input  type="number" name="quantity" readonly  class="qty-input" style="border:none; border-radius:3px; margin:0px 4px 0px 4px; background-color:lightgray; font-weight:bold;" placeholder="0" id="qty" min="1" value="1">
                         <div class="input-group-append increment-btn" style="cursor: pointer">
                          <span class="input-group-text">+</span>
                           </div>
+            @else
+            <label for="qty">qty</label>
+                         <div class="input-group-prepend" style="cursor: pointer">
+                         <span class="input-group-text">-</span>
+                      </div>
+                        <input  type="number" name="quantity" readonly  class="qty-input" style="border:none; border-radius:3px; margin:0px 4px 0px 4px; background-color:lightgray; font-weight:bold;" placeholder="0" id="qty" min="1" value="0">
+                        <div class="input-group-append " style="cursor: pointer">
+                         <span class="input-group-text">+</span>
+                          </div>
+            @endif
+
+
+                          @if($product->availability == 'on')
                           <button type="submit">Add to cart</button>
+            @else
+            <button >Availible Soon </button>
+
+            @endif
+
 
                     </div>
                     <div class="radio-grid">

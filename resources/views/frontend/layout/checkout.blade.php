@@ -76,58 +76,30 @@
                                             </div>
 
                                         </div>
-
-
-
-                                        <div class="buttons-set">
-                                            <button class="collapse button" data-bs-toggle="collapse" data-parent="#accordion" type="button"><span>Continue</span></button>
-                                        </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel">
-                        <div class="panel-heading" id="headingFive">
-                            <h4 class="panel-title">
-                                <a class="collapse" data-bs-toggle="collapse" data-parent="#accordion" href="#payment-info">
-                                    <span>2</span> PAYMENT INFORMATION
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="payment-info" class="collapse">
-                            <div class="panel-body">
-                                <div class="ship-method payment">
+                                        <br>
+                                        <h4 class="panel-title">
+                                            <a class="collapse" data-bs-toggle="collapse" data-parent="#accordion" href="#payment-info">
+                                                <span>2</span> PAYMENT INFORMATION
+                                            </a>
+                                        </h4>
+                                        <div class="ship-method payment">
                                     <div class="ship-wrap">
                                         <div class="ship-address">
                                             <input type="radio" name="payment_method" value="ChachOnDelivery">
-                                            <span>Cash on Delivery </span>
+                                            <span class="fw-bold">Cash on Delivery </span>
                                         </div>
                                          <div class="ship-address">
                                             <input type="radio" name="payment_method" value="Stripe">
-                                            <span>Stripe </span>
+                                            <span class="fw-bold">Stripe </span>
                                         </div>
                                     </div>
-                                    <div class="buttons-set">
-                                        <button type="button" class="button"><span>Continue</span></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel">
-                        <div class="panel-heading" id="headingSix">
-                            <h4 class="panel-title">
+                                    <br>
+                                    <h4 class="panel-title">
                                 <a class="collapsed" data-bs-toggle="collapse" data-parent="#accordion" href="#order-review">
                                     <span>3</span> ORDER REVIEW
                                 </a>
                             </h4>
-                        </div>
-                        <div id="order-review" class="collapse">
-                            <div class="panel-body">
 
-                                    <div class="checkout-table table-responsive">
                                         <table>
                                             <thead>
                                                 <tr>
@@ -174,9 +146,18 @@
                                         </div>
                                     </div>
                                 </form>
+
+                            <div class="buttons-set">
+                                        <button hidden class="button"><span>Continue</span></button>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
             <div class="col-lg-4 col-md-3 mt-4">

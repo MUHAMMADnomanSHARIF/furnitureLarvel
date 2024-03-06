@@ -45,6 +45,8 @@
                                     <div class="text-gray-400 fw-semibold fs-6" data-kt-translate="general-desc">Get
                                         unlimited access & earn money</div>
                                     <!--end::Link-->
+
+                            <input type="hidden" name="previous_url" value="{{ URL::previous() }}">
                                 </div>
                                 @if (Session::has('error'))
                                 <div class="alert alert-danger">

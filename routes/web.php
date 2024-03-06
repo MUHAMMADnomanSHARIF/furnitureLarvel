@@ -69,6 +69,7 @@ Route::withoutMiddleware([Permissions::class])->group(function () {
             Route::view('/Terms', 'frontend.layout.terms')->name('terms');
             Route::view('/Privacy-Policy', 'frontend.layout.privacypolicy')->name('privacy');
             Route::view('/FAQ', 'frontend.layout.faq')->name('faq');
+            Route::get('/product-by-category', 'productbycategory')->name('faq');
             Route::get('/blog', 'blog')->name('faq');
             Route::get('/blog-detail/{id}', 'blogDetail')->name('blogDetail');
 

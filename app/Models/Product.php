@@ -63,12 +63,6 @@ class Product extends Model implements HasMedia
 {
     return $this->belongsToMany(Color::class);
 }
-public function allProducts()
-{
-    // Fetch all products with pagination
-    $products = Product::paginate(10); // Adjust the number as per your requirement
 
-    return view('frontend.layout.allproduct', compact('products'));
-}
 }
 

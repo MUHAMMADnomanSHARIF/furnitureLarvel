@@ -3,17 +3,25 @@
 
 <head>
 
+                           @php
+                            $allSettings = app('GlobalHelper')->getSettings();
+                            @endphp
+
+                            @foreach ($allSettings as $setting)
+                            <!-- Display other columns as needed -->
+                            @endforeach
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 
-    <title>Furnimart</title>
+    <title>{{$setting['application_name']}}</title>
 
-    <meta name="description" content="">
+    <meta name="description" content="{{$setting['short_description']}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href=" ">
+    <link rel="shortcut icon" type="image/x-icon" src="
+    ">
 
     <!-- all css here -->
     <link rel="stylesheet" href=" {{ asset('assets/frontend/css/bootstrap.min.css') }}">
@@ -237,11 +245,11 @@
                                         @foreach (\App\Models\ParentCategory::take(7)->get() as $parent)
                                             <li>
                                                 <ul>
-                                                    <li>{{ $parent->name }}</li>
+                                                <li onclick="location.href='/product-by-category/{{$parent->name}}'" style="cursor: pointer;">{{ $parent->name }}</li>
 
 
                                                     @foreach (\App\Models\ChildCategory::where(['parent_category_id' => $parent->id])->take(10)->get() as $child)
-                                                        <li><a href="#">{{ $child->name }}</a></li>
+                                                        <li><a  href="/product-by-child-category/{{$child->id}}">{{ $child->name }}</a></li>
                                                     @endforeach
                                                     <li><a class="text-lowercase" href="#">more</a></li>
                                                 </ul>

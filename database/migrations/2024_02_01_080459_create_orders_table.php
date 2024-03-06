@@ -19,7 +19,11 @@ return new class extends Migration
             $table->string('product_detail');
             $table->string('totalprice');
             $table->string('userid');
-            $table->string('Address');
+            $table->string('userName');
+            $table->string('StreetAddress');
+            $table->string('state');
+            $table->string('zipcode');
+            $table->string('phoneNo');
             $table->string('delivery_status')->default('pending');
             $table->string('payment_method')->default('COD');            $table->string('payment_status')->default('pending');
             $table->string('update_payment_status');

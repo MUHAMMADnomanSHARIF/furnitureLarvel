@@ -25,7 +25,7 @@ class storeSizeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' =>   ['required', Rule::unique('product_sizes', 'name')->ignore($this->name)],
+            'name' => 'required',
             'parent_category_id' => 'required',
             'child_category_id' => 'nullable',
             "dimension"=> "required"

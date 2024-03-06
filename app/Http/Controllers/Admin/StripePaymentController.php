@@ -36,51 +36,56 @@ class StripePaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function stripePost(Request $request)
+   public function stripePost(Request $request)
+{
+    $id = $request->id;
+    $order = Order::findOrFail($id); // Find the order by ID
 
-    {
-        $id = $request->id;
-        $order = Order::findOrFail($id); // Find the order by ID
+    try {
+        Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        try {
-            Stripe::setApiKey(env('STRIPE_SECRET'));
+        // Create a customer in Stripe
+        $customer = Customer::create([
+            "email" => Auth::user()->email,
+            "name" => Auth::user()->name,
+            "source" => $request->stripeToken
+        ]);
 
-            // Create a customer in Stripe
-            $customer = Customer::create([
-                "email" => Auth::user()->email,
-                "name" => Auth::user()->name,
-                "source" => $request->stripeToken
-            ]);
+        // Create a charge in Stripe
+        Charge::create([
+            "amount" => $order->totalprice * 100, // Amount in cents
+            "currency" => "usd",
+            "customer" => $customer->id,
+            "description" => "Test payment from furnimart.com."
+        ]);
 
-            // Create a charge in Stripe
-            Charge::create([
-                "amount" => $order->totalprice * 100, // Amount in cents
-                "currency" => "usd",
-                "customer" => $customer->id,
-                "description" => "Test payment from furnimart.com."
-            ]);
+        $transaction = new transection();
+        $transaction->order_id = $order->id;
+        $transaction->stripe_customer_id = $customer->id;
+        $transaction->email = Auth::user()->email;
+        $transaction->amount = $order->totalprice;
+        $transaction->status = 'success'; // Update status to 'success' for successful payment
+        $transaction->save();
 
-            $transaction = new transection();
-            $transaction->order_id = $order->id;
-            $transaction->stripe_customer_id = $customer->id;
-            $transaction->email = Auth::user()->email;
-            $transaction->amount = $order->totalprice;
-            $transaction->status = 'success'; // Update status to 'success' for successful payment
-            $transaction->save();
+        // Update the order's payment status and update_payment_status
+        $order->payment_status = 'success';
+        $order->update_payment_status = 'automatic';
+        $order->save();
 
-            // Update the order's payment status and update_payment_status
-            $order->payment_status = 'success';
-            $order->update_payment_status = 'automatic';
-            $order->save();
+        // Clear the session data for cart or wishlist
+        Session::forget('cart');
+        Session::forget('wish');
 
-            Session::flash('success', 'Payment successful!');
-        } catch (Exception $e) {
-            // Handle exceptions, e.g., Stripe API errors
-            Session::flash('error', 'Payment failed: ' . $e->getMessage());
-        }
-
-        return back();
+        // Flash success message
+        Session::flash('success', 'Payment successful!');
+    } catch (Exception $e) {
+        // Handle exceptions, e.g., Stripe API errors
+        Session::flash('error', 'Payment failed: ' . $e->getMessage());
     }
+
+    // Redirect back to the shop page
+    return redirect()->route('web.index');
+}
 
     /**
      * Store a newly created resource in storage.

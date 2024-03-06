@@ -130,8 +130,6 @@
 
 
     <!-- Banner Area End -->
-    <!-- Category  Area Start -->
-    <div class="section-title ">
 
         <h2 align="center" class="mt-5 fs-1 fw-700"><span>Categories</span></h2>
 
