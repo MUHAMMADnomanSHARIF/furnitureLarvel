@@ -61,6 +61,10 @@
             color: #222222;
         }
 
+        .service-icon {
+            font-size: 2rem;
+        }
+
         /* Footer Styling */
 
 
@@ -163,7 +167,7 @@
                 <div class="col-lg-4 col-md-6 text-center mb-3">
                     <div class="service-wrap">
                         <div class="service-icon">
-                            <i class="fas fa-layer-group"></i>
+                            <i class="fas fa-hand-holding-heart"></i>
                         </div>
                         <h4>Design your space</h4>
                         <p>We design your space with our best furniture to make it beautiful and comfortable for sleeping
@@ -174,7 +178,7 @@
                 <div class="col-lg-4 col-md-6 text-center mb-3">
                     <div class="service-wrap">
                         <div class="service-icon">
-                            <i class="far fa-chart-bar"></i>
+                            <i class="fas fa-user-tie "></i>
                         </div>
                         <h4>Professional staff</h4>
                         <p>We provide the best professionals to guide you and help you choose the best furniture for your
@@ -185,7 +189,7 @@
                 <div class="col-lg-4 col-md-6 text-center mb-3">
                     <div class="service-wrap">
                         <div class="service-icon">
-                            <i class="fas fa-database"></i>
+                            <i class="fas fa-truck-fast"></i>
                         </div>
                         <h4>Fast delivery</h4>
                         <p>We ensure timely product delivery so you can organize your space faster and take the stress out
@@ -196,7 +200,7 @@
                 <div class="col-lg-4 col-md-6 text-center mb-3">
                     <div class="service-wrap">
                         <div class="service-icon">
-                            <i class="fas fa-cogs"></i>
+                            <i class="fas fa-cubes"></i>
                         </div>
                         <h4>A diverse range of product</h4>
                         <p>We offer you a variety of furniture, such as beds, sofas, and wardrobes, to help you organize
@@ -208,7 +212,7 @@
                 <div class="col-lg-4 col-md-6 text-center mb-3">
                     <div class="service-wrap">
                         <div class="service-icon">
-                            <i class="fas fa-thumbs-up"></i>
+                            <i class="fas fa-tag"></i>
                         </div>
                         <h4>Discount</h4>
                         <p>We offer discounts and additional offers that add more products to your desired product range.
@@ -219,7 +223,7 @@
                 <div class="col-lg-4 col-md-6 text-center mb-3">
                     <div class="service-wrap">
                         <div class="service-icon">
-                            <i class="fas fa-thumbs-up"></i>
+                            <i class="fas fa-dollar-sign"></i>
                         </div>
                         <h4>Affordable</h4>
                         <p>We care about your financial stress, that's why we offer you the best products that suit your

@@ -7,6 +7,9 @@
 /*----------------------------------------*/
 /*  Theme Default CSS
 /*----------------------------------------*/
+:root {
+    --nav-background: linear-gradient(rgb(255, 255, 0), rgb(237, 121, 2));
+}
 
 html,
 body {
@@ -698,7 +701,7 @@ button:focus {
     background: #f6f6f6;
 }
 .bg-ash {
-    background-image: linear-gradient(rgb(255, 255, 0), rgb(237, 121, 2));
+    background: var(--nav-background);
 }
 .bg-golden {
     background: #a9946a;
