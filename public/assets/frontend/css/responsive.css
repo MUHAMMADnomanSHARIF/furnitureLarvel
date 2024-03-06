@@ -375,7 +375,7 @@
     .header-search {
         height: 33px;
         margin: -4px 0px 7px 139px;
-        width: 46%;
+        width: 57%;
     }
 
     .cart-dropdown {
@@ -411,7 +411,7 @@
     }
     .slider-banner > h2 {
         font-size: 26px;
-        line-height: 20px;
+        line-height: 33px;
         margin: 0 0 12px;
     }
     .slider-banner {
@@ -1200,8 +1200,8 @@
 
 @media only screen and (max-width: 991px), (min-width: 768px) {
     .mean-container a.meanmenu-reveal {
-        margin-right: -3%;
-        margin-top: -12%;
+        margin-top: -116px;
+        margin-right: -20px;
     }
     .wish {
         margin-right: 43px;
@@ -1217,8 +1217,9 @@
         margin-top: 11px;
     }
     .mean-container a.meanmenu-reveal {
+        display: block !important;
         margin-top: -18%;
-        margin-right: -7%;
+        margin-right: -16%;
     }
 }
 @media only screen and (max-width: 667px) {
@@ -1257,13 +1258,33 @@
         margin-top: -89px;
     }
 }
+
 @media only screen and (max-width: 374px) {
     .mean-container a.meanmenu-reveal {
         margin-right: -1%;
-        margin-top: -35%;
+        margin-top: -30%;
     }
     .wish {
         margin-top: 64px;
         margin-right: 0px;
+    }
+}
+
+@media (max-width: 425px) {
+    .header-search {
+        height: 33px;
+        margin: -4px 0px 7px 139px;
+        width: 52%;
+    }
+}
+@media only screen and (max-width: 320px) {
+    .mean-container a.meanmenu-reveal {
+        margin-right: -1%;
+        margin-top: -36%;
+    }
+    .header-search {
+        height: 33px;
+        margin: -6px 0px 7px 113px;
+        width: 46%;
     }
 }

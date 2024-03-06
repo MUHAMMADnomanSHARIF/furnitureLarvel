@@ -13,7 +13,7 @@
             .slider-banner h2,
             h3,
             p {
-                color: #dadada;
+                color: black;
             }
 
 
@@ -27,11 +27,6 @@
                 overflow-x: hidden;
             }
 
-            .slider-banner h2,
-            h3,
-            p {
-                color: green;
-            }
 
 
         }
@@ -316,9 +311,69 @@
         </div>
     </div>
     <!-- Banner Area End -->
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="section-container">
+                    <!-- First Paragraph -->
+                    <div>
+
+                        <p>
+                            We provide the best quality beds in various designs and offer divan beds with a strong base and
+                            storage. We manufacture different sizes of beds, such as single and double divan beds. Our goal
+                            is
+                            to make your life easier, so to organize your living room accessories, we recommend ottoman beds
+                            that provide you with a beautiful structured bed with a wide range of storage underneath. We
+                            customize your furniture according to your instructions and requirements. We offer you gorgeous
+                            wardrobes that help you organize your accessories. To make your space more aesthetic, we provide
+                            high-gloss wardrobes that enhance the look
+                        </p>
+                    </div>
+
+                    <!-- Second Paragraph -->
+                    <div class="mt-4">
+
+                        <p>
+                            To meet your child's needs and take your stress out of the nursery, we offer a versatile quality
+                            bunk
+                            bed that provides a safe place for your children to sleep peacefully. We made a bunk bed with
+                            stainless steel, which lightens the weight of the bed. We customize the bed with your favorite
+                            material. If you like a wooden bed, we make it with the best quality wood, and if you want metal
+                            material, we make it with high-quality metal. Our main aim is to provide you with the best
+                            services.
+                            We cover and furnish the furniture with your favorite color.
+                        </p>
+                    </div>
+                    <div class="mt-4">
+
+                        <p>
+                            To enhance your comfort, we offer a mattress that perfectly matches your bed frame and gives you
+                            a restful sleep. We design the best bed frame that protects you from back and muscle pain. We
+                            also
+                            offer a crushed velvet bed that gives you a soothing effect, helps you de-stress throughout the
+                            day,
+                            and restores energy for the next day. We also customize the leather bed to give your room a
+                            royal
+                            look. To complete your furniture, we offer a beautiful sofa set that gives you a place to sit.
+                            Our
+                            experts aim to provide you with furniture that meets your expectations of furniture.
+
+                        </p>
+                    </div>
+
+                    <!-- Read More Button -->
+                    <div class="text-center mt-4">
+                        <a href="" class="banner-btn">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Testimonieal Section -->
 
-    <div class="section-title ">
+    <div class="section-title mt-4 ">
         <h2 align="center"><span>Testimonial</span></h2>
     </div>
 
@@ -375,7 +430,7 @@
                 <img src="blog1.jpg" alt="" class="img-fluid mb-2">
                 <h2>Blog Title 1</h2>
                 <p>Blog content goes here...</p>
-                <a href="#" class="btn btn-primary">Read</a>
+                <a href="" class="banner-btn">Shop now</a>
             </div>
 
         </div>
@@ -384,41 +439,52 @@
     <!-- ========== End Section blogs ========== -->
 
     <!-- ========== Start Section cards ========== -->
-    <section class="container mt-4">
-        <!-- 1 -->
-        <div class="row icons-and-details">
-            <div class="col-lg-4 style">
-                <div class="d-flex gap-4 align-items-center">
-                    <div class="home-icon"><i class="fa-solid fa-truck fa-2xl"></i></div>
-                    <div class="home-text">
-                        <h5>Free delivery</h5>
-                        <p class="lead">Free delivery throughout the UK</p>
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Card 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-truck fa-2x me-3"></i>
+                        <div>
+                            <h5 class="card-title">Free delivery</h5>
+                            <p class="card-text">Free delivery throughout the UK</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-4 style">
-                <div class="d-flex gap-4 align-items-center">
-                    <div class="home-icon"><i class="fa-regular fa-handshake fa-2xl"></i></div>
-                    <div class="home-text" style="font-size: 5px;">
-                        <h5>Quality standards</h5>
-                        <p class="lead">We offer the best quality products</p>
+            <!-- Card 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-check-circle fa-2x me-3"></i>
+                        <div>
+                            <h5 class="card-title">Quality standards</h5>
+                            <p class="card-text">We offer the best quality products</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-4 style">
-                <div class="d-flex gap-4 align-items-center">
-                    <div class="home-icon"><i class="fa-solid fa-truck fa-2xl"></i></div>
-                    <div class="home-text" style="font-size: 5px;">
-                        <h5>Easy to purchase</h5>
-                        <p class="lead">We offer the best products at affordable prices</p>
+
+            <!-- Card 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-shopping-cart fa-2x me-3"></i>
+                        <div>
+                            <h5 class="card-title">Easy to purchase</h5>
+                            <p class="card-text">We offer the best products at affordable prices</p>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </section>
+    </div>
 
     <!-- ========== End Section cards ========== -->
 @endsection

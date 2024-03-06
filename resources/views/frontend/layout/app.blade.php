@@ -91,6 +91,8 @@
             /* Adjust the width according to your design */
         }
     </style>
+
+
 </head>
 
 <body>
@@ -123,6 +125,7 @@
                         </form>
 
                         <span class="icon fs-5 d-sm-flex d-md-none"><i class="fas fa-shopping-cart"></i></span>
+
 
 
                     </div>

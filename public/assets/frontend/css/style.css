@@ -5,6 +5,11 @@
     --main-color:
         background-image: linear-gradient(rgb(255, 255, 0), rgb(237, 121, 2));
     /* Replace with your desired color code */
+
+
+}
+:root {
+    --section-background: linear-gradient(to right, rgb(255, 255, 0), rgb(237, 121, 2));
 }
 
 * {
@@ -777,12 +782,8 @@ input[type="number"] {
 .banner-btn:hover,
 .banner-btn:focus,
 .banner-btn:active {
-    background-image: linear-gradient(
-        to right,
-        rgb(245 187 60 / 88%),
-        rgb(111 92 42)
-    );
-    box-shadow-: 0 0px 15px 0 rgba(64, 66, 66, 0.75);
+    background: var(--section-background);
+    box-shadow: 0 0px 15px 0 rgba(64, 66, 66, 0.75);
     background-position: 100% 0;
     moz-transition: all 0.4s ease-in-out;
     -o-transition: all 0.4s ease-in-out;
@@ -4711,3 +4712,4 @@ h3.login-title {
     align-items: center;
     justify-content: center;
 }
+
