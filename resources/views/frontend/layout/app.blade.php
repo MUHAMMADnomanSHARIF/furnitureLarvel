@@ -183,11 +183,13 @@
                         <div id="cart">
                             <!-- Cart icon -->
 
-                            <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                            <span class="icon"><i class="fas fa-shopping-cart"> <sup class="ms-1">1</sup></i></span>
+
                             <!-- Dropdown content -->
                             <div class="dropdown">
                                 <!-- Replace the following with your actual image and price data -->
                                 <div class="dropdown-item">
+
                                     <div class="card-body p-0">
                                         <div>
                                             <table class="table table-sm">
@@ -257,7 +259,8 @@
                     <!-- Desktop Icons -->
                     <div class="col-lg-4 col-md-4 mt-2 text-center d-none d-md-flex justify-content-center">
                         <div class="cart-box-wrapper me-3 cart-container cart-box-wrapper " data-toggle="dropdown">
-                            <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                            <span class="icon"><i class="fas fa-shopping-cart"><sup class="ms-1">1</sup></i></span>
+
                             <span class="icon-text"> <a class="cart-info" style="display: inline;"
                                     href="{{ url('/cart') }}">cart</a></span>
 
@@ -316,8 +319,10 @@
 
                         </div>
                         <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
-                            <span class="icon"><i class="fas fa-heart"></i></span>
+                            <span class="icon"><i class="fas fa-heart"> <sup class="ms-1"></sup></i></span>
+
                             <span class="icon-text">Wishlist</span>
+
                             <!-- Dropdown content -->
                             <div class="dropdown-menu" id="addwish">
                                 <div class="card-body p-0">
@@ -388,12 +393,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
 
 
         <!--Header Middle Area End -->
