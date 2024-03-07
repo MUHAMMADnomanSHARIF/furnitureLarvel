@@ -5,25 +5,19 @@
 
                            @php
                             $allSettings = app('GlobalHelper')->getSettings();
-                            $startColor = $allSettings['color_one'] ?? ''; // Adjust the key according to your actual array structure
-                            $endColor = $allSettings['color_two'] ?? ''; // Adjust the key according to your actual array structure
-                            $startColorRgb = app('GlobalHelper')->hexToRgb($startColor);
-                            $endColorRgb = app('GlobalHelper')->hexToRgb($endColor);
-
                             @endphp
 
-
-                            @foreach ($allSettings as $setting)
-                            <!-- Display other columns as needed -->
-                            @endforeach
+    @foreach ($allSettings as $setting)
+        <!-- Display other columns as needed -->
+    @endforeach
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 
-    <title>{{$setting['application_name']}}</title>
+    <title>{{ $setting['application_name'] }}</title>
 
-    <meta name="description" content="{{$setting['short_description']}}">
+    <meta name="description" content="{{ $setting['short_description'] }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" src="
@@ -49,10 +43,6 @@
     @yield('CoustomCSS')
 
     <style>
-
-:root {
-        --nav-background: linear-gradient({{ $startColorRgb }}, {{ $endColorRgb }});
-    }
         /* Styling for the Cart container */
         .cart-container {
             position: relative;
@@ -73,7 +63,7 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: #dfbb0a;
+            background: var(--nav-background);
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 10px;
             min-width: auto;
@@ -99,6 +89,57 @@
         .custom-input-width {
             width: 30px;
             /* Adjust the width according to your design */
+        }
+
+        #cart {
+            display: none;
+            /* Hide the cart icon by default */
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* Style for the dropdown */
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            z-index: 1;
+        }
+
+        /* Style for the items in the dropdown */
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .dropdown-item img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        /* Media query for mobile view */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .dropdown-menu {
+
+                position: absolute;
+                top: 100%;
+                left: -90px;
+
+            }
+        }
+
+        /* Media query for mobile view */
+        @media (max-width: 768px) {
+            #cart {
+                display: inline-block;
+                /* Show the cart icon in mobile view */
+            }
         }
     </style>
 
@@ -134,7 +175,69 @@
                             <button><i class="icon icon-Search"></i></button>
                         </form>
 
-                        <span class="icon fs-5 d-sm-flex d-md-none"><i class="fas fa-shopping-cart"></i></span>
+                        <div id="cart">
+                            <!-- Cart icon -->
+
+                            <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                            <!-- Dropdown content -->
+                            <div class="dropdown">
+                                <!-- Replace the following with your actual image and price data -->
+                                <div class="dropdown-item">
+                                    <div class="card-body p-0">
+                                        <div>
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr class="ml-3">
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th class="text-left" width="30%">Product</th>
+                                                        <th class="text-center" width="45%">Items</th>
+                                                        <th>Subtotal</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="align-middle text-center">
+                                                            <a href="#delete" data-toggle="modal"
+                                                                data-title="Delete your product ?">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div class="rounded"
+                                                                style="background-image: url(https://unsplash.com/photos/ZBwQ2bCbJjw/download?force=true&w=640); width: 40px; height: 40px; background-size: cover;">
+                                                            </div>
+                                                        </td>
+                                                        <td class="align-middle text-left">Spy Suit</td>
+                                                        <td class="align-middle text-center">1 </td>
+                                                        <td class="align-middle text-right">$698</td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td colspan="4" class="align-middle text-right">Delievery
+                                                            Charges</td>
+                                                        <td class="align-middle text-right">55</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4" class="align-middle text-right">Total</td>
+                                                        <td class="align-middle text-right">3600</td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <a href="{{ url('/check-out') }}" class="banner-btn">Checkout</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Add more items as needed -->
+
+                                <!-- You can use JavaScript to dynamically populate the dropdown with data -->
+                            </div>
+                        </div>
+
 
 
 
@@ -154,46 +257,53 @@
                                     href="{{ url('/cart') }}">cart</a></span>
 
                             <!-- Dropdown content -->
-                            <div class="dropdown-menu" id="addcart">
-                                <button class="close"><i class="fa fa-close"></i></button>
+                            <div class="dropdown-menu" id="addwish">
+                                <div class="card-body p-0">
+                                    <div>
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr class="ml-3">
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th class="text-left" width="30%">Product</th>
+                                                    <th class="text-center" width="45%">Items</th>
+                                                    <th>Subtotal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="align-middle text-center">
+                                                        <a href="#delete" data-toggle="modal"
+                                                            data-title="Delete your product ?">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <div class="rounded"
+                                                            style="background-image: url(https://unsplash.com/photos/ZBwQ2bCbJjw/download?force=true&w=640); width: 40px; height: 40px; background-size: cover;">
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle text-left">Spy Suit</td>
+                                                    <td class="align-middle text-center">1 </td>
+                                                    <td class="align-middle text-right">$698</td>
+                                                </tr>
 
-                                <div class="cart-summary">
-                                    <div class="cart-item-amount d-flex">
-                                        <span class="item-count">{{ count((array) session('cart')) }}</span> items
-                                        <?php $total = 0; ?>
-                                        @foreach ((array) session('cart') as $id => $details)
-                                            <?php $total += $details['price'] * $details['quantity']; ?>
-                                        @endforeach
-                                        <div class="cart-total">
-                                            <h5>Total:</h5>
-                                            <h4>$ {{ $total }}</h4>
-                                        </div>
-                                    </div>
 
-                                    @if (session('cart'))
-                                        @foreach (session('cart') as $id => $details)
-                                            <div class="cart-item d-flex">
-                                                <div class="cart-item-details">
-                                                    <label>Name:</label>
-                                                    <a href="#" class="cart-item-name">{{ $details['name'] }}</a>
-                                                    <span>Size:</span>
-                                                    <span>{{ $details['size'] }}</span>
-                                                </div>
-                                                <div class="cart-item-quantity d-flex">
-                                                    <label class="me-3">Qty</label>
-                                                    <input type="text" placeholder="" readonly
-                                                        value="{{ $details['quantity'] }}" class="custom-input-width">
-                                                    <button class="remove-from-cart ms-3 "
-                                                        data-id="{{ $id }}">
-                                                        <i class="icon icon-Delete"></i></button>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
+                                                <tr>
+                                                    <td colspan="4" class="align-middle text-right">Delievery
+                                                        Charges</td>
+                                                    <td class="align-middle text-right">55</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" class="align-middle text-right">Total</td>
+                                                    <td class="align-middle text-right">3600</td>
 
-                                    <div class="cart-buttons mt-3">
-                                        <a href="{{ url('/check-out') }}" class="grey-button">Checkout</a>
-                                        <a href="{{ url('/cart') }}" class="grey-button">View Cart</a>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <a href="{{ url('/check-out') }}"
+                                            class="banner-btn d-flex justify-content-center">Checkout</a>
                                     </div>
                                 </div>
                             </div>
@@ -205,9 +315,53 @@
                             <span class="icon-text">Wishlist</span>
                             <!-- Dropdown content -->
                             <div class="dropdown-menu" id="addwish">
-                                <a href="#" class="dropdown-item">Item 1</a>
-                                <a href="#" class="dropdown-item">Item 2</a>
-                                <a href="#" class="dropdown-item">Item 3</a>
+                                <div class="card-body p-0">
+                                    <div>
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr class="ml-3">
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th class="text-left" width="30%">Product</th>
+                                                    <th class="text-center" width="45%">Items</th>
+                                                    <th>Subtotal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="align-middle text-center">
+                                                        <a href="#delete" data-toggle="modal"
+                                                            data-title="Delete your product ?">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <div class="rounded"
+                                                            style="background-image: url(https://unsplash.com/photos/ZBwQ2bCbJjw/download?force=true&w=640); width: 40px; height: 40px; background-size: cover;">
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle text-left">Spy Suit</td>
+                                                    <td class="align-middle text-center">1 </td>
+                                                    <td class="align-middle text-right">$698</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td colspan="4" class="align-middle text-right">Delievery
+                                                        Charges</td>
+                                                    <td class="align-middle text-right">55</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" class="align-middle text-right">Total</td>
+                                                    <td class="align-middle text-right">3600</td>
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <a href="{{ url('/check-out') }}" class="banner-btn">Checkout</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
@@ -256,11 +410,14 @@
                                         @foreach (\App\Models\ParentCategory::take(7)->get() as $parent)
                                             <li>
                                                 <ul>
-                                                <li onclick="location.href='/product-by-category/{{$parent->name}}'" style="cursor: pointer;">{{ $parent->name }}</li>
+                                                    <li onclick="location.href='/product-by-category/{{ $parent->name }}'"
+                                                        style="cursor: pointer;">{{ $parent->name }}</li>
 
 
                                                     @foreach (\App\Models\ChildCategory::where(['parent_category_id' => $parent->id])->take(10)->get() as $child)
-                                                        <li><a  href="/product-by-child-category/{{$child->id}}">{{ $child->name }}</a></li>
+                                                        <li><a
+                                                                href="/product-by-child-category/{{ $child->id }}">{{ $child->name }}</a>
+                                                        </li>
                                                     @endforeach
                                                     <li><a class="text-lowercase" href="#">more</a></li>
                                                 </ul>
@@ -585,6 +742,21 @@
             }
 
 
+        });
+    </script>
+
+
+    <script>
+        // JavaScript to handle the hover effect
+        const cartIcon = document.getElementById('cart');
+        const dropdown = document.querySelector('.dropdown');
+
+        cartIcon.addEventListener('mouseenter', () => {
+            dropdown.style.display = 'block';
+        });
+
+        cartIcon.addEventListener('mouseleave', () => {
+            dropdown.style.display = 'none';
         });
     </script>
     @yield('coustomJS')
