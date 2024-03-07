@@ -7,6 +7,13 @@
 /*----------------------------------------*/
 /*  Theme Default CSS
 /*----------------------------------------*/
+
+@php
+    $allSettings = app('GlobalHelper')->getSettings();
+    $startColor = $allSettings['start_color']; // Assuming start_color is a key in your settings
+    $endColor = $allSettings['end_color']; // Assuming end_color is a key in your settings
+@endphp
+
 :root {
     --nav-background: linear-gradient(rgb(255, 255, 0), rgb(237, 121, 2));
 }

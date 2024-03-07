@@ -5,7 +5,13 @@
 
                            @php
                             $allSettings = app('GlobalHelper')->getSettings();
+                            $startColor = $allSettings['color_one'] ?? ''; // Adjust the key according to your actual array structure
+                            $endColor = $allSettings['color_two'] ?? ''; // Adjust the key according to your actual array structure
+                            $startColorRgb = app('GlobalHelper')->hexToRgb($startColor);
+                            $endColorRgb = app('GlobalHelper')->hexToRgb($endColor);
+
                             @endphp
+
 
                             @foreach ($allSettings as $setting)
                             <!-- Display other columns as needed -->
@@ -43,6 +49,10 @@
     @yield('CoustomCSS')
 
     <style>
+
+:root {
+        --nav-background: linear-gradient({{ $startColorRgb }}, {{ $endColorRgb }});
+    }
         /* Styling for the Cart container */
         .cart-container {
             position: relative;
