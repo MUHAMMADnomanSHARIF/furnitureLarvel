@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use SebastianBergmann\Type\NullType;
 use Illuminate\Support\Facades\Session;
+use PhpOffice\PhpSpreadsheet\Calculation\Category;
 
 class DefaultController extends Controller
 {
@@ -88,23 +89,43 @@ if($pid->isEmpty())
     }
 
 
-    public function all(){
+    public function all(Request $request, $category = null)
+{
+    $categorySelected = '';
+    $categoryName = $request->category;
 
-        $product = Product::all();
-        $categories = ParentCategory::all();
-        $productCounts = Product::select('parent_category_id', DB::raw('count(*) as product_count'))
-            ->groupBy('parent_category_id')
-            ->get();
-        $blogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
+    $products = Product::query();
 
-        return view('frontend.layout.allproduct')->with([
-            'category' => $product,
-            'categories' => $categories,
-            'productCounts' => $productCounts,
-            'blogs' => $blogs,
-        ]);
+    $categories = ParentCategory::all();
+    $productCounts = Product::select('parent_category_id', DB::raw('count(*) as product_count'))
+        ->groupBy('parent_category_id')
+        ->get();
 
+    if (!empty($categoryName)) {
+        $category = ParentCategory::where('name', $categoryName)->first();
+        if ($category) {
+            $products = $products->where('parent_category_id', $category->id);
+            $categorySelected = $category->id;
+        }
     }
+
+    if ($request->filled('price_max') && $request->filled('price_min')) {
+        $products = $products->whereBetween('price', [$request->input('price_min'), $request->input('price_max')]);
+    }
+
+    // Paginate the results
+    $products = $products->paginate(12);
+
+    $blogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
+
+    return view('frontend.layout.allproduct')->with([
+        'product' => $products,
+        'categories' => $categories,
+        'productCounts' => $productCounts,
+        'blogs' => $blogs,
+        'categorySelected' => $categorySelected,
+    ]);
+}
     public function porductbychildcategory(Request $request){
 
         $id = $request->id;

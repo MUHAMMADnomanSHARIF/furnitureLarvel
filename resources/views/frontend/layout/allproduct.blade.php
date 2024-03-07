@@ -118,25 +118,39 @@ margin-top: 8px;
                     </div>
 
                 </div>
-                         <!-- <div class="pagination-wrapper">
-                            <nav aria-label="navigation">
-                                <ul id="pagination" class="pagination align-items-center">
+                <div class="pagination-wrapper">
+                    <nav aria-label="navigation">
+                        <ul class="pagination align-items-center">
+                            @if ($product->onFirstPage())
+                                <li class="page-item disabled">
+                                    <span class="page-link">&laquo;</span>
+                                </li>
+                            @else
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $product->previousPageUrl() }}" rel="prev">&laquo;</a>
+                                </li>
+                            @endif
 
-                                </ul>
-                            </nav>
-                            <div class="shop-results">
-                                <span>Show</span>
-                                <select name="number" id="b-number">
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                </select>
-                                <span>per page</span>
-                            </div>
-                        </div> -->
+                            @foreach ($product->getUrlRange(1, $product->lastPage()) as $page => $url)
+                                <li class="page-item {{ $page == $product->currentPage() ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endforeach
+
+                            @if ($product->hasMorePages())
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $product->nextPageUrl() }}" rel="next">&raquo;</a>
+                                </li>
+                            @else
+                                <li class="page-item disabled">
+                                    <span class="page-link">&raquo;</span>
+                                </li>
+                            @endif
+                        </ul>
+                    </nav>
+</div>
             </div>
-            <div class="col-xl-3 col-lg-4">
+            <!-- <div class="col-xl-3 col-lg-4">
                 <div class="sidebar-widget widget-style-1 panel-group" id="widget-parent" aria-multiselectable="true" role="tablist">
                     <h4>Shop By</h4>
                     <div class="panel widget-option">
@@ -196,7 +210,48 @@ margin-top: 8px;
 
 
 
-            </div>
+            </div> -->
+            <div class="col-xl-3 col-lg-4">
+                        <div class="sidebar-widget widget-style-1 panel-group" id="widget-parent" aria-multiselectable="true" role="tablist">
+                            <h4>Shop By</h4>
+                            <div class="panel widget-option">
+                            <a data-bs-toggle="collapse" href="#category" data-parent="#widget-parent">Category</a>
+                            <div class="collapse show" id="category">
+                                <div class="collapse-content">
+                                @foreach($categories as $categor)
+                                <div class="single-widget-opt">
+                                <input type="checkbox" id="{{ $categor->name }}" class="category-checkbox" {{ ($categorySelected == $categor->id) ? 'checked' : '' }}>
+                                    <label for="{{ $categor->name }}">
+                                        <a href="{{ url('shop/'.$categor->name) }}" style="display: inline;">{{ $categor->name }}<span>({{ $categor->products->count() }})</span></a>
+                                    </label>
+                                </div>
+                            @endforeach
+        </div>
+    </div>
+</div>
+
+
+
+                            <div class="panel widget-option">
+
+                              <a >Price</a>
+                                <div>
+                                    <div>
+                                    <input type="text" class="js-range-slider" name="my_range" value="" />
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="sidebar-widget">
+                            <a href="product-details.html" class="banner-image">
+                                <img src="assets/img/banner/18.jpg" alt="">
+                            </a>
+                        </div>
+                    </div>
         </div>
     </div>
 </div>
@@ -339,6 +394,55 @@ margin-top: 8px;
     }
 });
 </script> -->
+<script>
+    rangeSlider = $(".js-range-slider").ionRangeSlider({
+        type: "double",
+        min: 0,
+        max: 1000,
+        from: 0,
+        step: 10,
+        to: 500,
+        skin: "round",
+        max_postfix: "+",
+        prefix: "$",
+        onFinish: function(){
+             apply_filters()
+        }
+
+    });
+
+      var slider = $(".js-range-slider").data("ionRangeSlider");
+
+
+    //   Aplly Filters
+
+    function apply_filters(){
+
+      var url = '{{ url()->current() }}?';
+        url += '&price_min='+slider.result.from+'&price_max='+slider.result.to;
+        window.location.href = url;
+
+    }
+    // Get all the checkboxes with the class "category-checkbox"
+    const checkboxes = document.querySelectorAll('.category-checkbox');
+
+    // Add event listener to each checkbox
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            // If the current checkbox is checked
+            if (this.checked) {
+                // Uncheck all other checkboxes except this one
+                checkboxes.forEach(function(otherCheckbox) {
+                    if (otherCheckbox !== checkbox) {
+                        otherCheckbox.checked = false;
+                    }
+                });
+            }
+        });
+    });
+
+
+</script>
 
 
 

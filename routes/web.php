@@ -64,7 +64,7 @@ Route::withoutMiddleware([Permissions::class])->group(function () {
             Route::get('/allcategories', 'allparentcategory')->name('allcategories');
             Route::view('/about', 'frontend.layout.about')->name('about');
             Route::get('/product-by-category/{id}', 'productbycategory')->name('product-by-category');
-            Route::get('/all-product', 'all')->name('allproduct');
+            Route::get('/shop/{category?}', 'all')->name('shop');
             Route::get('/product-by-child-category/{id}', 'porductbychildcategory')->name('productbychildcategory');
             Route::view('/Terms', 'frontend.layout.terms')->name('terms');
             Route::view('/Privacy-Policy', 'frontend.layout.privacypolicy')->name('privacy');
