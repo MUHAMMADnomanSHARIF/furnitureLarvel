@@ -319,7 +319,7 @@
 
                         </div>
                         <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
-                            <span class="icon"><i class="fas fa-heart"> <sup class="ms-1"></sup></i></span>
+                            <span class="icon"><i class="fas fa-heart"> <sup>1</sup></i></span>
 
                             <span class="icon-text">Wishlist</span>
 
