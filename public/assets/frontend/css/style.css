@@ -8,9 +8,6 @@
 
 
 }
-:root {
-    --section-background: linear-gradient(to right, rgb(255, 255, 0), rgb(237, 121, 2));
-}
 
 * {
     border: 0;
@@ -564,7 +561,7 @@ input[type="number"] {
     z-index: 999;
 }
 .header-area .header-sticky.sticky {
-    background-image: linear-gradient(rgb(255, 255, 0), rgb(237, 121, 2));
+    background-image:var(--nav-background);
 }
 #mobile-menu-active {
     display: none;

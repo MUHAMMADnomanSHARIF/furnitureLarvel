@@ -416,27 +416,47 @@
     <!-- End Testimonieal Section -->
 
 
-
-    <!-- ========== Start Section blogs ========== -->
-    <div class="container">
-
-        <div class="row text-center mb-4">
-            <h2>Our Blogs</h2>
-        </div>
-        <div class="row">
-            <!-- Blog 1 - Large Screen -->
-            <div class="col-lg-3 col-md-6 col-sm-12 mb-4 mx-auto">
-                <!-- Your blog content goes here -->
-                <img src="blog1.jpg" alt="" class="img-fluid mb-2">
-                <h2>Blog Title 1</h2>
-                <p>Blog content goes here...</p>
-                <a href="" class="banner-btn">Shop now</a>
-            </div>
-
+<!-- Blog Area Start -->
+<div class="blog-area pb-85">
+    <div class="container text-center">
+        <div class="section-title">
+            <span>Latest New</span>
+            <h2><span>FROM OUR BLOG</span></h2>
         </div>
     </div>
+    <div class="container">
+        <div class="custom-row">
+            <div class="blog-carousel owl-carousel">
+                @foreach($blogs as $blog)
+                <?php
+                    $date = $blog->created_at; // Your date from the database
 
-    <!-- ========== End Section blogs ========== -->
+                    // Extract the day and month from the date
+                    $day = date("d ", strtotime($date)); // Format the date as "21 February"
+                    $month = date("M ", strtotime($date));
+                   ?>
+                <div class="custom-col">
+                    <div class="single-blog">
+                        <div class="blog-image">
+                            <a href="/blog-detail/{{$blog->id}}">
+                                <img src="{{$blog->getFirstMediaUrl('blog.image')}}" alt="" height="200px" width>
+                                <span><?php echo $day; ?> <span><?php echo $month; ?></span></span>
+                            </a>
+                        </div>
+                        <div class="blog-text">
+                            <h5><a href="/blog-detail/{{$blog->id}}">{{$blog->title}}</a></h5>
+                            <p>{{$blog->description}}</p>
+                            <a href="/blog-detail/{{$blog->id}}">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog Area End -->
 
     <!-- ========== Start Section cards ========== -->
 

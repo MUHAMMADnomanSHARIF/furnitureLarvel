@@ -12,6 +12,7 @@ use App\Models\ParentCategory;
 use App\Models\Product;
 use App\Models\productSize;
 use App\Models\User;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -227,11 +228,7 @@ if($pid->isEmpty())
             // Get the existing cart from the session or initialize an empty array
             $wish = Session::get('wish', []);
 
-            // Check if the product already exists in the cart
-            if (array_key_exists($productId, $wish)) {
-                // Product already exists, increase quantity
-                $wish[$productId]['quantity'] += 1;
-            } else {
+
                 // Product doesn't exist, add it to the cart
                 $productImage =  $product->getFirstMediaUrl('product.image');
                 $price = $product->discounted_price ?? $product->price;
@@ -244,11 +241,9 @@ if($pid->isEmpty())
 
                     // Add other product details as needed
                 ];
-            }
 
             // Save the updated cart array to the session
             Session::put('wish', $wish);
-
             // Return a JSON response (optional)
             return response()->json(['wishSection' => view('frontend.layout.wish')->render()]);
         } else {

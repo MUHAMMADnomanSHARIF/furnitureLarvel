@@ -175,7 +175,7 @@ input[type='radio']:checked::after {
 
 </form>
                     <div class="p-d-buttons">
-                        <a href="{{ url('add-to-wish/'.$product->id) }}">Add to wish list</a>
+                        <a class="add-to-wish" data-product-id="{{ $product->id }}" style="cursor:pointer;" >Add to wish list</a>
                         <a href="#">BUY NOW</a>
 
                     </div>
