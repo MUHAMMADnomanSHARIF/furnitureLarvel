@@ -187,7 +187,7 @@
                             <div class="product-item">
                                 <span class="hot-sale">sale</span>
                                 <div class="product-image-hover">
-                                    <a href="{{ url('/product-detail' . $products->name) }}">
+                                    <a  href="{{ url('product-detail/' . $products->name) }}">
                                         <img class="primary-image" src="{{ $products->getFirstMediaUrl('product.image') }}"
                                             alt="">
                                     </a>
@@ -210,7 +210,7 @@
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <h4><a href="shop.html">{{ $products->name }}</a></h4>
+                                    <h4><a  href="{{ url('product-detail/' . $products->name) }}">{{ $products->name }}</a></h4>
                                     <div class="product-price"><span>${{ $products->discounted_price }}</span><span
                                             class="prev-price">${{ $products->price }}</span></div>
 

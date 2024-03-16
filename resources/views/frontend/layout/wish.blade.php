@@ -34,13 +34,12 @@
                                 </div> -->
 
 
-
-
-                                <span class="icon"><i class="fas fa-heart"> <sup>{{ count((array) session('wish')) }}</sup></i></span>
+                              <span class="icon"><i class="fas fa-heart">&nbsp;<sup>{{ count((array) session('wish')) }}</sup></i></span>
                             <span class="icon-text">Wishlist</span>
                             <!-- Dropdown content -->
-                            <div class="dropdown-menu" id="addwish">
+                            <div class="dropdown-menu" >
                                 <div class="card-body p-0">
+
                                     <div>
                                         <table class="table table-sm">
                                             <thead>
@@ -54,29 +53,38 @@
                                             </thead>
                                             <tbody>
                                             @if(session('wish'))
-                                     @foreach(session('wish') as $id => $details)
+
+                                        @foreach(session('wish') as $id => $details)
                                                 <tr>
                                                     <td class="align-middle text-center">
-                                                        <a href="#delete"  data-toggle="modal"
-                                                            data-title="Delete your product ?">
-                                                            <i class="fas fa-trash-alt remove-from-wish" data-id="{{ $id }}"></i>
+                                                        <a href="#delete" class="remove-from-wish" data-id="{{ $id }}">
+                                                            <i class="fas fa-trash-alt"></i>
                                                         </a>
                                                     </td>
                                                     <td>
                                                         <div class="rounded"
-                                                            style="background-image: url({{$details['photo']}}); width: 50px; height: 50px; background-size: cover;">
+                                                            style=" width: 40px; height: 40px; background-size: cover;">
+                                                            <img src="{{$details['photo']}}" alt="{{ $details['name'] }}">
                                                         </div>
                                                     </td>
                                                     <td class="align-middle text-left">{{ $details['name'] }}</td>
-                                                    <td class="align-middle text-center">{{ $details['quantity'] }} </td>
+                                                    <td class="align-middle text-center">{{ $details['quantity'] }}</td>
                                                     <td class="align-middle text-right">${{ $details['price'] }}</td>
                                                 </tr>
-                                                @endforeach
-                                                @endif
 
+
+                                                <tr>
+                                                    <td colspan="4" class="align-middle text-right">Delievery
+                                                        Charges</td>
+                                                    <td class="align-middle text-right">55</td>
+                                                </tr>
+
+                                               @endforeach
+                                               @endif
                                             </tbody>
                                         </table>
-                                        <a href="{{ url('/check-out') }}" class="banner-btn">Checkout</a>
+                                        <a href="{{ url('/wish') }}" class="banner-btn">WISHLIST</a>
                                     </div>
                                 </div>
                             </div>
+

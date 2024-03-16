@@ -48,18 +48,17 @@
                                     </div>
                                 </div>
  -->
- <span class="icon"><i class="fas fa-shopping-cart"> <sup class="ms-1">{{ count((array) session('cart')) }}</sup></i></span>
+
+
+ <span class="icon"><i class="fas fa-shopping-cart"></i></span>&nbsp;<sup>{{ count((array) session('cart')) }}</sup>
                             <span class="icon-text"> <a class="cart-info" style="display: inline;"
                                     href="{{ url('/cart') }}">cart</a></span>
-
-                                    <?php $total = 0    ?>
+              <div class="dropdown-menu" id="addcart">
+                    <div class="card-body p-0">
+                    <?php $total = 0    ?>
                                              @foreach((array) session('cart') as $id => $details)
                                              <?php $total += $details['price'] * $details['quantity'] ?>
                                              @endforeach
-
-                            <!-- Dropdown content -->
-                            <div class="dropdown-menu" id="addwish">
-                                <div class="card-body p-0">
                                     <div>
                                         <table class="table table-sm">
                                             <thead>
@@ -74,37 +73,42 @@
                                             <tbody>
                                             @if(session('cart'))
 
-                                                    @foreach(session('cart') as $id => $details)
+                                        @foreach(session('cart') as $id => $details)
                                                 <tr>
                                                     <td class="align-middle text-center">
-                                                        <a href="#delete" data-toggle="modal"
-                                                            data-title="Delete your product ?">
-                                                            <i class="fas fa-trash-alt remove-from-cart"  data-id="{{ $id }}"></i>
+                                                        <a href="#delete" class="remove-from-cart" data-id="{{ $id }}">
+                                                            <i class="fas fa-trash-alt"></i>
                                                         </a>
                                                     </td>
                                                     <td>
-                                                    <img src="{{$details['photo']}}" alt="{{ $details['name'] }}" width="100px" height="100px">
+                                                        <div class="rounded"
+                                                            style=" width: 40px; height: 40px; background-size: cover;">
+                                                            <img src="{{$details['photo']}}" alt="{{ $details['name'] }}">
+                                                        </div>
                                                     </td>
                                                     <td class="align-middle text-left">{{ $details['name'] }}</td>
                                                     <td class="align-middle text-center">{{ $details['quantity'] }}</td>
-                                                    <td class="align-middle text-right">{{ $details['price'] }}</td>
+                                                    <td class="align-middle text-right">${{ $details['price'] }}</td>
                                                 </tr>
-                                               @endforeach
-                                               @endif
-
 
 
                                                 <tr>
+                                                    <td colspan="4" class="align-middle text-right">Delievery
+                                                        Charges</td>
+                                                    <td class="align-middle text-right">55</td>
+                                                </tr>
+
+                                               @endforeach
+                                               @endif
+                                               <tr>
                                                     <td colspan="4" class="align-middle text-right">Total</td>
                                                     <td class="align-middle text-right">$ {{ $total }}</td>
 
                                                 </tr>
-
                                             </tbody>
                                         </table>
-                                        <a href="{{ url('/check-out') }}"
-                                            class="banner-btn d-flex justify-content-center">Checkout</a>
+                                        <a href="{{ url('/check-out') }}" class="banner-btn">Checkout</a>
                                     </div>
                                 </div>
-                            </div>
+ </div>
 

@@ -178,73 +178,15 @@
                                     src="{{ asset('images/logo.png') }}" alt="logo"></a>
                         </div>
                         <!-- Add your search bar HTML here -->
-                        <form action="#" method="post" class="header-search  d-flex">
-                            <input type="text" placeholder="Search for item..." class="w-100">
-                            <button><i class="icon icon-Search"></i></button>
+                        <form action="{{ url('/search/products') }}" method="get" class="header-search d-flex">
+                            <input type="text" name="query" placeholder="Search for item..." class="w-100">
+                            <button type="submit"><i class="icon icon-Search"></i></button>
                         </form>
 
-                        <div id="cart">
+                        <div id="cart" class="addcart">
                             <!-- Cart icon -->
 
-                            <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                            <!-- Dropdown content -->
-                            <div class="dropdown">
-                                <!-- Replace the following with your actual image and price data -->
-                                <div class="dropdown-item">
-
-                                    <div class="card-body p-0">
-                                        <div>
-                                            <table class="table table-sm">
-                                                <thead>
-                                                    <tr class="ml-3">
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th class="text-left" width="30%">Product</th>
-                                                        <th class="text-center" width="45%">Items</th>
-                                                        <th>Subtotal</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="align-middle text-center">
-                                                            <a href="#delete" data-toggle="modal"
-                                                                data-title="Delete your product ?">
-                                                                <i class="fas fa-trash-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <div class="rounded"
-                                                                style="background-image: url(https://unsplash.com/photos/ZBwQ2bCbJjw/download?force=true&w=640); width: 40px; height: 40px; background-size: cover;">
-                                                            </div>
-                                                        </td>
-                                                        <td class="align-middle text-left">Spy Suit</td>
-                                                        <td class="align-middle text-center">1 </td>
-                                                        <td class="align-middle text-right">$698</td>
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td colspan="4" class="align-middle text-right">Delievery
-                                                            Charges</td>
-                                                        <td class="align-middle text-right">55</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="4" class="align-middle text-right">Total</td>
-                                                        <td class="align-middle text-right">3600</td>
-
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                            <a href="{{ url('/check-out') }}" class="banner-btn">Checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Add more items as needed -->
-
-                                <!-- You can use JavaScript to dynamically populate the dropdown with data -->
-                            </div>
+                          @include('frontend.layout.cart')
                         </div>
 
 
@@ -260,130 +202,41 @@
 
                     <!-- Desktop Icons -->
                     <div class="col-lg-4 col-md-4 mt-2 text-center d-none d-md-flex justify-content-center">
-                        <div class="cart-box-wrapper me-3 cart-container cart-box-wrapper " data-toggle="dropdown">
-                            <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                            <span class="icon-text"> <a class="cart-info" style="display: inline;"
-                                    href="{{ url('/cart') }}">cart</a></span>
-
+                        <div class="cart-box-wrapper me-3 cart-container cart-box-wrapper addcart" data-toggle="dropdown" >
+                        @include('frontend.layout.cart')
                             <!-- Dropdown content -->
-                            <div class="dropdown-menu" id="addwish">
-                                <div class="card-body p-0">
-                                    <div>
-                                        <table class="table table-sm">
-                                            <thead>
-                                                <tr class="ml-3">
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th class="text-left" width="30%">Product</th>
-                                                    <th class="text-center" width="45%">Items</th>
-                                                    <th>Subtotal</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="align-middle text-center">
-                                                        <a href="#delete" data-toggle="modal"
-                                                            data-title="Delete your product ?">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <div class="rounded"
-                                                            style="background-image: url(https://unsplash.com/photos/ZBwQ2bCbJjw/download?force=true&w=640); width: 40px; height: 40px; background-size: cover;">
-                                                        </div>
-                                                    </td>
-                                                    <td class="align-middle text-left">Spy Suit</td>
-                                                    <td class="align-middle text-center">1 </td>
-                                                    <td class="align-middle text-right">$698</td>
-                                                </tr>
 
-
-                                                <tr>
-                                                    <td colspan="4" class="align-middle text-right">Delievery
-                                                        Charges</td>
-                                                    <td class="align-middle text-right">55</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4" class="align-middle text-right">Total</td>
-                                                    <td class="align-middle text-right">3600</td>
-
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                        <a href="{{ url('/check-out') }}"
-                                            class="banner-btn d-flex justify-content-center">Checkout</a>
-                                    </div>
-                                </div>
-                            </div>
 
 
                         </div>
-                        <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
-                            <span class="icon"><i class="fas fa-heart"></i></span>
-                            <span class="icon-text">Wishlist</span>
-                            <!-- Dropdown content -->
-                            <div class="dropdown-menu" id="addwish">
-                                <div class="card-body p-0">
-                                    <div>
-                                        <table class="table table-sm">
-                                            <thead>
-                                                <tr class="ml-3">
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th class="text-left" width="30%">Product</th>
-                                                    <th class="text-center" width="45%">Items</th>
-                                                    <th>Subtotal</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="align-middle text-center">
-                                                        <a href="#delete" data-toggle="modal"
-                                                            data-title="Delete your product ?">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <div class="rounded"
-                                                            style="background-image: url(https://unsplash.com/photos/ZBwQ2bCbJjw/download?force=true&w=640); width: 40px; height: 40px; background-size: cover;">
-                                                        </div>
-                                                    </td>
-                                                    <td class="align-middle text-left">Spy Suit</td>
-                                                    <td class="align-middle text-center">1 </td>
-                                                    <td class="align-middle text-right">$698</td>
-                                                </tr>
+                        <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown" id="addwish">
 
+                                @include('frontend.layout.wish')
 
-                                                <tr>
-                                                    <td colspan="4" class="align-middle text-right">Delievery
-                                                        Charges</td>
-                                                    <td class="align-middle text-right">55</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4" class="align-middle text-right">Total</td>
-                                                    <td class="align-middle text-right">3600</td>
-
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                        <a href="{{ url('/check-out') }}" class="banner-btn">Checkout</a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
-                            <span class="icon"><i class="fa-solid fa-user"></i></span>
-                            <span class="icon-text">Login</span>
+                      <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
+    <span class="icon"><i class="fa-solid fa-user"></i></span>
+    @auth
+        <span class="icon-text">{{ Auth::user()->name }}</span>
+    @else
+        <span class="icon-text">Login</span>
+    @endauth
 
-                            <!-- Dropdown content -->
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Item 1</a>
-                                <a href="#" class="dropdown-item">Item 2</a>
-                                <a href="#" class="dropdown-item">Item 3</a>
-                            </div>
-                        </div>
+    <!-- Dropdown content -->
+    <div class="dropdown-menu">
+        @auth
+            <!-- If the user is logged in, show a logout link -->
+            <form action="{{ route('auth.logout') }}" method="GET">
+                @csrf
+                <button type="submit" class="dropdown-item">Logout</button>
+            </form>
+        @else
+            <!-- If the user is not logged in, show login/register links -->
+            <a href="{{ route('auth.login') }}" class="dropdown-item">Login</a>
+            <a href="{{ route('auth.register') }}" class="dropdown-item">Register</a>
+        @endauth
+    </div>
+</div>
                     </div>
 
 
@@ -659,7 +512,7 @@
 
             function updatecart(cartHtml) {
                 // Update the cart section with the new HTML content
-                $('#addcart').html(cartHtml);
+                $('.addcart').html(cartHtml);
 
             }
             function updateaddCart(carthtml) {
@@ -709,7 +562,7 @@
 
             function updateCart(cartHtml) {
                 // Update the cart section with the new HTML content
-                $('#addcart').html(cartHtml);
+                $('.addcart').html(cartHtml);
             }
         });
 
