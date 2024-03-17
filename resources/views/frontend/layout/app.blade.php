@@ -21,6 +21,8 @@
 
     <meta name="description" content="{{ $setting['short_description'] }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="{{ $setting['gsc'] }}">
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" src="
     ">
@@ -406,10 +408,9 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="social-link text-light">
-                            <a href="https://twitter.com/example"><i class="fab fa-twitter"></i></a>
-                            <a href="https://plus.google.com/example"><i class="fab fa-google-plus"></i></a>
-                            <a href="https://facebook.com/example"><i class="fab fa-facebook"></i></a>
-                            <a href="https://instagram.com/example"><i class="fab fa-instagram"></i></a>
+                            <a href="{{ $setting['short_description'] }}"><i class="fab fa-twitter"></i></a>
+                            <a href="{{ $setting['facebook_link'] }}"><i class="fab fa-facebook"></i></a>
+                            <a href="{{ $setting['instagram_link'] }}"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
 
