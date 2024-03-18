@@ -1177,7 +1177,7 @@ input[type="number"] {
     position: absolute;
 }
 #mc_embed_signup_scroll > button {
-    background: #c7a432 none repeat scroll 0 0;
+    background: var(--section-background) ;
     border-radius: 0 30px 30px 0;
     color: #ffffff;
     cursor: pointer;
@@ -4168,10 +4168,10 @@ h3.login-title {
     border: 1px solid black;
     border-radius: 5px;
     text-align: center;
-    background-image: linear-gradient(rgb(245 187 60 / 88%), rgb(111 92 42));
+    background: var(--section-background) ;
 }
 .cardsp:hover {
-    box-shadow: 2px 2px 50px rgb(245 187 60 / 88%);
+    box-shadow: 2px 2px 50px rgba(235, 231, 12, 0.88);
 }
 
 .cardss .card_image {
