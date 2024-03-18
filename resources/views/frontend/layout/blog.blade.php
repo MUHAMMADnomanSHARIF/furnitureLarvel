@@ -21,6 +21,7 @@
 <!-- Blog Section Start -->
 <div class="blog-section pt-80 pb-35">
     <div class="container">
+        <h1 class="text-center">Our Blogs</h1>
         <div class="row">
             @foreach($blogs as $blog)
             <?php

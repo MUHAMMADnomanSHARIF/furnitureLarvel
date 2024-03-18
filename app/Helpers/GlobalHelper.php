@@ -8,11 +8,33 @@ use Illuminate\Support\Facades\Cache;
 class GlobalHelper
 
 {
-   public static function getSettings(): array
+    public static function getSettings(): array
     {
-        return cache()->rememberForever('settings', function () {
+        $settings = cache()->rememberForever('settings', function () {
             return Setting::all()->toArray();
         });
+
+        // Convert color codes to RGB format if necessary
+        foreach ($settings as &$setting) {
+            if (isset($setting['color_code'])) {
+                $setting['color_code'] = self::hexToRgb($setting['color_code']);
+            }
+            // You might need to adjust the key 'color_code' based on your actual setting structure
+        }
+
+        return $settings;
+    }
+    public static function hexToRgb($hex)
+    {
+        // Remove the # if it's there
+        $hex = str_replace('#', '', $hex);
+
+        // Convert hex to RGB
+        $r = hexdec(substr($hex, 0, 2));
+        $g = hexdec(substr($hex, 2, 2));
+        $b = hexdec(substr($hex, 4, 2));
+
+        return "rgb($r, $g, $b)";
     }
 
     public static function getSettingModel(): ?Setting

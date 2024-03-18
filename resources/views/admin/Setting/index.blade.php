@@ -36,24 +36,7 @@
                             <div class="card-body pt-0">
 
                             <div class="row">
-                            <div class="col-6">
-                                                <label class="col-lg-8 col-form-label required fw-bold fs-6">Logo</label>
-                                                @include('admin.media.dropdown', ['file' => $setting, 'collection_name' => 'setting.logo'])
-                                                @if (!empty($setting['logo']))
-                                                    <img src="{{ asset('path/to/your/logo/' . $setting['logo']) }}" alt="Logo">
-                                                @else
-                                                    <p>No logo found</p>
-                                                @endif
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="col-lg-8 col-form-label required fw-bold fs-6">Favicon</label>
-                                                @include('admin.media.dropdown', ['file' => $setting, 'collection_name' => 'setting.favicon'])
-                                                @if (!empty($setting['favicon']))
-                                                    <img src="{{ asset('path/to/your/favicon/' . $setting['favicon']) }}" alt="Favicon">
-                                                @else
-                                                    <p>No favicon found</p>
-                                                @endif
-                                            </div>
+
 
 
 

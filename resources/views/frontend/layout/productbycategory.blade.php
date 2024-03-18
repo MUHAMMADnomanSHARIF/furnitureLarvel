@@ -40,11 +40,11 @@ margin-top: 8px;
         <nav aria-label="breadcrumb">
             <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
-                 @if(empty($category))
-                 <li class="breadcrumb-item active" aria-current="page">All Products</li>
+                 @if(empty($categories))
+                 <li class="breadcrumb-item active" aria-current="page">ProductbyCategory</li>
                 @else
-                  @foreach($category as $category)
-                <li class="breadcrumb-item active" aria-current="page">{{$category->name}}</li>
+                  @foreach($categories as $category)
+                <li class="breadcrumb-item active text-capitalize" aria-current="page"> <span class="text-light">Category</span> <span class="text-secondary">>&nbsp;</span>{{$category->name}}</li>
                  @endforeach
                  @endif
             </ul>
@@ -62,7 +62,10 @@ margin-top: 8px;
                         <div class="shop-banner">
                             <img src="assets/img/banner/19.jpg" alt="">
                         </div>
-                        <h1 class="page-title">Dining Room</h1>
+                        @foreach($categories as $categor)
+                        @endforeach
+
+                        <h1 class="page-title">{{$categor->name}}</h1>
 
                         <div class="ht-product-shop tab-content">
                             <div class="tab-pane active show fade text-center" id="grid" role="tabpanel">
@@ -169,6 +172,16 @@ margin-top: 8px;
             </div>
         </div>
         <!-- Shop Area End -->
+
+        <!-- Ctaegory Discription  -->
+        <div class="container">
+
+            <p class="fw-3 fs-2">{!! $categor->description !!}</p>
+        </div>
+
+
+
+        <!--End Ctaegory Discription  -->
   <!-- Blog Area Start -->
 <div class="blog-area pb-85">
     <div class="container text-center">

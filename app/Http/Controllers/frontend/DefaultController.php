@@ -12,6 +12,7 @@ use App\Models\ParentCategory;
 use App\Models\Product;
 use App\Models\productSize;
 use App\Models\User;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -90,42 +91,54 @@ if($pid->isEmpty())
 
 
     public function all(Request $request, $category = null)
-{
-    $categorySelected = '';
-    $categoryName = $request->category;
+    {
+        $categorySelected = '';
+        $categoryName = $request->category;
 
-    $products = Product::query();
+        $products = Product::query();
 
-    $categories = ParentCategory::all();
-    $productCounts = Product::select('parent_category_id', DB::raw('count(*) as product_count'))
-        ->groupBy('parent_category_id')
-        ->get();
+        $categories = ParentCategory::all();
+        $productCounts = Product::select('parent_category_id', DB::raw('count(*) as product_count'))
+            ->groupBy('parent_category_id')
+            ->get();
 
-    if (!empty($categoryName)) {
-        $category = ParentCategory::where('name', $categoryName)->first();
-        if ($category) {
-            $products = $products->where('parent_category_id', $category->id);
-            $categorySelected = $category->id;
+        // Search functionality
+        if ($request->filled('query')) {
+            $query = $request->input('query');
+            $products = $products->where('name', 'like', "%$query%");
         }
+
+        // Filter by category
+        if (!empty($categoryName)) {
+            $category = ParentCategory::where('name', $categoryName)->first();
+            if ($category) {
+                $products = $products->where('parent_category_id', $category->id);
+                $categorySelected = $category->id;
+            }
+        }
+
+        // Filter by price range
+        if ($request->filled('price_max') && $request->filled('price_min')) {
+            $products = $products->whereBetween('price', [$request->input('price_min'), $request->input('price_max')]);
+        }
+
+        // Paginate the results
+        $products = $products->paginate(12);
+
+        $blogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
+
+        return view('frontend.layout.allproduct')->with([
+            'product' => $products,
+            'categories' => $categories,
+            'productCounts' => $productCounts,
+            'blogs' => $blogs,
+            'categorySelected' => $categorySelected,
+        ]);
     }
+ // Search feilds
 
-    if ($request->filled('price_max') && $request->filled('price_min')) {
-        $products = $products->whereBetween('price', [$request->input('price_min'), $request->input('price_max')]);
-    }
 
-    // Paginate the results
-    $products = $products->paginate(12);
 
-    $blogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
-
-    return view('frontend.layout.allproduct')->with([
-        'product' => $products,
-        'categories' => $categories,
-        'productCounts' => $productCounts,
-        'blogs' => $blogs,
-        'categorySelected' => $categorySelected,
-    ]);
-}
     public function porductbychildcategory(Request $request){
 
         $id = $request->id;
@@ -227,11 +240,7 @@ if($pid->isEmpty())
             // Get the existing cart from the session or initialize an empty array
             $wish = Session::get('wish', []);
 
-            // Check if the product already exists in the cart
-            if (array_key_exists($productId, $wish)) {
-                // Product already exists, increase quantity
-                $wish[$productId]['quantity'] += 1;
-            } else {
+
                 // Product doesn't exist, add it to the cart
                 $productImage =  $product->getFirstMediaUrl('product.image');
                 $price = $product->discounted_price ?? $product->price;
@@ -244,14 +253,13 @@ if($pid->isEmpty())
 
                     // Add other product details as needed
                 ];
-            }
 
             // Save the updated cart array to the session
             Session::put('wish', $wish);
-
             // Return a JSON response (optional)
             return response()->json(['wishSection' => view('frontend.layout.wish')->render()]);
-        } else {
+        }
+      else{
             // Redirect to the login route
             return response()->json(['redirect' => route('auth.login')]);
         }
@@ -520,6 +528,7 @@ public function orderedit(order $id):View
 
 
     }
+
 
 
  }

@@ -3,9 +3,11 @@
 
 <head>
 
-    @php
-        $allSettings = app('GlobalHelper')->getSettings();
-    @endphp
+                           @php
+                            $allSettings = app('GlobalHelper')->getSettings();
+
+
+                            @endphp
 
     @foreach ($allSettings as $setting)
         <!-- Display other columns as needed -->
@@ -19,6 +21,8 @@
 
     <meta name="description" content="{{ $setting['short_description'] }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="{{ $setting['gsc'] }}">
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" src="
     ">
@@ -43,11 +47,12 @@
     @yield('CoustomCSS')
 
     <style>
-        html,
-        body {
-            overflow-x: hidden;
-        }
-
+  :root {
+        --nav-background: linear-gradient(
+            {{ app('GlobalHelper')->hexToRgb($setting['color_one']) }},
+            {{ app('GlobalHelper')->hexToRgb($setting['color_two']) }}
+        );
+    }
         /* Styling for the Cart container */
         .cart-container {
             position: relative;
@@ -175,74 +180,15 @@
                                     src="{{ asset('images/logo.png') }}" alt="logo"></a>
                         </div>
                         <!-- Add your search bar HTML here -->
-                        <form action="#" method="post" class="header-search  d-flex">
-                            <input type="text" placeholder="Search for item..." class="w-100">
-                            <button><i class="icon icon-Search"></i></button>
+                        <form action="{{ url('/search/products') }}" method="get" class="header-search d-flex">
+                            <input type="text" name="query" placeholder="Search for item..." class="w-100">
+                            <button type="submit"><i class="icon icon-Search"></i></button>
                         </form>
 
-                        <div id="cart">
+                        <div id="cart" class="addcart">
                             <!-- Cart icon -->
 
-                            <span class="icon"><i class="fas fa-shopping-cart"> <sup class="ms-1">1</sup></i></span>
-
-                            <!-- Dropdown content -->
-                            <div class="dropdown">
-                                <!-- Replace the following with your actual image and price data -->
-                                <div class="dropdown-item">
-
-                                    <div class="card-body p-0">
-                                        <div>
-                                            <table class="table table-sm">
-                                                <thead>
-                                                    <tr class="ml-3">
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th class="text-left" width="30%">Product</th>
-                                                        <th class="text-center" width="45%">Items</th>
-                                                        <th>Subtotal</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="align-middle text-center">
-                                                            <a href="#delete" data-toggle="modal"
-                                                                data-title="Delete your product ?">
-                                                                <i class="fas fa-trash-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <div class="rounded"
-                                                                style="background-image: url(https://unsplash.com/photos/ZBwQ2bCbJjw/download?force=true&w=640); width: 40px; height: 40px; background-size: cover;">
-                                                            </div>
-                                                        </td>
-                                                        <td class="align-middle text-left">Spy Suit</td>
-                                                        <td class="align-middle text-center">1 </td>
-                                                        <td class="align-middle text-right">$698</td>
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td colspan="4" class="align-middle text-right">Delievery
-                                                            Charges</td>
-                                                        <td class="align-middle text-right">55</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="4" class="align-middle text-right">Total</td>
-                                                        <td class="align-middle text-right">3600</td>
-
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                            <a href="{{ url('/check-out') }}" class="banner-btn">Checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Add more items as needed -->
-
-                                <!-- You can use JavaScript to dynamically populate the dropdown with data -->
-                            </div>
+                          @include('frontend.layout.cart')
                         </div>
 
 
@@ -258,133 +204,41 @@
 
                     <!-- Desktop Icons -->
                     <div class="col-lg-4 col-md-4 mt-2 text-center d-none d-md-flex justify-content-center">
-                        <div class="cart-box-wrapper me-3 cart-container cart-box-wrapper " data-toggle="dropdown">
-                            <span class="icon"><i class="fas fa-shopping-cart"><sup class="ms-1">1</sup></i></span>
-
-                            <span class="icon-text"> <a class="cart-info" style="display: inline;"
-                                    href="{{ url('/cart') }}">cart</a></span>
-
+                        <div class="cart-box-wrapper me-3 cart-container cart-box-wrapper addcart" data-toggle="dropdown" >
+                        @include('frontend.layout.cart')
                             <!-- Dropdown content -->
-                            <div class="dropdown-menu" id="addwish">
-                                <div class="card-body p-0">
-                                    <div>
-                                        <table class="table table-sm">
-                                            <thead>
-                                                <tr class="ml-3">
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th class="text-left" width="30%">Product</th>
-                                                    <th class="text-center" width="45%">Items</th>
-                                                    <th>Subtotal</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="align-middle text-center">
-                                                        <a href="#delete" data-toggle="modal"
-                                                            data-title="Delete your product ?">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <div class="rounded"
-                                                            style="background-image: url(https://unsplash.com/photos/ZBwQ2bCbJjw/download?force=true&w=640); width: 40px; height: 40px; background-size: cover;">
-                                                        </div>
-                                                    </td>
-                                                    <td class="align-middle text-left">Spy Suit</td>
-                                                    <td class="align-middle text-center">1 </td>
-                                                    <td class="align-middle text-right">$698</td>
-                                                </tr>
 
-
-                                                <tr>
-                                                    <td colspan="4" class="align-middle text-right">Delievery
-                                                        Charges</td>
-                                                    <td class="align-middle text-right">55</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4" class="align-middle text-right">Total</td>
-                                                    <td class="align-middle text-right">3600</td>
-
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                        <a href="{{ url('/check-out') }}"
-                                            class="banner-btn d-flex justify-content-center">Checkout</a>
-                                    </div>
-                                </div>
-                            </div>
 
 
                         </div>
-                        <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
-                            <span class="icon"><i class="fas fa-heart"> <sup>1</sup></i></span>
+                        <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown" id="addwish">
 
-                            <span class="icon-text">Wishlist</span>
+                                @include('frontend.layout.wish')
 
-                            <!-- Dropdown content -->
-                            <div class="dropdown-menu" id="addwish">
-                                <div class="card-body p-0">
-                                    <div>
-                                        <table class="table table-sm">
-                                            <thead>
-                                                <tr class="ml-3">
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th class="text-left" width="30%">Product</th>
-                                                    <th class="text-center" width="45%">Items</th>
-                                                    <th>Subtotal</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="align-middle text-center">
-                                                        <a href="#delete" data-toggle="modal"
-                                                            data-title="Delete your product ?">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <div class="rounded"
-                                                            style="background-image: url(https://unsplash.com/photos/ZBwQ2bCbJjw/download?force=true&w=640); width: 40px; height: 40px; background-size: cover;">
-                                                        </div>
-                                                    </td>
-                                                    <td class="align-middle text-left">Spy Suit</td>
-                                                    <td class="align-middle text-center">1 </td>
-                                                    <td class="align-middle text-right">$698</td>
-                                                </tr>
-
-
-                                                <tr>
-                                                    <td colspan="4" class="align-middle text-right">Delievery
-                                                        Charges</td>
-                                                    <td class="align-middle text-right">55</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4" class="align-middle text-right">Total</td>
-                                                    <td class="align-middle text-right">3600</td>
-
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                        <a href="{{ url('/check-out') }}" class="banner-btn">Checkout</a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
-                            <span class="icon"><i class="fa-solid fa-user"></i></span>
-                            <span class="icon-text">Login</span>
+                      <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
+    <span class="icon"><i class="fa-solid fa-user"></i></span>
+    @auth
+        <span class="icon-text">{{ Auth::user()->name }}</span>
+    @else
+        <span class="icon-text">Login</span>
+    @endauth
 
-                            <!-- Dropdown content -->
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Item 1</a>
-                                <a href="#" class="dropdown-item">Item 2</a>
-                                <a href="#" class="dropdown-item">Item 3</a>
-                            </div>
-                        </div>
+    <!-- Dropdown content -->
+    <div class="dropdown-menu">
+        @auth
+            <!-- If the user is logged in, show a logout link -->
+            <form action="{{ route('auth.logout') }}" method="GET">
+                @csrf
+                <button type="submit" class="dropdown-item">Logout</button>
+            </form>
+        @else
+            <!-- If the user is not logged in, show login/register links -->
+            <a href="{{ route('auth.login') }}" class="dropdown-item">Login</a>
+            <a href="{{ route('auth.register') }}" class="dropdown-item">Register</a>
+        @endauth
+    </div>
+</div>
                     </div>
 
 
@@ -554,10 +408,9 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="social-link text-light">
-                            <a href="https://twitter.com/example"><i class="fab fa-twitter"></i></a>
-                            <a href="https://plus.google.com/example"><i class="fab fa-google-plus"></i></a>
-                            <a href="https://facebook.com/example"><i class="fab fa-facebook"></i></a>
-                            <a href="https://instagram.com/example"><i class="fab fa-instagram"></i></a>
+                            <a href="{{ $setting['short_description'] }}"><i class="fab fa-twitter"></i></a>
+                            <a href="{{ $setting['facebook_link'] }}"><i class="fab fa-facebook"></i></a>
+                            <a href="{{ $setting['instagram_link'] }}"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
 
@@ -604,6 +457,32 @@
             });
 
         });
+        $(document).on('click', '.remove-from-wish', function(e) {
+            e.preventDefault();
+            var ele = $(this);
+            if (confirm("Are you sure")) {
+                $.ajax({
+                    url: '{{ url('delete-wish') }}',
+                    method: "DELETE",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: ele.attr("data-id")
+                    },
+                    success: function(response) {
+                            updatewish(response.wishSection);
+                            }
+                });
+            }
+
+            function updatewish(wishHtml) {
+                // Update the cart section with the new HTML content
+                $('#addwish').html(wishHtml);
+            }
+
+
+
+
+        });
 
 
         $(document).on('click', '.remove-from-cart', function(e) {
@@ -619,7 +498,10 @@
                         id: ele.attr("data-id")
                     },
                     success: function(response) {
+
                         updatecart(response.cartSection);
+                        updateaddCart(response.updatecar);
+
 
 
 
@@ -631,36 +513,16 @@
 
             function updatecart(cartHtml) {
                 // Update the cart section with the new HTML content
-                $('#addcart').html(cartHtml);
+                $('.addcart').html(cartHtml);
+
             }
+            function updateaddCart(carthtml) {
+            // Update the cart section with the new HTML content
+            $('#addcart1').html(carthtml);
+        }
 
         });
-        $(document).on('click', '.remove-from-wish', function(e) {
-            e.preventDefault();
-            var ele = $(this);
-            if (confirm("Are you sure")) {
-                $.ajax({
-                    url: '{{ url('delete-wish') }}',
-                    method: "DELETE",
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: ele.attr("data-id")
-                    },
-                    success: function(response) {
-                        updatewish(response.wishSection);
-                    }
-                });
-            }
 
-            function updatewish(wishHtml) {
-                // Update the cart section with the new HTML content
-                $('#addwish').html(wishHtml);
-            }
-
-
-
-
-        });
         $(document).ready(function() {
             $('#product').submit(function(e) {
                 e.preventDefault();
@@ -701,7 +563,7 @@
 
             function updateCart(cartHtml) {
                 // Update the cart section with the new HTML content
-                $('#addcart').html(cartHtml);
+                $('.addcart').html(cartHtml);
             }
         });
 
@@ -722,7 +584,7 @@
                         // Check the console for the response
                         if (response.redirect) {
                             // Handle redirect
-                            window.location.href = response.redirect;
+                            updateCart(response.wishSection);
                         } else {
                             // Update the cart section with the new HTML content
                             updateCart(response.wishSection);

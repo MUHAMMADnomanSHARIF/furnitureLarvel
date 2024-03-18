@@ -83,7 +83,7 @@ Route::withoutMiddleware([Permissions::class])->group(function () {
             Route::get('/wish', 'wish')->name('wish');
             Route::delete('delete-wish', 'deletewish')->name('deletewish');
             Route::get('product-detail/{name}', 'productDetail')->name('product.detail');
-
+            Route::get('/search/products', 'all')->name('search.products');
             Route::delete('delete-cart', 'deletecart')->name('deletecart');
             Route::get('product/detail/{product}', 'productDetails')->name('prod.detail');
             Route::get('getsize/{id}', function ($id) {
