@@ -7,6 +7,10 @@
             overflow-x: hidden;
         }
 
+        .single-slide {
+            background-size: cover;
+            background-position: center center;
+        }
 
         @media only screen and (max-width: 676px) {
 
@@ -69,6 +73,9 @@
 
         }
 
+        .section-container p {
+            font-size: 14px;
+        }
 
         @media only screen and (max-width: 676px) {
             .banner-text {
@@ -86,6 +93,16 @@
                 /* Adjust the font size */
             }
         }
+
+
+
+
+
+
+
+
+        /* Media query for responsiveness */
+
 
         /* Default styles for larger screens */
     </style>
@@ -110,7 +127,7 @@
                     <div class="slider-banner">
                         <h2>Elevant the living style</h2>
                         <h2>Lounge Chairs</h2>
-                        <p>Increase the elegance with lounge chairs
+                        <p class="text-white">Increase the elegance with lounge chairs
                         </p>
                         <a href="shop.html" class="banner-btn">Shop now</a>
                     </div>
@@ -131,7 +148,7 @@
 
     <!-- Banner Area End -->
 
-        <h2 align="center" class="mt-5 fs-1 fw-700"><span>Categories</span></h2>
+    <h2 align="center" class="mt-5 mb-4 fs-1 fw-700"><span>Categories</span></h2>
 
     </div>
     <div class="container-fluid mb-3">
@@ -187,7 +204,7 @@
                             <div class="product-item">
                                 <span class="hot-sale">sale</span>
                                 <div class="product-image-hover">
-                                    <a  href="{{ url('product-detail/' . $products->name) }}">
+                                    <a href="{{ url('product-detail/' . $products->name) }}">
                                         <img class="primary-image" src="{{ $products->getFirstMediaUrl('product.image') }}"
                                             alt="">
                                     </a>
@@ -210,7 +227,8 @@
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <h4><a  href="{{ url('product-detail/' . $products->name) }}">{{ $products->name }}</a></h4>
+                                    <h4><a href="{{ url('product-detail/' . $products->name) }}">{{ $products->name }}</a>
+                                    </h4>
                                     <div class="product-price"><span>${{ $products->discounted_price }}</span><span
                                             class="prev-price">${{ $products->price }}</span></div>
 
@@ -328,13 +346,7 @@
                             customize your furniture according to your instructions and requirements. We offer you gorgeous
                             wardrobes that help you organize your accessories. To make your space more aesthetic, we provide
                             high-gloss wardrobes that enhance the look
-                        </p>
-                    </div>
 
-                    <!-- Second Paragraph -->
-                    <div class="mt-4">
-
-                        <p>
                             To meet your child's needs and take your stress out of the nursery, we offer a versatile quality
                             bunk
                             bed that provides a safe place for your children to sleep peacefully. We made a bunk bed with
@@ -345,6 +357,9 @@
                             We cover and furnish the furniture with your favorite color.
                         </p>
                     </div>
+
+                    <!-- Second Paragraph -->
+
                     <div class="mt-4">
 
                         <p>
@@ -416,47 +431,48 @@
     <!-- End Testimonieal Section -->
 
 
-<!-- Blog Area Start -->
-<div class="blog-area pb-85">
-    <div class="container text-center">
-        <div class="section-title">
-            <span>Latest New</span>
-            <h2><span>FROM OUR BLOG</span></h2>
+    <!-- Blog Area Start -->
+    <div class="blog-area pb-85">
+        <div class="container text-center">
+            <div class="section-title">
+                <span>Latest New</span>
+                <h2><span>FROM OUR BLOG</span></h2>
+            </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="custom-row">
-            <div class="blog-carousel owl-carousel">
-                @foreach($blogs as $blog)
-                <?php
-                    $date = $blog->created_at; // Your date from the database
+        <div class="container">
+            <div class="custom-row">
+                <div class="blog-carousel owl-carousel">
+                    @foreach ($blogs as $blog)
+                        <?php
+                        $date = $blog->created_at; // Your date from the database
+                        
+                        // Extract the day and month from the date
+                        $day = date('d ', strtotime($date)); // Format the date as "21 February"
+                        $month = date('M ', strtotime($date));
+                        ?>
+                        <div class="custom-col">
+                            <div class="single-blog">
+                                <div class="blog-image">
+                                    <a href="/blog-detail/{{ $blog->id }}">
+                                        <img src="{{ $blog->getFirstMediaUrl('blog.image') }}" alt=""
+                                            height="200px" width>
+                                        <span><?php echo $day; ?> <span><?php echo $month; ?></span></span>
+                                    </a>
+                                </div>
+                                <div class="blog-text">
+                                    <h5><a href="/blog-detail/{{ $blog->id }}">{{ $blog->title }}</a></h5>
+                                    <p>{{ $blog->description }}</p>
+                                    <a href="/blog-detail/{{ $blog->id }}">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
 
-                    // Extract the day and month from the date
-                    $day = date("d ", strtotime($date)); // Format the date as "21 February"
-                    $month = date("M ", strtotime($date));
-                   ?>
-                <div class="custom-col">
-                    <div class="single-blog">
-                        <div class="blog-image">
-                            <a href="/blog-detail/{{$blog->id}}">
-                                <img src="{{$blog->getFirstMediaUrl('blog.image')}}" alt="" height="200px" width>
-                                <span><?php echo $day; ?> <span><?php echo $month; ?></span></span>
-                            </a>
-                        </div>
-                        <div class="blog-text">
-                            <h5><a href="/blog-detail/{{$blog->id}}">{{$blog->title}}</a></h5>
-                            <p>{{$blog->description}}</p>
-                            <a href="/blog-detail/{{$blog->id}}">Read More</a>
-                        </div>
-                    </div>
                 </div>
-                @endforeach
-
             </div>
         </div>
     </div>
-</div>
-<!-- Blog Area End -->
+    <!-- Blog Area End -->
 
     <!-- ========== Start Section cards ========== -->
 

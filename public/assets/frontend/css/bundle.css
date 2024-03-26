@@ -120,12 +120,7 @@ mark {
     color: #ffffff;
     font-weight: 600;
 }
-p {
-}
-p::-moz-selection {
-}
-p::selection {
-}
+
 ul {
     list-style: outside none none;
     margin: 0;
@@ -139,7 +134,7 @@ ul {
     /* Firefox 19+ */
     color: #969696;
     opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  
 }
 :-ms-input-placeholder {
     /* IE 10+ */

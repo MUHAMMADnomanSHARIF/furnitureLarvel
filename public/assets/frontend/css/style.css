@@ -5,7 +5,8 @@
     --main-color:
         background-image: linear-gradient(rgb(255, 255, 0), rgb(237, 121, 2));
     /* Replace with your desired color code */
-
+    --section-background:
+    linear-gradient(rgb(255, 255, 0), rgb(237, 121, 2));
 
 }
 
@@ -51,9 +52,7 @@ input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }
 
-input[type="number"] {
-    -moz-appearance: textfield;
-}
+
 
 .header-area,
 .header-two-area,
@@ -105,7 +104,7 @@ input[type="number"] {
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
     left: -28px;
     opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
     padding: 9px 15px;
     position: absolute;
     text-align: right;
@@ -118,7 +117,7 @@ input[type="number"] {
 .header-submenu:hover .h-submenu {
     visibility: visible;
     opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
 }
 .h-submenu li a {
     display: block;
@@ -224,7 +223,7 @@ input[type="number"] {
     padding-top: 5px;
 }
 .cart-info {
-    display: block;
+    display: inline;
     padding: 10px 0;
 }
 .cart-dropdown {
@@ -233,7 +232,7 @@ input[type="number"] {
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
     color: #666666;
     opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
     padding: 25px 0;
     position: absolute;
     right: 0;
@@ -258,7 +257,7 @@ input[type="number"] {
 .cart-box-wrapper:hover .cart-dropdown {
     visibility: visible;
     opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
 }
 .cart-number span {
     font-weight: 700;
@@ -406,14 +405,14 @@ input[type="number"] {
     cursor: pointer;
     font-size: 18px;
     opacity: 0.2;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+
     position: absolute;
     right: 10px;
     top: 9px;
 }
 .cart-dropdown > button.close:hover {
     opacity: 0.5;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+
 }
 /*----------------------------------------*/
 /*  2.3 Mainmenu Area
@@ -473,7 +472,7 @@ input[type="number"] {
     box-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 0.1);
     left: 0;
     opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
     padding: 30px 30px 26px;
     position: absolute;
     text-align: left;
@@ -492,7 +491,7 @@ input[type="number"] {
 .main-menu > nav > ul > li:hover > ul {
     -webkit-transform: scaleY(1);
     transform: scaleY(1);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
     visibility: visible;
     opacity: 1;
 }
@@ -724,19 +723,10 @@ input[type="number"] {
     padding-left: 25px;
 
 }
-.single-slide h1 {
-    color: #252531;
-    font-size: 36px;
-    font-weight: 200;
-    margin-bottom: 7px;
-    padding-top: 47px;
-    text-transform: uppercase;
-    width: 100%;
-}
-.owl-item.active .single-slide h1 {
-    -webkit-animation: 1100ms ease-in-out 0s normal none 1 running fadeInRight;
-    animation: 1100ms ease-in-out 0s normal none 1 running fadeInRight;
-}
+
+
+
+
 .single-slide h2 {
     color: #252531;
     font-size: 48px;
@@ -744,6 +734,7 @@ input[type="number"] {
     line-height: 35px;
     margin: 0 0 22px;
     text-transform: uppercase;
+   
 }
 .owl-item.active .single-slide h2 {
     -webkit-animation: 1500ms ease-in-out 0s normal none 1 running fadeInLeft;
@@ -771,7 +762,7 @@ input[type="number"] {
     padding: 10px 30px;
     text-transform: uppercase;
     letter-spacing: 0.2px;
-    moz-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
     -o-transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
     transition: all 0.4s ease-in-out;
@@ -782,7 +773,7 @@ input[type="number"] {
     background: var(--section-background);
     box-shadow: 0 0px 15px 0 rgba(64, 66, 66, 0.75);
     background-position: 100% 0;
-    moz-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
     -o-transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
     transition: all 0.4s ease-in-out;
@@ -856,7 +847,7 @@ input[type="number"] {
     height: 100%;
     left: 0;
     opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
     position: absolute;
     top: 0;
     width: 100%;
@@ -867,7 +858,7 @@ input[type="number"] {
 }
 .product-item:hover .hover-image {
     opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
 }
 .product-hover {
     background: #ffffff none repeat scroll 0 0;
@@ -880,7 +871,7 @@ input[type="number"] {
     height: 50px;
     left: 0;
     opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
     padding: 14px 0;
     position: absolute;
     -webkit-transform: translateY(20px);
@@ -901,7 +892,7 @@ input[type="number"] {
 .product-item:hover .product-hover {
     box-shadow: 2px 2px 2px 0 #ececec;
     opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
 }
@@ -1270,7 +1261,7 @@ input[type="number"] {
     height: 24px;
     letter-spacing: 0.4px;
     opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
     padding: 5px;
     position: absolute;
     right: 0;
@@ -1377,7 +1368,7 @@ input[type="number"] {
     border-top: 1px solid #eeeeee;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
     opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
     padding: 20px;
     position: absolute;
     right: -6px;
@@ -1389,7 +1380,7 @@ input[type="number"] {
 }
 .search-form-two:hover form {
     opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
     visibility: visible;
 }
 .search-form-two form input {
@@ -1410,7 +1401,7 @@ input[type="number"] {
     font-size: 15px;
     height: 40px;
     opacity: 0.4;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+
     position: absolute;
     right: 20px;
     top: 20px;
@@ -1477,7 +1468,7 @@ input[type="number"] {
     border-top: 1px solid #eeeeee;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
     opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
     padding: 15px 0;
     position: absolute;
     right: -6px;
@@ -1487,7 +1478,7 @@ input[type="number"] {
 }
 .header-settings:hover > ul {
     opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
     visibility: visible;
 }
 .header-settings li {
@@ -1507,7 +1498,7 @@ ul.header-menu-list {
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
     left: 100%;
     opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
     padding: 7px 0px;
     position: absolute;
     top: 0;
@@ -1516,7 +1507,7 @@ ul.header-menu-list {
 }
 .header-settings > ul li:hover ul.header-menu-list {
     opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
     visibility: visible;
 }
 .header-two-area.sticky {
@@ -1530,8 +1521,7 @@ ul.header-menu-list {
 .sticky .header-settings > a {
     line-height: 65px;
 }
-.sticky.header-two-area .cart-info {
-}
+
 .slider-two-area .slider-banner {
     padding-left: 34px;
 }
@@ -2196,7 +2186,7 @@ h1.page-title {
     height: 100%;
     left: 0;
     opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
     position: absolute;
     top: 0;
     -webkit-transition: all 0.3s ease 0s;
@@ -2208,7 +2198,7 @@ h1.page-title {
 }
 .single-product-thumbnail .p-thumb.slick-current:after {
     opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
 }
 .single-product-image .slick-arrow {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
@@ -2222,7 +2212,7 @@ h1.page-title {
     transform: translateY(-50%);
     z-index: 9;
     opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
 }
 .single-product-image .slick-arrow.slick-prev {
     left: -50px;
@@ -2232,7 +2222,7 @@ h1.page-title {
 }
 .single-product-image:hover .slick-arrow {
     opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
 }
 .single-product-image .slick-arrow:focus {
     box-shadow: none;
@@ -2332,11 +2322,7 @@ h1.page-title {
     text-align: center;
     width: 52px;
 }
-.qty-cart-add > input,
-.qty-cart-add > input:hover,
-.qty-cart-add > input:focus {
-    -moz-appearance: textfield;
-}
+
 .qty-cart-add > input::-moz-progress-bar {
     color: #444444;
 }
@@ -2765,10 +2751,7 @@ h1.page-title {
     padding: 0 10px;
     width: 300px;
 }
-.cart-main-area select.country {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-}
+
 .ht-shipping-content .level {
     color: #7d7d7d;
     font-size: 13px;
@@ -3782,7 +3765,7 @@ h3.login-title {
 }
 .blog-links {
     display: inline-block;
-    float: right;
+
 }
 .blog-links > a {
     color: #555555;
@@ -3830,7 +3813,7 @@ h3.login-title {
 }
 .comment-information > span {
     display: inline-block;
-    float: right;
+
     line-height: 13px;
 }
 .comment-text > p {
@@ -4710,3 +4693,10 @@ h3.login-title {
     justify-content: center;
 }
 
+
+@media only screen and (max-width: 676px) {
+    .cart-info {
+        display: none;
+
+    }
+}
