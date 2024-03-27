@@ -9,12 +9,13 @@
         }
 
         .masthead {
-            height: 100%;
-            padding: 20em 0;
+
+            height: 70%;
+            padding: 20em 0px;
             background-image: url("assets/frontend/img/banner/about.png");
             background-repeat: no-repeat;
             background-size: cover;
-            background-position: top center;
+            background-position: center center;
 
         }
 
@@ -70,14 +71,16 @@
 
         @media only screen and (max-width: 571px) {
 
-
-
-            .masthead-heading {
-                padding: 5em 0px,
-                    font-size: 3em;
+            .masthead {
+                padding: 7em 0px;
             }
 
-            .container {
+            .masthead-heading {
+
+                font-size: 2em !important;
+            }
+
+            .container-about {
                 padding: 0 3em;
             }
 
@@ -104,7 +107,7 @@
         <h1 class="masthead-heading">About Us</h1>
     </header>
     <section class="introduction-section">
-        <div class="container">
+        <div class="container-about">
             <h2>Step ahead toward your dreamy world</h2>
             <p>Welcome to the world of beautiful furniture; Furnimart is the best furniture supplier that offers you
                 fantastic furniture for your living room. We know that everyone wants to make their space functional and
@@ -118,7 +121,7 @@
     </section>
 
     <section class="location-section">
-        <div class="container">
+        <div class="container-about">
             <h2>Transform your dream into reality</h2>
             <p>We train our experts who can design the room as per your wish. We turn the idea of your mind into a reality
                 with beautiful colors and unique designs. We make the furniture of your ideas. Share your dream idea about
@@ -130,7 +133,7 @@
     </section>
 
     <section class="questions-section">
-        <div class="container">
+        <div class="container-about">
 
             <h2>WHY CHOOSE US</h2>
             <p>We aim to provide you with the best quality content at an affordable price that meets the needs of the
@@ -142,7 +145,7 @@
         </div>
     </section>
     <section class="questions-section">
-        <div class="container">
+        <div class="container-about">
 
             <h2>Design a space for your family and kids </h2>
             <p>We value family and understand the importance of their comfort. We design your home with comfortable
@@ -155,7 +158,7 @@
     </section>
 
     <section class="service-grid pb-5 pt-5">
-        <div class="container">
+        <div class="container-about">
             <div class="row">
                 <div class="col-xl-12 text-center mb-4">
                     <div class="service-title">
@@ -236,7 +239,7 @@
     </section>
 
     <section class="introduction-section">
-        <div class="container">
+        <div class="container-about">
             <h2>Supremacy of furnimart</h2>
             <p>Furnimart offers the best beds, sofas, wardrobes and accessories to make your life easier. Our experts are
                 highly trained in selecting and guiding you to choose the best furniture for your space. They decorate every

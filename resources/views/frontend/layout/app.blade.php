@@ -3,11 +3,10 @@
 
 <head>
 
-                           @php
-                            $allSettings = app('GlobalHelper')->getSettings();
+    @php
+        $allSettings = app('GlobalHelper')->getSettings();
 
-
-                            @endphp
+    @endphp
 
     @foreach ($allSettings as $setting)
         <!-- Display other columns as needed -->
@@ -47,12 +46,11 @@
     @yield('CoustomCSS')
 
     <style>
-  :root {
-        --nav-background: linear-gradient(
-            {{ app('GlobalHelper')->hexToRgb($setting['color_one']) }},
-            {{ app('GlobalHelper')->hexToRgb($setting['color_two']) }}
-        );
-    }
+        :root {
+            --nav-background: linear-gradient({{ app('GlobalHelper')->hexToRgb($setting['color_one']) }},
+                    {{ app('GlobalHelper')->hexToRgb($setting['color_two']) }});
+        }
+
         /* Styling for the Cart container */
         .cart-container {
             position: relative;
@@ -151,6 +149,13 @@
                 /* Show the cart icon in mobile view */
             }
         }
+
+        @media (max-width: 320px) {
+            .icon-text {
+                display: hidden !important;
+                /* Show the cart icon in mobile view */
+            }
+        }
     </style>
 
 
@@ -188,7 +193,7 @@
                         <div id="cart" class="addcart">
                             <!-- Cart icon -->
 
-                          @include('frontend.layout.cart')
+                            @include('frontend.layout.cart')
                         </div>
 
 
@@ -204,8 +209,9 @@
 
                     <!-- Desktop Icons -->
                     <div class="col-lg-4 col-md-4 mt-2 text-center d-none d-md-flex justify-content-center">
-                        <div class="cart-box-wrapper me-3 cart-container cart-box-wrapper addcart" data-toggle="dropdown" >
-                        @include('frontend.layout.cart')
+                        <div class="cart-box-wrapper me-3 cart-container cart-box-wrapper addcart"
+                            data-toggle="dropdown">
+                            @include('frontend.layout.cart')
                             <!-- Dropdown content -->
 
 
@@ -213,32 +219,32 @@
                         </div>
                         <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown" id="addwish">
 
-                                @include('frontend.layout.wish')
+                            @include('frontend.layout.wish')
 
                         </div>
-                      <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
-    <span class="icon"><i class="fa-solid fa-user"></i></span>
-    @auth
-        <span class="icon-text">{{ Auth::user()->name }}</span>
-    @else
-        <span class="icon-text">Login</span>
-    @endauth
+                        <div class="cart-box-wrapper me-3 cart-container" data-toggle="dropdown">
+                            <span class="icon"><i class="fa-solid fa-user"></i></span>
+                            @auth
+                                <span class="icon-text">{{ Auth::user()->name }}</span>
+                            @else
+                                <span class="icon-text">Login</span>
+                            @endauth
 
-    <!-- Dropdown content -->
-    <div class="dropdown-menu">
-        @auth
-            <!-- If the user is logged in, show a logout link -->
-            <form action="{{ route('auth.logout') }}" method="GET">
-                @csrf
-                <button type="submit" class="dropdown-item">Logout</button>
-            </form>
-        @else
-            <!-- If the user is not logged in, show login/register links -->
-            <a href="{{ route('auth.login') }}" class="dropdown-item">Login</a>
-            <a href="{{ route('auth.register') }}" class="dropdown-item">Register</a>
-        @endauth
-    </div>
-</div>
+                            <!-- Dropdown content -->
+                            <div class="dropdown-menu">
+                                @auth
+                                    <!-- If the user is logged in, show a logout link -->
+                                    <form action="{{ route('auth.logout') }}" method="GET">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Logout</button>
+                                    </form>
+                                @else
+                                    <!-- If the user is not logged in, show login/register links -->
+                                    <a href="{{ route('auth.login') }}" class="dropdown-item">Login</a>
+                                    <a href="{{ route('auth.register') }}" class="dropdown-item">Register</a>
+                                @endauth
+                            </div>
+                        </div>
                     </div>
 
 
@@ -305,9 +311,9 @@
                 <nav id="mobile-menu-active">
                     <ul class="menu-overflow">
                         <li><a href="{{ url('') }}">HOME</a></li>
-                        <li><a href="{{ url('/All-Product') }}">Shop</a></li>
-                        <li><a href="{{ url('/About') }}">About Us</a></li>
-                        <li><a href="{{ url('/Blog') }}">Blog</a></li>
+                        <li><a href="{{ url('/shop') }}">Shop</a></li>
+                        <li><a href="{{ url('/about') }}">About Us</a></li>
+                        <li><a href="{{ url('/blog') }}">Blog</a></li>
                         <li><a href="{{ url('/Contact-Us') }}">Contact</a></li>
                     </ul>
                 </nav>
@@ -469,8 +475,8 @@
                         id: ele.attr("data-id")
                     },
                     success: function(response) {
-                            updatewish(response.wishSection);
-                            }
+                        updatewish(response.wishSection);
+                    }
                 });
             }
 
@@ -516,10 +522,11 @@
                 $('.addcart').html(cartHtml);
 
             }
+
             function updateaddCart(carthtml) {
-            // Update the cart section with the new HTML content
-            $('#addcart1').html(carthtml);
-        }
+                // Update the cart section with the new HTML content
+                $('#addcart1').html(carthtml);
+            }
 
         });
 
