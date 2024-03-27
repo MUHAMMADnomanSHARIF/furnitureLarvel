@@ -1,4 +1,4 @@
-<form action="#" class="cart-form">
+
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -70,4 +70,4 @@
             </div>
         </div>
     </div>
-</form>
+
