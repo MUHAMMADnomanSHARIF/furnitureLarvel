@@ -53,7 +53,7 @@ margin-top: 8px;
 </div>
 <!-- Breadcrumb Area End -->
 <!-- Shop Area Start -->
-<div class="shop-area ptb-80">
+<div class="shop-area ">
     <div class="container">
         <div class="row">
             <div class="order-xl-2 order-lg-2 col-xl-9 col-lg-8">
