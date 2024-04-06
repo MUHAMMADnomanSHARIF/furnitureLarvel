@@ -49,6 +49,9 @@
         :root {
             --nav-background: linear-gradient({{ app('GlobalHelper')->hexToRgb($setting['color_one']) }},
                     {{ app('GlobalHelper')->hexToRgb($setting['color_two']) }});
+
+                    --section-background: linear-gradient({{ app('GlobalHelper')->hexToRgb($setting['color_three']) }},
+                    {{ app('GlobalHelper')->hexToRgb($setting['color_four']) }});
         }
 
         /* Styling for the Cart container */

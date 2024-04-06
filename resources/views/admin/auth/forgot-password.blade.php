@@ -75,7 +75,8 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Content-->
 						<div class="w-md-400px">
 							<!--begin::Form-->
-							<form class="form w-100" novalidate="novalidate" id="kt_password_reset_form" data-kt-redirect-url="../../demo1/dist/authentication/layouts/overlay/new-password.html" action="#">
+							<form class="form w-100" method="POST" action="{{ route('auth.forgotpassword') }}" novalidate="novalidate" id="kt_password_reset_form" data-kt-redirect-url="/auth/forgot-password">
+                            @csrf
 								<!--begin::Heading-->
 								<div class="text-center mb-10">
 									<!--begin::Title-->
@@ -88,13 +89,32 @@ License: For each use you must have a valid license purchased only from above li
 								<!--begin::Heading-->
 								<!--begin::Input group=-->
 								<div class="fv-row mb-8">
+
 									<!--begin::Email-->
-									<input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" />
+									<input type="text" placeholder="Email" name="email" id="email" autocomplete="off" class="form-control bg-transparent" />
+
+
 									<!--end::Email-->
 								</div>
+                                @if (Session::has('error'))
+                                <div class="alert alert-danger">
+                                    {{ Session::get('error') }}
+                                </div>
+                            @endif
+                            @if (Session::has('success'))
+                                <div class="alert alert-success">
+                                    {{ Session::get('success') }}
+                                </div>
+                            @endif
+                                @error('email')
+                                        <span class="error text-danger">{{ $message }}</span>
+                                    @enderror
+                                     @error('email')
+                                        <span class="error text-success">{{ $message }}</span>
+                                    @enderror
 								<!--begin::Actions-->
 								<div class="d-flex flex-wrap justify-content-center pb-lg-0">
-									<button type="button" id="kt_password_reset_submit" class="btn btn-primary me-4">
+									<button type="submit"   class="btn btn-primary me-4">
 										<!--begin::Indicator label-->
 										<span class="indicator-label">Submit</span>
 										<!--end::Indicator label-->
@@ -103,7 +123,7 @@ License: For each use you must have a valid license purchased only from above li
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 										<!--end::Indicator progress-->
 									</button>
-									<a href="../../demo1/dist/authentication/layouts/overlay/sign-in.html" class="btn btn-light">Cancel</a>
+									<a href="auth/login" class="btn btn-light">Cancel</a>
 								</div>
 								<!--end::Actions-->
 							</form>

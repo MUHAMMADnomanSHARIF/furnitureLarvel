@@ -45,8 +45,12 @@ Route::withoutMiddleware([Permissions::class])->group(function () {
             Route::get('register', 'registerView')->name('register');
             Route::post('check-register', 'checkRegister')->name('check.register');
             Route::get('logout', 'logout')->name('logout');
+            Route::post('forgot-password', 'forgot_password')->name('forgotpassword');
 
         });
+
+        Route::get('reset/{token}', [AuthController::class, 'rest'])->name('reset');
+        Route::post('reset/{token}', [AuthController::class, 'post_reset'])->name('post.reset');
 
 
     Route::view('/Terms', 'frontend.layout.terms')->name('web.terms');
@@ -72,6 +76,9 @@ Route::withoutMiddleware([Permissions::class])->group(function () {
             Route::get('/product-by-category', 'productbycategory')->name('faq');
             Route::get('/blog', 'blog')->name('faq');
             Route::get('/blog-detail/{id}', 'blogDetail')->name('blogDetail');
+            Route::get('/forget-password', 'forgotPassword')->name('forget-password');
+            Route::view('/new', 'admin.auth.setup-new-password')->name('new');
+
 
 
             Route::post('add-to-cart', 'addtocart')->name('addtocart');

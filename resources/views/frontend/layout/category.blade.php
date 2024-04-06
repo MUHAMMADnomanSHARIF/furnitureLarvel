@@ -30,8 +30,8 @@
                     <div class="card 1 cardsp  ">
 
                         <div class=" title-white ">
-                            <p class="text-dark" style="line-height: 30px; list-style:none;"><a
-                                    href="{{ route('web.product-by-category', Str::slug($parentcategory->name)) }}">{{ $parentcategory->name }}</a>
+                            <p class="text-light" style="line-height: 30px; list-style:none;"><a
+                                   class="text-light"  href="{{ route('web.product-by-category', Str::slug($parentcategory->name)) }}">{{ $parentcategory->name }}</a>
                             </p>
                         </div>
                     </div>

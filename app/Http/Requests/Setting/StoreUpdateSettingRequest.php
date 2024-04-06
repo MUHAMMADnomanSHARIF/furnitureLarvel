@@ -25,16 +25,16 @@ class StoreUpdateSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'application_name' => 'nullable',
-            'email' => 'nullable',
-            'short_description' => 'nullable',
-            'color_one'  => 'nullable',
-            'color_two'  => 'nullable',
-            'color_three'  => 'nullable',
-            'color_four'  => 'nullable',
-            'facebook_link' => 'nullable',
-            'instagram_link' => 'nullable',
-            'gsc' => 'nullable',
+            'application_name' => 'required',
+            'email' => 'required',
+            'short_description' => 'required',
+            'color_one'  => 'required',
+            'color_two'  => 'required',
+            'color_three'  => 'required',
+            'color_four'  => 'required',
+            'facebook_link' => 'required',
+            'instagram_link' => 'required',
+            'gsc' => 'required',
             'site_index' => 'nullable',
     ];
     }

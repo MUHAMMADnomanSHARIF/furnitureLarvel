@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="col-12">
                                         <x-cento-dash-input type="text" name="code" label="Name" placeholder=" Color Code"   required
-                                            :message="$errors->first('Color code')"  />
+                                            :message="$errors->first('code')"  />
                                     </div>
 
                                     </div>

@@ -93,7 +93,7 @@
                                 <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-10">
                                     <div></div>
                                     <!--begin::Link-->
-                                    <a href="#" class="link-primary"
+                                    <a href="{{route('web.forget-password')}}" class="link-primary"
                                         data-kt-translate="sign-in-forgot-password">Forgot Password
                                         ?</a>
                                     <!--end::Link-->

@@ -148,7 +148,7 @@ margin-top: 8px;
                             @endif
                         </ul>
                     </nav>
-</div>
+                  </div>
             </div>
             <!-- <div class="col-xl-3 col-lg-4">
                 <div class="sidebar-widget widget-style-1 panel-group" id="widget-parent" aria-multiselectable="true" role="tablist">

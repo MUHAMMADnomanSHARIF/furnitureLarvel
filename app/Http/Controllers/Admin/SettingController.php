@@ -57,7 +57,7 @@ class SettingController extends Controller
 cache()->forget('settings');
         return redirect()->back()->withSuccess('Settings have been updated successfully!');
     } catch (Exception $ex) {
-        return back()->withError($ex->getMessage());
+        return back()->withError("Something went wrong");
     }
 }
 }

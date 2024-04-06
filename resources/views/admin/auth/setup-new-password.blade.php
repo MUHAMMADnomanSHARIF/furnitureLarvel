@@ -76,7 +76,8 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Content-->
 						<div class="w-md-400px">
 							<!--begin::Form-->
-							<form class="form w-100" novalidate="novalidate" id="kt_new_password_form" data-kt-redirect-url="../../demo1/dist/authentication/layouts/overlay/sign-in.html" action="#">
+							<form class="form w-100" method="post" action="" novalidate="novalidate" id="kt_new_password_form" data-kt-redirect-url="/auth/reset/$token" action="#">
+                                @csrf
 								<!--begin::Heading-->
 								<div class="text-center mb-10">
 									<!--begin::Title-->
@@ -117,9 +118,18 @@ License: For each use you must have a valid license purchased only from above li
 								</div>
 								<!--end::Input group=-->
 								<!--end::Input group=-->
+                                @if (Session::has('error'))
+                                <div class="alert alert-danger">
+                                    {{ Session::get('error') }}
+                                </div>
+                                @endif
 								<div class="fv-row mb-8">
 									<!--begin::Repeat Password-->
-									<input type="password" placeholder="Repeat Password" name="confirm-password" autocomplete="off" class="form-control bg-transparent" />
+									<input type="password" placeholder="Repeat Password" name="confirm_password" autocomplete="off" class="form-control bg-transparent"
+                                     />
+                                     @error('success')
+                                        <span class="error text-danger">{{ $message }}</span>
+                                    @enderror
 									<!--end::Repeat Password-->
 								</div>
 								<!--end::Input group=-->
@@ -134,7 +144,7 @@ License: For each use you must have a valid license purchased only from above li
 								<!--end::Input group=-->
 								<!--begin::Action-->
 								<div class="d-grid mb-10">
-									<button type="button" id="kt_new_password_submit" class="btn btn-primary">
+									<button type="submit"  id="kt_new_password_submit" class="btn btn-primary">
 										<!--begin::Indicator label-->
 										<span class="indicator-label">Submit</span>
 										<!--end::Indicator label-->

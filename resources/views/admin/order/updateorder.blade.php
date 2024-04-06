@@ -34,22 +34,22 @@
                                   <div class="col-lg-6 fv-row fv-plugins-icon-container">
                                         <label class="col-lg-8 col-form-label required fw-bold fs-6">Order NUmber</label>
                                         <input type="text" placeholder="{{$orders->order_no}}"
-                                           readonly  class="form-control form-control-lg form-control-solid mb-lg-0 mb-3">
-                                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                                           readonly  class="form-control form-control-lg form-control-solid mb-lg-0 mb-3" required>
+                                        <div class="fv-plugins-message-container invalid-feedback" ></div>
 
                                     </div>
                                     <div class="col-lg-6 fv-row fv-plugins-icon-container">
                                         <label class="col-lg-8 col-form-label required fw-bold fs-6">User Name</label>
                                         <input type="text" readonly placeholder="{{$orders->userName}}"
-                                             class="form-control form-control-lg form-control-solid mb-lg-0 mb-3">
-                                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                                             class="form-control form-control-lg form-control-solid mb-lg-0 mb-3" required>
+                                        <div class="fv-plugins-message-container invalid-feedback" ></div>
 
                                     </div>
                                       <label class="col-lg-8 col-form-label required fw-bold fs-6">product Detail</label>
                                     <div class="col-lg-12 fv-row fv-plugins-icon-container">
 
                                         <textarea type="text"  placeholder="{{ $orders->product_detail}}"
-                                            readonly  class="form-control form-control-lg form-control-solid mb-lg-0 mb-3">{{$orders->product_detail}}</textarea>
+                                            readonly  class="form-control form-control-lg form-control-solid mb-lg-0 mb-3" required>{{$orders->product_detail}}</textarea>
                                     </div>
                                         <!--end::Col-->
 
@@ -60,7 +60,7 @@
                                     <div class="col-lg-12 fv-row fv-plugins-icon-container">
 
                                         <textarea type="text" name="StreetAddress" value="{{$orders->StreetAddress}}"  placeholder="{{ $orders->StreetAddress }}"
-                                            class="form-control form-control-lg form-control-solid mb-lg-0 mb-3">{{$orders->StreetAddress}}</textarea>
+                                            class="form-control form-control-lg form-control-solid mb-lg-0 mb-3" required>{{$orders->StreetAddress}}</textarea>
 
                                     <!--end::Col-->
                                      <!--begin::Col-->
@@ -68,21 +68,21 @@
                                      <div class="col-lg-4 fv-row fv-plugins-icon-container">
                                         <label class="col-lg-8 col-form-label required fw-bold fs-6">City, State</label>
                                         <input type="text" name="state" placeholder="{{$orders->state}}" value="{{$orders->state}}"
-                                            class="form-control form-control-lg form-control-solid mb-lg-0 mb-3">
+                                            class="form-control form-control-lg form-control-solid mb-lg-0 mb-3" required>
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
 
                                     </div>
                                     <div class="col-lg-4 fv-row fv-plugins-icon-container">
                                         <label class="col-lg-8 col-form-label required fw-bold fs-6">Zipcode</label>
                                         <input type="text"  name="zipcode" value="{{$orders->zipcode}}" placeholder="{{$orders->zipcode}}"
-                                             class="form-control form-control-lg form-control-solid mb-lg-0 mb-3">
+                                             class="form-control form-control-lg  form-control-solid mb-lg-0 mb-3" required>
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
 
                                     </div>
                                     <div class="col-lg-4 fv-row fv-plugins-icon-container">
                                         <label class="col-lg-8 col-form-label required fw-bold fs-6">Phone Number</label>
                                         <input type="text" name="phoneNo" placeholder="{{$orders->phoneNo}}"
-                                           value="{{$orders->phoneNo}}"   class="form-control form-control-lg form-control-solid mb-lg-0 mb-3">
+                                           value="{{$orders->phoneNo}}"  required class="form-control form-control-lg form-control-solid mb-lg-0 mb-3">
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
 
                                     </div>
@@ -102,23 +102,23 @@
                                     <div class="col-lg-6 fv-row fv-plugins-icon-container">
                                         <label class="col-lg-8 col-form-label required fw-bold fs-6">Total Price</label>
                                         <input type="text" readonly   placeholder="{{$orders->totalprice}}"
-                                            class="form-control form-control-lg form-control-solid mb-lg-0 mb-3">
+                                            class="form-control form-control-lg form-control-solid mb-lg-0 mb-3" required>
 
                                     </div>
                                     <div class="col-lg-6 fv-row fv-plugins-icon-container">
                                         <label class="col-lg-8 col-form-label required fw-bold fs-6">User Email</label>
                                         <input type="text" readonly placeholder="{{$mail}}"
-                                            class="form-control form-control-lg form-control-solid mb-lg-0 mb-3">
+                                            class="form-control form-control-lg form-control-solid mb-lg-0 mb-3" required>
                                     </div>
                                     <div class="col-lg-6 fv-row fv-plugins-icon-container">
                                         <label class="col-lg-8 col-form-label required fw-bold fs-6">Payment Method</label>
                                         <input type="text" readonly  placeholder="{{$orders->payment_method}}"
-                                            class="form-control form-control-lg form-control-solid mb-lg-0 mb-3">
+                                            class="form-control form-control-lg form-control-solid mb-lg-0 mb-3" required>
                                     </div>
                                     <div class="col-lg-6 fv-row fv-plugins-icon-container">
                                         <label class="col-lg-8 col-form-label required fw-bold fs-6">Payment Method</label>
                                         <input type="text" readonly  placeholder="{{$orders->payment_status}}"
-                                            class="form-control form-control-lg form-control-solid mb-lg-0 mb-3">
+                                            class="form-control form-control-lg form-control-solid mb-lg-0 mb-3" required>
                                     </div>
 
 

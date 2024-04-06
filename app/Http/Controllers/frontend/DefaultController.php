@@ -12,6 +12,7 @@ use App\Models\ParentCategory;
 use App\Models\Product;
 use App\Models\productSize;
 use App\Models\User;
+use Exception;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -491,7 +492,7 @@ public function orderedit(order $id):View
  {
 
 
-
+    try {
     $id =$request->id;
     $order= order::where('id',$id)->first();
 
@@ -503,7 +504,10 @@ public function orderedit(order $id):View
 
     $order->save();
     return redirect()->back()->with('success', 'Delivery status updated successfully');
-    }
+} catch (Exception $ex) {
+    return back()->withError("Something went wrong");
+}
+}
 
     public function blog(){
         $blogs = Blog::orderBy('created_at', 'desc')->paginate(8);
@@ -527,6 +531,11 @@ public function orderedit(order $id):View
         ]);
 
 
+    }
+
+    public function forgotPassword(){
+
+        return view('admin.auth.forgot-password');
     }
 
 

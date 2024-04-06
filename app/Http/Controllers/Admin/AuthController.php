@@ -7,12 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests\User\LoginRequest;
 use App\Http\Requests\User\RegisterUserRequest;
 use App\Models\User;
+use App\Mail\ForgotPasswordMail;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Str;
+
 
 class AuthController extends Controller
 {
@@ -69,8 +73,15 @@ class AuthController extends Controller
 
         try {
             if (Auth::attempt($validatedUser)) {
-                $previousUrl = $request->input('previous_url', '/user/index'); // Get the previous URL from the request
-                return redirect()->intended($previousUrl); // Redirect to the previous URL
+                // Check if the previous URL is from 'forget' or 'login', then redirect to '/user/index'
+                $previousUrl = $request->input('previous_url');
+
+                if ($previousUrl && (strpos($previousUrl, '/auth/login') !== false || strpos($previousUrl, 'reset/{token}') !== false)) {
+                    return redirect('/user/index');
+                }
+
+                // If not from 'forget' or 'login', redirect to the intended URL
+                return redirect()->intended($previousUrl ? $previousUrl : '/user/index');
             } else {
                 return back()->withError('Either the email or the password is incorrect');
             }
@@ -96,5 +107,76 @@ class AuthController extends Controller
         return redirect()->route('auth.login');
     }
 
+    public function forgot_password(Request $requset)
+    {
 
+
+        $user = User::where('email', '=', $requset->email)->first();
+        try {
+            if (!empty($user)) {
+                $user->remember_token = Str::random(40);
+                $user->save();
+
+
+                Mail::to($user->email)->send(new ForgotPasswordMail($user));
+                return redirect()->back()->with('success', 'We have e-mailed your password reset link!');
+            } else {
+                return redirect()->back()->withError('Email not found');
+            }
+        } catch (Exception $ex) {
+            // Log the error or handle it as needed
+            return back()->withError($ex->getMessage());
+        }
+
+
+
+
+    }
+
+    public function rest($token){
+
+        $user = User::where('remember_token', '=', $token)->first();
+        if(!empty($user))
+        {
+            $data['user'] = $user;
+            return view('admin.auth.setup-new-password', $data);
+        }
+        else{
+            abort(404);
+        }
+
+    }
+
+    public function post_reset($token, Request $request){
+
+
+        $user = User::where('remember_token', '=', $token)->first();
+        if(!empty($user)){
+
+
+        if($request->password == $request->confirm_password){
+        $user->password = $request->password;
+
+        if(!empty($user->email_verified_at )){
+            $user->email_verified_at = date('Y-m-d H:i:s');
+        }
+
+        $user->remember_token = Str::random(40);
+
+        $user->save();
+
+        return redirect('auth/login')->with('success', 'Passwords Successfully rest');
+    }
+    else{
+        return redirect()->back()->with('error', 'Passwords do not match');
+    }
 }
+    else{
+       abort(404);
+    }
+
+    }
+}
+
+
+

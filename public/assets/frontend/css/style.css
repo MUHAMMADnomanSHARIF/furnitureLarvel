@@ -5,8 +5,7 @@
     --main-color:
         background-image: linear-gradient(rgb(255, 255, 0), rgb(237, 121, 2));
     /* Replace with your desired color code */
-    --section-background:
-    linear-gradient(rgb(255, 255, 0), rgb(237, 121, 2));
+
 
 }
 
@@ -734,7 +733,7 @@ input[type="number"]::-webkit-outer-spin-button {
     line-height: 35px;
     margin: 0 0 22px;
     text-transform: uppercase;
-   
+
 }
 .owl-item.active .single-slide h2 {
     -webkit-animation: 1500ms ease-in-out 0s normal none 1 running fadeInLeft;
@@ -1188,7 +1187,7 @@ input[type="number"]::-webkit-outer-spin-button {
     border-top: 1px solid #e0e0e3;
     font-size: 14px;
     padding: 30px 0;
-    background-color: #272424;
+    background-color: #212529;
     color: white;
 }
 .footer-bottom span,
