@@ -65,6 +65,9 @@
         .service-icon {
             font-size: 2rem;
         }
+        p{
+            font-size: large;
+        }
 
         /* Footer Styling */
 
@@ -238,20 +241,7 @@
         </div>
     </section>
 
-    <section class="introduction-section">
-        <div class="container-about">
-            <h2>Supremacy of furnimart</h2>
-            <p>Furnimart offers the best beds, sofas, wardrobes and accessories to make your life easier. Our experts are
-                highly trained in selecting and guiding you to choose the best furniture for your space. They decorate every
-                corner of your space with beautiful furniture colors. Our aim is not only to illustrate the area but also to
-                maintain your health. We design the best bed frame that helps you adjust easily and provides you with
-                storage space to manage the room accessories. We also offer comfortable mattresses that complete your
-                furniture set. Our experts are always available to help you; you only need to make a call. So what are you
-                waiting for? Contact us to design your area with the best furniture.
-            </p>
 
-        </div>
-    </section>
     <!-- About Skill Area End -->
 @endsection
 

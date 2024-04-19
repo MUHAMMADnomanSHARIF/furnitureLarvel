@@ -82,9 +82,11 @@ class StripePaymentController extends Controller
         // Handle exceptions, e.g., Stripe API errors
         Session::flash('error', 'Payment failed: ' . $e->getMessage());
     }
-
+    $user= Auth::user()->email;
     // Redirect back to the shop page
-    return redirect()->route('web.index');
+    return view ('frontend.thankyou')->with([
+        'user' => $user
+    ]);
 }
 
     /**

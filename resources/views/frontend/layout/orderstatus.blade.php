@@ -1,4 +1,3 @@
-
 @extends('frontend.layout.app')
 
 @section('CoustomCSS')
@@ -12,14 +11,12 @@
         <nav aria-label="breadcrumb">
             <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                <li class="breadcrumb-item active" aria-current="page">Order status</li>
             </ul>
         </nav>
     </div>
 </div>
 <!-- Breadcrumb Area End -->
-
-@if(session('cart'))
 <!-- Checkout Area Start -->
 <div class="checkout-area pt-80">
     <div class="container">
@@ -119,8 +116,6 @@
                                           <?php $total += $details['price'] * $details['quantity'] ?>
                                           @endforeach
                                           @endif
-
-
                                           @foreach(session('cart') as $id => $details)
                                                 <tr>
                                                     <td class="p-name">{{$details['name']}}</td>
@@ -129,7 +124,6 @@
                                                     <td class="p-total alignright">${{$details['price']}}</td>
                                                 </tr>
                                             @endforeach
-
                                             </tbody>
                                             <tfoot>
                                                 <tr>
@@ -199,19 +193,6 @@
     </div>
 </div>
 <!-- Checkout Area End -->
-@else
-
-
-<div class="container-fluid align-center d-flex flex-center" style="padding: 100px 0px 200px 400px;">
-    <div>
-        <h1 class="text-center text-dark">Your Cart is Emty</h1>
-
-
-<button align="center" class="btn btn-primary btn-larg ml-4 w-100 h-20 mt-3"  onclick="location.href='/shop'">Go to Shop</button>
-
-</div>
-</div>
-@endif
 
 
 @endsection
@@ -219,5 +200,3 @@
 @section('coustomJS')
 
 @endsection
-
-

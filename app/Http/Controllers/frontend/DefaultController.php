@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\frontend;
 
+use App\DataTables\NewsLetterDataTable;
 use App\DataTables\OrderDataTable;
 use App\Http\Controllers\Controller;
+use App\Mail\orderConfirmMail;
 use App\Models\Blog;
 use App\Models\ChildCategory;
 use App\Models\Color;
+use App\Models\newsletter;
 use App\Models\order;
 use App\Models\ParentCategory;
 use App\Models\Product;
@@ -373,6 +376,7 @@ return view('frontend.layout.productdetail')->with([
       ]);
         print_r($validation);
         $Fname=$request->input('Fname');
+        $email = $request->input('email');
         $Lname=$request->input('Lname');
         $address=$request->input('address');
         $city=$request->input('city');
@@ -393,8 +397,8 @@ return view('frontend.layout.productdetail')->with([
                 $count=$count +1 ;
                 $total += $details['price'] * $details['quantity'];
                 $order_details=$order_details.'<br>'.
-                ('Product Name:'.$details["name"].', Quantity: '.$details["quantity"].
-                '<br> Price:'.$details["price"].',Size:'.$details["size"].',Color:'.$details["color"]);
+                ('Product Name:'.$details["name"].' <br> Quantity: '.$details["quantity"].
+                '<br> Price:'.$details["price"].'<br> Size:'.$details["size"].'<br> Color:'.$details["color"]);
             }
     }
     $Amount =$total;
@@ -406,6 +410,7 @@ return view('frontend.layout.productdetail')->with([
 /*Order Details Ends Here*/
      $Order = new order();
 
+     $user =  User::where('id', $userid);
      $Order->userid=$userid;
      $Order->userName=$fullname;
      $Order->StreetAddress=$address;
@@ -420,42 +425,65 @@ return view('frontend.layout.productdetail')->with([
 
      if($Pmethod=='Stripe')
      {
+        $welcomemessage='Hello '.$name.'<br>';
+        $emailbody='Your Order Was Placed Successfully<br>
+        <p>Thank you for your order. We’ll send a confirmation when your order ships. Your estimated delivery date is 3-5 working days. If you would like to view the status of your order or make any changes to it, please visit Your Orders on <a href="https://www.gainaloe.com">Gainaloe.com</a></p>
+        <h4>Order Details: </h4><p> Order TrakingNo:'.$Order->order_no.$O_Details.'</p>
+         <p><strong>Delivery Address:</strong>
+       '.$address.'</p>
+        <p> <strong>Total Amount:</strong>
+        '.$Amount.'</p>
+         <p><strong>Payment Method:</strong>'.$Pmethod.'</p>';
+        $emailcontent=array(
+            'WelcomeMessage'=>$welcomemessage,
+            'emailBody'=>$emailbody
+
+            );
+            Mail::send(array('html' => 'emails.order'), $emailcontent, function($message) use
+            ($loginid, $name,$id)
+            {
+                $message->to($loginid, $name)->subject
+                ('Your furnimart.co.uk order '.$id.' is Confirmed');
+                $message->from('muhammadnoman0786@hotmail.com','furnimart.co.uk');
+
+            });
         return redirect("stripe/$id");
      }
      else
      {
 
 
-            $welcomemessage='Hello '.$name.'<br>';
-            $emailbody='Your Order Was Placed Successfully<br>
-            <p>Thank you for your order. We’ll send a confirmation when your order ships. Your estimated delivery date is 3-5 working days. If you would like to view the status of your order or make any changes to it, please visit Your Orders on <a href="https://www.gainaloe.com">Gainaloe.com</a></p>
-            <h4>Order Details: </h4><p> Order No:'.$id.$O_Details.'</p>
-             <p><strong>Delivery Address:</strong>
-           '.$Delivery_Address.'</p>
-            <p> <strong>Total Amount:</strong>
-            '.$Amount.'</p>
-             <p><strong>Payment Method:</strong>'.$Pmethod.'</p>';
-            $emailcontent=array(
-                'WelcomeMessage'=>$welcomemessage,
-                'emailBody'=>$emailbody
+        $welcomemessage='Hello '.$name.'<br>';
+        $emailbody='Your Order Was Placed Successfully<br>
+        <p>Thank you for your order. We’ll send a confirmation when your order ships. Your estimated delivery date is 3-5 working days. If you would like to view the status of your order or make any changes to it, please visit Your Orders on <a href="https://www.gainaloe.com">Gainaloe.com</a></p>
+        <h4>Order Details: </h4><p> Order trakingNo:'.$Order->order_no.$O_Details.'</p>
+         <p><strong>Delivery Address:</strong>
+       '.$address.'</p>
+        <p> <strong>Total Amount:</strong>
+        '.$Amount.'</p>
+         <p><strong>Payment Method:</strong>'.$Pmethod.'</p>';
+        $emailcontent=array(
+            'WelcomeMessage'=>$welcomemessage,
+            'emailBody'=>$emailbody
 
-                );
-                Mail::send(array('html' => 'emails.order_email'), $emailcontent, function($message) use
-                ($loginid, $name,$id)
-                {
-                    $message->to($loginid, $name)->subject
-                    ('Your ouction.pk order '.$id.' is Confirmed');
-                    $message->from('muhammadnoman0786@hotmail.com','ouction.pk');
+            );
+            Mail::send(array('html' => 'emails.order'), $emailcontent, function($message) use
+            ($loginid, $name,$id)
+            {
+                $message->to($loginid, $name)->subject
+                ('Your ouction.pk order '.$id.' is Confirmed');
+                $message->from('muhammadnoman0786@hotmail.com','furnimart.co.uk');
 
-                });
-
+            });
                 Session::forget('cart');
                 Session::forget('discount');
                 Session::forget('promocode');
                 session()->flash('success', 'Session data  is Cleared');
 
 
-        return redirect("/Orders")->with('status','Order Placed Succesfully!');
+        return view('frontend.thankyou')->with([
+            'email' => $email
+        ]);
      }
 
 
@@ -537,6 +565,72 @@ public function orderedit(order $id):View
 
         return view('admin.auth.forgot-password');
     }
+
+    public function trackorder(Request $request){
+        $request->validate([
+            'orderno' => 'required|string', // Example validation rule (adjust as needed)
+        ]);
+
+
+
+        $trackor = $request->orderno;
+
+        $order = order::where('order_tracker', $trackor)->first();
+        if (!$order) {
+           Session::put('val', 'ORderNotFout');
+            return view('frontend.ordertrack');
+        }else{
+
+        // Get the order creation date (updated_at timestamp)
+        $orderCreationDate = $order->updated_at;
+
+        // Calculate the date 5 days after the order creation date
+        $dateAfter5Days = new \DateTime($orderCreationDate);
+        $dateAfter5Days->modify('+5 days');
+
+        // Format the calculated date as a string
+        $formattedDate = $dateAfter5Days->format('Y-m-d');
+
+        return view('frontend.trackorder')->with([
+            'order' => $order,
+            'formattedDate' => $formattedDate
+        ]);
+
+    }
+
+
+
+
+    }
+
+    public function newsletter(Request $request) {
+        $request->validate([
+            'email' => 'required|email', // Example validation rule (adjust as needed)
+        ]);
+
+        $email = $request->email;
+
+        // Check if the email already exists in the database
+        $existingSubscriber = Newsletter::where('email', $email)->first();
+
+        if ($existingSubscriber) {
+            // Email already exists, return back with alert
+            return redirect()->back()->with('alert', 'You are already subscribed to our newsletter');
+        }
+
+        // Email does not exist, proceed to save it
+        $news = new Newsletter();
+        $news->email = $email;
+        $news->save();
+
+        return redirect()->back()->with('alert', 'Your email has been added to our mailing list');
+    }
+
+
+
+
+
+
 
 
 

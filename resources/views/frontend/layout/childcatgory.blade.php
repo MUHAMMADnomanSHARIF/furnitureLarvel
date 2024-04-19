@@ -73,7 +73,7 @@
                         <span class="hot-sale">sale</span>
                         <div class="product-image-hover">
                             <a href="shop.html">
-                                <img class="primary-image" src="{{$product->getFirstMediaUrl('product.image')}}" alt="">
+                                <img class="primary-image" src="{{$product->getFirstMediaUrl('product.image')}}" alt="" height="250px">
 
                             </a>
                             <div class="product-hover">

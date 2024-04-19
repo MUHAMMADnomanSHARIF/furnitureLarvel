@@ -36,7 +36,7 @@ class ParentCategoryDataTable extends DataTable
      */
     public function query(ParentCategory $model): QueryBuilder
     {
-        return $model->newQuery()->select('id', 'name', 'description');
+        return $model->newQuery()->select('id', 'name');
     }
 
     /**
@@ -68,7 +68,6 @@ class ParentCategoryDataTable extends DataTable
         $columns = [
             Column::make('id'),
             Column::make('name'),
-            Column::make('description'),
 
         ];
 
