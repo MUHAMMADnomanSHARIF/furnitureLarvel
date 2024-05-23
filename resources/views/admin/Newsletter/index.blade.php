@@ -21,13 +21,9 @@
                     <!--begin::Header-->
                     <div class="card-header border-0 pt-5" style="user-select: auto;">
                         <h3 class="card-title align-items-start flex-column" style="user-select: auto;">
-                            <span class="card-label fw-bold fs-3 mb-1" style="user-select: auto;">All Parent Categories</span>
+                            <span class="card-label fw-bold fs-3 mb-1" style="user-select: auto;">News Letter</span>
                         </h3>
-                        <div class="d-grid gap-2 align-items-center py-1 d-flex">
-                            @can('parent.category.create')
-                                <a href="{{ route('parent.category.create') }}" class="btn btn-sm btn-primary">Add New Category</a>
-                            @endcan
-                        </div>
+
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->

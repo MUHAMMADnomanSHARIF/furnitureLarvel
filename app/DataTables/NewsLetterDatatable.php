@@ -2,16 +2,17 @@
 
 namespace App\DataTables;
 
-use App\Models\ChildCategory;
+use App\Models\newsletter;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
 
-class ChildCategoryDatatable extends DataTable
+class NewsLetterDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,28 +23,20 @@ class ChildCategoryDatatable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'admin.child-category.datatables_actions')
-            ->addColumn('parent_category_id', function (ChildCategory $childCategory) {
-                return $childCategory->parentCategory->name;
-            })
-
-
-            ->addColumn('image', function (ChildCategory $childCategory) {
-                return '<img src="' . asset($childCategory->getFirstMediaUrl('childCategory.image')) . '" class="image-input-wrapper rounded-circle w-50px h-50px" alt="alt text">';
-            })
-            ->rawColumns(['image', 'edit', 'delete', 'action'])
+            ->addColumn('action', 'admin.Newsletter.datatables_actions')
+            ->rawColumns(['delete','action'])
             ->setRowId('id');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\User $model
+     * @param \App\Models\newsletter $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(ChildCategory $model): QueryBuilder
+    public function query(newsletter $model): QueryBuilder
     {
-        return $model->newQuery()->select('id', 'name', 'parent_category_id');
+        return $model->newQuery()->select('id', 'email');
     }
 
     /**
@@ -54,7 +47,7 @@ class ChildCategoryDatatable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('child-category-table')
+            ->setTableId('news-letter-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
@@ -74,14 +67,20 @@ class ChildCategoryDatatable extends DataTable
     {
         $columns = [
             Column::make('id'),
-            Column::make('image'),
-            Column::make('name'),
-            Column::make('parent_category_id')->title('Parent Category')
+            Column::make('email')
+
+
+
         ];
 
-        if (Auth::user()->can('child.category.edit') || Auth::user()->can('child.category.delete')) {
-            $columns = array_merge($columns, [Column::make('action')]);
+
+// dd(Auth::user()->can('news.letter'));
+        if(Auth::user())
+        {
+            $columns = array_merge($columns,[Column::make('action')]);
         }
+
+
 
         return $columns;
     }
@@ -93,6 +92,6 @@ class ChildCategoryDatatable extends DataTable
      */
     protected function filename(): string
     {
-        return 'ChildCategory_' . date('YmdHis');
+        return 'newsletter_' . date('YmdHis');
     }
 }

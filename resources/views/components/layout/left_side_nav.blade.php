@@ -406,6 +406,21 @@
                 </div>
                 <!--end:Menu item-->
                  <!--begin:Menu item-->
+                 <div class="menu-item menu-accordion ">
+                    <!--begin:Menu link-->
+                    <a class="menu-link {{Request::route()->getName()=='news.letter'?'active':''}}"
+                        href="{{ route('news.letter') }}">
+                        <span class="menu-bullet">
+                            <span class="svg-icon svg-icon-2">
+                            <svg width="64px" height="64px" viewBox="0 0 20.00 20.00" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff" stroke="#ffffff" transform="matrix(-1, 0, 0, 1, 0, 0)rotate(0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>email [#b0abab]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke-width="0.62" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-340.000000, -922.000000)" fill="#b0abab"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M294,774.474 L284,765.649 L284,777 L304,777 L304,765.649 L294,774.474 Z M294.001,771.812 L284,762.981 L284,762 L304,762 L304,762.981 L294.001,771.812 Z" id="email-[#b0abab]"> </path> </g> </g> </g> </g></svg>
+                            </span>
+                        </span>
+                        <span class="menu-title">Subscribed Emails</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <!--end:Menu item-->
+                 <!--begin:Menu item-->
                  <div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1">
                                 <!--begin:Menu link-->
                                 <span class="menu-link">

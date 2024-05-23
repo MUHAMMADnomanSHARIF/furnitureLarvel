@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\productSizeController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StripePaymentController;
 use App\Http\Controllers\frontend\DefaultController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PostController;
 use App\Http\Middleware\Permissions;
 use Illuminate\Support\Facades\Route;
@@ -52,15 +53,16 @@ Route::withoutMiddleware([Permissions::class])->group(function () {
         Route::get('reset/{token}', [AuthController::class, 'rest'])->name('reset');
         Route::post('reset/{token}', [AuthController::class, 'post_reset'])->name('post.reset');
 
+        Route::get('news-letter', [NewsletterController::class,'newsletterindex'])->name('news.letter');
+        Route::get('delete/{id}', [NewsletterController::class,'destroy'])->name('letter.delete');
 
     Route::view('/Terms', 'frontend.layout.terms')->name('web.terms');
     Route::view('/Privacy-Policy', 'frontend.layout.privacypolicy')->name('web.privacy');
     Route::view('/FAQ', 'frontend.layout.faq')->name('web.faq');
-    Route::view('/Contact-Us', 'frontend.layout.contact');
+    Route::view('/Contact-Us', 'frontend.layout.contact')->name('contact');
 
 
     Route::controller(DefaultController::class)
-        ->prefix('')
         ->name('web.')
         ->group(function () {
             Route::get('', 'home')->name('index');
@@ -74,10 +76,16 @@ Route::withoutMiddleware([Permissions::class])->group(function () {
             Route::view('/Privacy-Policy', 'frontend.layout.privacypolicy')->name('privacy');
             Route::view('/FAQ', 'frontend.layout.faq')->name('faq');
             Route::get('/product-by-category', 'productbycategory')->name('faq');
-            Route::get('/blog', 'blog')->name('faq');
+            Route::get('/blog', 'blog')->name('blog');
             Route::get('/blog-detail/{id}', 'blogDetail')->name('blogDetail');
             Route::get('/forget-password', 'forgotPassword')->name('forget-password');
             Route::view('/new', 'admin.auth.setup-new-password')->name('new');
+            Route::view('/thankyou', 'frontend.thankyou')->name('thanks');
+            Route::post('/track', 'trackorder')->name('tracker');
+            route::view('/ordertrack','frontend.ordertrack')->name('ordertrack');
+            Route::post('newsletter', 'newsletter')->name('newsletter');
+
+            route::view('/register','frontend.layout.register')->name('ordertrack');
 
 
 
@@ -281,4 +289,8 @@ Route::middleware('auth')->group(function () {
             Route::get('delete/{blog}', 'destroy')->name('delete');
         });
 
+});
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+     dd("storage is linke");
 });

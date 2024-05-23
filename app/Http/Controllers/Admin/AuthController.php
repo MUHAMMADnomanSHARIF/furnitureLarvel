@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\URL;
 
 
 class AuthController extends Controller
@@ -102,6 +103,8 @@ class AuthController extends Controller
 
         $request->session()->invalidate();
 
+        $previousUrl =URL::previous();
+        return redirect()->intended($previousUrl);
         $request->session()->regenerateToken();
 
         return redirect()->route('auth.login');

@@ -51,7 +51,7 @@
 
  <span class="icon"><i class="fas fa-shopping-cart"></i></span>&nbsp;<sup>{{ count((array) session('cart')) }}</sup>
  <span class="icon-text"> <a class="cart-info" href="{{ url('/cart') }}">cart</a></span>
- <div class="dropdown-menu" id="addcart">
+ <div class="dropdown-menu logindown"   id="addcart">
      <div class="card-body p-0">
          <?php $total = 0; ?>
          @foreach ((array) session('cart') as $id => $details)

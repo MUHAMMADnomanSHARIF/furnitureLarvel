@@ -74,7 +74,7 @@
         }
 
         .section-container p {
-            font-size: 14px;
+            font-size: 20px;
         }
 
         @media only screen and (max-width: 676px) {
@@ -118,7 +118,7 @@
                         <h2>Beautify your living space</h2>
                         <h3>Sofas</h3>
                         <p>Decor your area with a lavish sofa</p>
-                        <a href="shop.html" class="banner-btn">Shop now</a>
+                        <a href="{{ url('/shop') }}" class="banner-btn">Shop now</a>
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                         <h2>Lounge Chairs</h2>
                         <p class="text-white">Increase the elegance with lounge chairs
                         </p>
-                        <a href="shop.html" class="banner-btn">Shop now</a>
+                        <a href="{{ url('/shop') }}" class="banner-btn">Shop now</a>
                     </div>
                 </div>
             </div>
@@ -156,13 +156,13 @@
             {{-- Adjusted classes to center one category if there's only one --}}
             @foreach ($childcategory as $child)
                 <div class="col-md-{{ count($childcategory) === 1 ? '8' : '2' }} col-sm-6 col-6">
-                    <div class="card border-0" onclick="location.href='/product-by-child-category/{{ $child->id }}'">
+                    <div class="card border-0 categoryh" onclick="location.href='/product-by-child-category/{{ $child->id }}'">
                         <div class="text-center">
                             <img src="{{ $child->getFirstMediaUrl('childCategory.image') }}"
                                 class="rounded-circle cat-image" alt="cat-image">
                         </div>
                         <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
-                            <h5 class="card-title">{{ $child->name }}</h5>
+                            <h5 class="card-title categoryh">{{ $child->name }}</h5>
                         </div>
                     </div>
                 </div>
@@ -189,7 +189,7 @@
         </div>
         <div class="container">
             <div class="custom-row">
-                <div class="product-carousel owl-carousel carousel-style-one">
+                <div class="product-carousel owl-carousel carousel-style-tow">
 
 
 
@@ -205,7 +205,7 @@
                                 <span class="hot-sale">sale</span>
                                 <div class="product-image-hover">
                                     <a href="{{ url('product-detail/' . $products->name) }}">
-                                        <img class="primary-image" src="{{ $products->getFirstMediaUrl('product.image') }}"
+                                        <img class="primary-image" src="{{ $products->getFirstMediaUrl('product.image') }}" width="200px" height="200px"
                                             alt="">
                                     </a>
                                     <div class="product-hover">
@@ -254,7 +254,7 @@
                     <div class="row">
                         <div class="col-md-4 grid-item position-relative">
                             <!-- Image with link -->
-                            <a class="banner-image" href="shop.html">
+                            <a class="banner-image" href="{{ url('/shop') }}">
                                 <img src="assets/slider/6.png" alt="">
                                 <span class="banner-hover-text position-absolute w-100 text-center">Bed
                                     collection</span>
@@ -273,7 +273,7 @@
 
                         <div class="col-md-4 grid-item position-relative">
                             <!-- Image with link -->
-                            <a class="banner-image" href="shop.html">
+                            <a class="banner-image" href="{{ url('/shop') }}">
                                 <img src="assets/slider/4.png" alt="">
                                 <span class="banner-hover-text position-absolute w-100 text-center">Sofa
                                     collection</span>
@@ -290,7 +290,7 @@
                         </div>
                         <div class="col-md-4 grid-item position-relative">
                             <!-- Image with link -->
-                            <a class="banner-image" href="shop.html">
+                            <a class="banner-image" href="{{ url('/shop') }}">
                                 <img src="assets/slider/5.png" alt="">
                                 <span class="banner-hover-text position-absolute w-100 text-center">Wardrobe
                                     collection</span>
@@ -445,7 +445,7 @@
                     @foreach ($blogs as $blog)
                         <?php
                         $date = $blog->created_at; // Your date from the database
-                        
+
                         // Extract the day and month from the date
                         $day = date('d ', strtotime($date)); // Format the date as "21 February"
                         $month = date('M ', strtotime($date));

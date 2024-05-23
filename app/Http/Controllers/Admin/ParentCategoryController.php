@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\ParentCategoryDataTable;
+use App\DataTables\ParentCategoryDatatable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ParentCategory\StoreCategoryRequest;
 use App\Http\Requests\ParentCategory\UpdateCategoryRequest;
@@ -19,7 +19,7 @@ class ParentCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ParentCategoryDataTable $parentCategoryDataTable)
+    public function index(ParentCategoryDatatable $parentCategoryDataTable)
     {
         return $parentCategoryDataTable->render('admin.parent-category.index',[$parentCategoryDataTable]);
     }

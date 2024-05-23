@@ -1,26 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-use App\DataTables\ColorDatatable;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Color;
-use App\Http\Requests\Color\StoreRequest;
+use App\DataTables\NewsLetterDatatable;
+use App\Models\newsletter;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
-class ColorController extends Controller
+class NewsletterController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ColorDatatable $colorDatable)
+    public function newsletterindex(NewsLetterDatatable $newsLetterDataTable)
     {
-        return $colorDatable->render('admin.color-pallet.index',[$colorDatable]);
+        return $newsLetterDataTable->render('admin.Newsletter.index',[$newsLetterDataTable]);
     }
 
     /**
@@ -28,9 +25,9 @@ class ColorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create():View
+    public function create()
     {
-        return view("admin.color-pallet.create");
+        //
     }
 
     /**
@@ -39,25 +36,18 @@ class ColorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request):RedirectResponse
+    public function store(Request $request)
     {
-        try {
-            $color = Color::create($request->validated());
-          if($color){
-               return redirect()->route('color.index')->withSuccess("Color Add Successfully");
-          }
-       } catch (Exception $ex) {
-           return back()->withError("Something went wrong");
-       }
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\newsletter  $newsletter
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(newsletter $newsletter)
     {
         //
     }
@@ -65,10 +55,10 @@ class ColorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\newsletter  $newsletter
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(newsletter $newsletter)
     {
         //
     }
@@ -77,10 +67,10 @@ class ColorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\newsletter  $newsletter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, newsletter $newsletter)
     {
         //
     }
@@ -88,15 +78,14 @@ class ColorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\newsletter  $newsletter
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Color $color):RedirectResponse
+    public function destroy(newsletter $newsletter):RedirectResponse
     {
         try {
-            $color->delete();
-
-            return back()->withSuccess("Color deleted successfully");
+            $newsletter->delete();
+            return back()->withSuccess("NewsLetter deleted successfully");
         } catch (Exception $ex) {
             return back()->withError('something went wrong');
         }
