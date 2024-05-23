@@ -64,6 +64,9 @@
         .service-icon {
             font-size: 2rem;
         }
+        p{
+            font-size: large;
+        }
 
         /* Footer Styling */
 

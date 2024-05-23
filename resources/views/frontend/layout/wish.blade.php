@@ -37,7 +37,7 @@
                               <span class="icon"><i class="fas fa-heart">&nbsp;<sup>{{ count((array) session('wish')) }}</sup></i></span>
                             <span class="icon-text">Wishlist</span>
                             <!-- Dropdown content -->
-                            <div class="dropdown-menu" >
+                            <div class="dropdown-menu logindown" >
                                 <div class="card-body p-0">
 
                                     <div>

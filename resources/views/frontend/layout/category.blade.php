@@ -75,7 +75,7 @@
                                 <div class="product-image-hover">
                                     <a href="shop.html">
                                         <img class="primary-image" src="{{ $product->getFirstMediaUrl('product.image') }}"
-                                            alt="">
+                                            alt="" height="250px" >
 
                                     </a>
                                     <div class="product-hover">

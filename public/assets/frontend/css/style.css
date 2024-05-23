@@ -3,7 +3,8 @@
 
 :root {
     --main-color:
-        background-image: linear-gradient(rgb(255, 255, 0), rgb(237, 121, 2));
+        background-color: #333;
+
     /* Replace with your desired color code */
 
 
@@ -485,7 +486,7 @@ input[type="number"] {
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
     visibility: hidden;
-    width: 210px;
+
     z-index: 999;
     background: #fff;
 }
@@ -543,7 +544,8 @@ input[type="number"] {
 .main-menu > nav > ul > li.megamenu > ul > li {
     float: left;
     margin-right: 35px;
-    width: 245px;
+    width: 100px;
+
 }
 .main-menu > nav > ul > li.megamenu > ul li:last-child {
     margin: 0;
@@ -4168,7 +4170,7 @@ h3.login-title {
     background: var(--section-background) ;
 }
 .cardsp:hover {
-    box-shadow: 2px 2px 50px rgba(235, 231, 12, 0.88);
+    box-shadow: 2px 2px 50px rgba(130, 187, 201, 0.88);
 }
 
 .cardss .card_image {
@@ -4241,11 +4243,10 @@ h3.login-title {
     .card-list1 {
         align-items: center;
         display: grid;
-        width: 100%;
-
-        grid-template-columns: repeat(
-            auto-fill,
-            minmax(min(100%, 139px), 116px)
+        width: 80%;
+        grid-template-columns: repeat(auto-fill, minmax(min(105%, 79px), 80px));
+        justify-content: space-between;
+        align-content: center;
         );
     }
     .cards_title {

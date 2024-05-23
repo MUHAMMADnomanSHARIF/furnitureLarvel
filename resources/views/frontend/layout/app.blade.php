@@ -24,8 +24,7 @@
     <meta name="google-site-verification" content="{{ $setting['gsc'] }}">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" src="
-    ">
+    <link rel="shortcut icon" type="image/x-icon" src="{{ asset('images/logo.png') }}">
 
     <!-- all css here -->
     <link rel="stylesheet" href=" {{ asset('assets/frontend/css/bootstrap.min.css') }}">
@@ -168,7 +167,7 @@
         <!-- Mainmenu Area Start -->
 
         <!-- Header Middle Area Start -->
-        <div class="header-middle-area">
+        <div class="header-middle-area ">
             <div class="container-fluid">
                 <div class="row align-items-center">
 
@@ -258,17 +257,17 @@
                         <nav>
                             <ul>
 
-                                <li class="{{ Request::route()->getName() == 'index' ? 'active' : '' }}"><a
+                                <li class="{{ Request::route()->getName() == 'web.index' ? 'active' : '' }}"><a
                                         href="{{ url('') }}">Home</a></li>
 
                                 <li
-                                    class="megamenu {{ Request::route()->getName() == 'web.allcategories' ? 'active' : '' }}">
+                                    class="megamenu {{ Request::route()->getName() == 'web.allcategories' ? 'active' : '' }} ">
                                     <a href="{{ url('/allcategories') }}">Categories</a>
-                                    <ul>
+                                    <ul  class="d-flex flex-row right col-md-12  text-wrap">
                                         @foreach (\App\Models\ParentCategory::take(7)->get() as $parent)
-                                            <li>
-                                                <ul>
-                                                    <li onclick="location.href='/product-by-category/{{ $parent->name }}'"
+                                            <li   class="d-inine">
+                                                <ul >
+                                                    <li class="col-md-2"  onclick="location.href='/product-by-category/{{ $parent->name }}'"
                                                         style="cursor: pointer;">{{ $parent->name }}</li>
 
 
@@ -282,15 +281,19 @@
                                             </li>
                                         @endforeach
 
+
+
                                     </ul>
+
+
                                 </li>
-                                <li class="{{ Request::route()->getName() == 'web.allproduct' ? 'active' : '' }}"><a
+                                <li class="{{ Request::route()->getName() == 'web.shop' ? 'active' : '' }}"><a
                                         href="{{ url('/shop') }}">Shop</a></li>
                                 <li class="{{ Request::route()->getName() == 'web.about' ? 'active' : '' }}"><a
-                                        class="{{ Request::route()->getName() == 'about' ? 'active' : '' }}"
+                                        class="{{ Request::route()->getName() == 'web.about' ? 'active' : '' }}"
                                         href="{{ url('/about') }}">About Us</a></li>
-                                <li><a href="{{ url('/blog') }}">Blog</a></li>
-                                <li><a href="{{ url('/Contact-Us') }}">Contact</a></li>
+                                <li class="{{ Request::route()->getName() == 'web.blog' ? 'active' : '' }}"><a href="{{ url('/blog') }}">Blog</a></li>
+                                <li class="{{ Request::route()->getName() == 'web.contact' ? 'active' : '' }}"><a href="{{ url('/Contact-Us') }}">Contact</a></li>
 
                             </ul>
                         </nav>
@@ -364,8 +367,16 @@
                         <div class="single-footer-widget">
                             <h4>my account</h4>
                             <ul class="footer-widget-list">
-                                <li><a href="{{ url('/Check-Out') }}">Checkout</a></li>
-                                <li><a href="{{ url('/Login') }}">Login</a></li>
+                                <li><a href="{{ url('/check-out') }}">Checkout</a></li>
+                                @auth
+                                <a href="{{ route('auth.logout') }}"
+                               >Logout
+                                </a>
+                                @else
+                            <!-- User is not authenticated, display a login link -->
+                            <a class="text-white" href="{{ url('/auth/login') }}">Login</a>
+                        @endauth
+
                                 <li><a href="#">Order status</a></li>
                                 <li><a href="#">Site Map</a></li>
                             </ul>
@@ -377,13 +388,32 @@
                             <p class="text-light">Be the first to hear about new trending and offers and see how youve
                                 helped</p>
                             <div class="newsletter-form mc_embed_signup">
+                            <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alertModalLabel">Subscription Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="alertMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="frameModalTopInfoDemo" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
                                 <form
-                                    action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
+                                    action="{{url('/newsletter')}}"
                                     method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
-                                    class="validate" target="_blank" novalidate>
+                                    class="validate"  novalidate>
+                                    @csrf
                                     <div id="mc_embed_signup_scroll" class="mc-form">
-                                        <input type="email" value="" name="EMAIL" class="email"
-                                            id="mce-EMAIL" placeholder="Enter your email address" required>
+                                        <input type="email" value="" name="email" class="email"
+                                            id="email" placeholder="Enter your email address" required>
                                         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                                         <div class="mc-news" aria-hidden="true"><input type="text"
                                                 name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1"
@@ -432,6 +462,25 @@
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/ion.rangeSlider.min.js') }}"></script>
     <script>
+
+    // JavaScript to handle the modal display
+    @if(session('alert'))
+        $(document).ready(function() {
+            // Set the alert message text
+            $('#alertMessage').text("{{ session('alert') }}");
+
+            // Show the modal
+            $('#alertModal').modal('show');
+
+        });
+        $('#frameModalTopInfoDemo').on('click', function () {
+            // Hide the modal when the close button inside the modal is clicked
+            $('#frameModalTopInfoDemo').modal('hide');
+            $('#alertMessage').text('');
+
+        });
+    @endif
+
         $(document).ready(function() {
 
             $('.increment-btn').click(function(e) {

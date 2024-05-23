@@ -2,15 +2,24 @@
 <html lang="en">
 <!--begin::Head-->
 
+
+@php
+        $allSettings = app('GlobalHelper')->getSettings();
+
+    @endphp
+
+    @foreach ($allSettings as $setting)
+        <!-- Display other columns as needed -->
+    @endforeach
 <head>
     <base href="../../../" />
-    <title>Shiplynx</title>
+    <title>{{ $setting['application_name'] }}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
-    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+    <link rel="canonical" href="" />
+    <link rel="shortcut icon" href="{{ asset('assets/media/logos/') }}" />
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->

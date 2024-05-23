@@ -103,12 +103,7 @@
                                     </div>
                                     <!--end::Input wrapper-->
                                     <!--begin::Meter-->
-                                    <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
-                                        <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-                                        <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-                                        <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-                                        <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
-                                    </div>
+
                                     <!--end::Meter-->
                                 </div>
                                 <!--end::Wrapper-->

@@ -26,9 +26,8 @@ class ChildCategoryDatatable extends DataTable
             ->addColumn('parent_category_id', function (ChildCategory $childCategory) {
                 return $childCategory->parentCategory->name;
             })
-            ->addColumn('description', function (ChildCategory $childCategory) {
-                return strip_tags($childCategory->description);
-            })
+
+
             ->addColumn('image', function (ChildCategory $childCategory) {
                 return '<img src="' . asset($childCategory->getFirstMediaUrl('childCategory.image')) . '" class="image-input-wrapper rounded-circle w-50px h-50px" alt="alt text">';
             })
@@ -44,7 +43,7 @@ class ChildCategoryDatatable extends DataTable
      */
     public function query(ChildCategory $model): QueryBuilder
     {
-        return $model->newQuery()->select('id', 'name', 'parent_category_id', 'description');
+        return $model->newQuery()->select('id', 'name', 'parent_category_id');
     }
 
     /**
@@ -77,8 +76,7 @@ class ChildCategoryDatatable extends DataTable
             Column::make('id'),
             Column::make('image'),
             Column::make('name'),
-            Column::make('parent_category_id')->title('Parent Category'),
-            Column::make('description')
+            Column::make('parent_category_id')->title('Parent Category')
         ];
 
         if (Auth::user()->can('child.category.edit') || Auth::user()->can('child.category.delete')) {

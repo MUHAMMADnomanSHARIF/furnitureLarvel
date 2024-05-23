@@ -13,6 +13,7 @@ class order extends Model
 
     protected $fillable = [
         'order_no',
+        'order_tracker',
         'product_detail',
         'totalprice',
         'userid',
@@ -33,6 +34,10 @@ class order extends Model
     protected static function booted()
     {
         static::creating(function ($order) {
+
+
+            $order->order_tracker = str_pad(mt_rand(1, 9999999999), 10, '0', STR_PAD_LEFT);
+
             // Check if any orders exist
             $count = Order::count();
 

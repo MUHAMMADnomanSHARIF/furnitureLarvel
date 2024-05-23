@@ -71,7 +71,7 @@ margin-top: 8px;
                             <div class="tab-pane active show fade text-center" id="grid" role="tabpanel">
                                 <div class="row">
                                      @foreach($product as $category)
-                                     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                   <div class="product-item">
                                   @if($category->availability == 'on')
                                         <span class="in-stock">In Stock</span>

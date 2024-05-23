@@ -41,7 +41,7 @@ margin-top: 8px;
             <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
                  @if(empty($category))
-                 <li class="breadcrumb-item active" aria-current="page">All Products</li>
+                 <li class="breadcrumb-item active " aria-current="page">All Products</li>
                 @else
                   @foreach($category as $category)
                 <li class="breadcrumb-item active" aria-current="page">{{$category->name}}</li>
@@ -58,7 +58,7 @@ margin-top: 8px;
         <div class="row">
             <div class="order-xl-2 order-lg-2 col-xl-9 col-lg-8">
                 @if(Empty($category))
-                <h1 class="page-title text-dark">All Products</h1>
+                <h1 class="page-title text-dark pt-2">All Products</h1>
                 @else
                 <h1 class="page-title text-dark">{{$category->name}}</h1>
                 @endif
@@ -75,7 +75,7 @@ margin-top: 8px;
                                     @endif
                                     <div class="product-image-hover">
                                    <a href="{{ url('product-detail/'.$category->name) }}">
-                                     <img class="primary-image" src="{{$category->getFirstMediaUrl('product.image')}}" alt="" />
+                                     <img class="primary-image" src="{{$category->getFirstMediaUrl('product.image')}}" alt="" height="250px" />
                                      </a>
                                     <div class="product-hover">
                                         <button class="add-to-cart" data-product-id="{{$category->id}}" role="button"><i class="icon icon-FullShoppingCart"></i></button>
